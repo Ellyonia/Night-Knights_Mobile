@@ -1,0 +1,471 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		7EC9CDD418DBB4E400AB3BFA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EC9CDD318DBB4E400AB3BFA /* Foundation.framework */; };
+		7EC9CDD618DBB4E400AB3BFA /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EC9CDD518DBB4E400AB3BFA /* CoreGraphics.framework */; };
+		7EC9CDD818DBB4E400AB3BFA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EC9CDD718DBB4E400AB3BFA /* UIKit.framework */; };
+		7EC9CDDE18DBB4E400AB3BFA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7EC9CDDC18DBB4E400AB3BFA /* InfoPlist.strings */; };
+		7EC9CDE018DBB4E400AB3BFA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EC9CDDF18DBB4E400AB3BFA /* main.m */; };
+		7EC9CDE418DBB4E400AB3BFA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EC9CDE318DBB4E400AB3BFA /* AppDelegate.m */; };
+		7EC9CDE718DBB4E400AB3BFA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7EC9CDE518DBB4E400AB3BFA /* Main.storyboard */; };
+		7EC9CDEA18DBB4E400AB3BFA /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EC9CDE918DBB4E400AB3BFA /* ViewController.m */; };
+		7EC9CDEC18DBB4E400AB3BFA /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7EC9CDEB18DBB4E400AB3BFA /* Images.xcassets */; };
+		7EC9CDF318DBB4E500AB3BFA /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EC9CDF218DBB4E500AB3BFA /* XCTest.framework */; };
+		7EC9CDF418DBB4E500AB3BFA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EC9CDD318DBB4E400AB3BFA /* Foundation.framework */; };
+		7EC9CDF518DBB4E500AB3BFA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EC9CDD718DBB4E400AB3BFA /* UIKit.framework */; };
+		7EC9CDFD18DBB4E500AB3BFA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7EC9CDFB18DBB4E500AB3BFA /* InfoPlist.strings */; };
+		7EC9CDFF18DBB4E500AB3BFA /* NightKnightsMobileApplicationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EC9CDFE18DBB4E500AB3BFA /* NightKnightsMobileApplicationTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		7EC9CDF618DBB4E500AB3BFA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7EC9CDC818DBB4E400AB3BFA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 7EC9CDCF18DBB4E400AB3BFA;
+			remoteInfo = NightKnightsMobileApplication;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		7EC9CDD018DBB4E400AB3BFA /* NightKnightsMobileApplication.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NightKnightsMobileApplication.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		7EC9CDD318DBB4E400AB3BFA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		7EC9CDD518DBB4E400AB3BFA /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		7EC9CDD718DBB4E400AB3BFA /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		7EC9CDDB18DBB4E400AB3BFA /* NightKnightsMobileApplication-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "NightKnightsMobileApplication-Info.plist"; sourceTree = "<group>"; };
+		7EC9CDDD18DBB4E400AB3BFA /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		7EC9CDDF18DBB4E400AB3BFA /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		7EC9CDE118DBB4E400AB3BFA /* NightKnightsMobileApplication-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NightKnightsMobileApplication-Prefix.pch"; sourceTree = "<group>"; };
+		7EC9CDE218DBB4E400AB3BFA /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		7EC9CDE318DBB4E400AB3BFA /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		7EC9CDE618DBB4E400AB3BFA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		7EC9CDE818DBB4E400AB3BFA /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		7EC9CDE918DBB4E400AB3BFA /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		7EC9CDEB18DBB4E400AB3BFA /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		7EC9CDF118DBB4E500AB3BFA /* NightKnightsMobileApplicationTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NightKnightsMobileApplicationTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		7EC9CDF218DBB4E500AB3BFA /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		7EC9CDFA18DBB4E500AB3BFA /* NightKnightsMobileApplicationTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "NightKnightsMobileApplicationTests-Info.plist"; sourceTree = "<group>"; };
+		7EC9CDFC18DBB4E500AB3BFA /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		7EC9CDFE18DBB4E500AB3BFA /* NightKnightsMobileApplicationTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NightKnightsMobileApplicationTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		7EC9CDCD18DBB4E400AB3BFA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7EC9CDD618DBB4E400AB3BFA /* CoreGraphics.framework in Frameworks */,
+				7EC9CDD818DBB4E400AB3BFA /* UIKit.framework in Frameworks */,
+				7EC9CDD418DBB4E400AB3BFA /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7EC9CDEE18DBB4E500AB3BFA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7EC9CDF318DBB4E500AB3BFA /* XCTest.framework in Frameworks */,
+				7EC9CDF518DBB4E500AB3BFA /* UIKit.framework in Frameworks */,
+				7EC9CDF418DBB4E500AB3BFA /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		7EC9CDC718DBB4E400AB3BFA = {
+			isa = PBXGroup;
+			children = (
+				7EC9CDD918DBB4E400AB3BFA /* NightKnightsMobileApplication */,
+				7EC9CDF818DBB4E500AB3BFA /* NightKnightsMobileApplicationTests */,
+				7EC9CDD218DBB4E400AB3BFA /* Frameworks */,
+				7EC9CDD118DBB4E400AB3BFA /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		7EC9CDD118DBB4E400AB3BFA /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				7EC9CDD018DBB4E400AB3BFA /* NightKnightsMobileApplication.app */,
+				7EC9CDF118DBB4E500AB3BFA /* NightKnightsMobileApplicationTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		7EC9CDD218DBB4E400AB3BFA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				7EC9CDD318DBB4E400AB3BFA /* Foundation.framework */,
+				7EC9CDD518DBB4E400AB3BFA /* CoreGraphics.framework */,
+				7EC9CDD718DBB4E400AB3BFA /* UIKit.framework */,
+				7EC9CDF218DBB4E500AB3BFA /* XCTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		7EC9CDD918DBB4E400AB3BFA /* NightKnightsMobileApplication */ = {
+			isa = PBXGroup;
+			children = (
+				7EC9CDE218DBB4E400AB3BFA /* AppDelegate.h */,
+				7EC9CDE318DBB4E400AB3BFA /* AppDelegate.m */,
+				7EC9CDE518DBB4E400AB3BFA /* Main.storyboard */,
+				7EC9CDE818DBB4E400AB3BFA /* ViewController.h */,
+				7EC9CDE918DBB4E400AB3BFA /* ViewController.m */,
+				7EC9CDEB18DBB4E400AB3BFA /* Images.xcassets */,
+				7EC9CDDA18DBB4E400AB3BFA /* Supporting Files */,
+			);
+			path = NightKnightsMobileApplication;
+			sourceTree = "<group>";
+		};
+		7EC9CDDA18DBB4E400AB3BFA /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				7EC9CDDB18DBB4E400AB3BFA /* NightKnightsMobileApplication-Info.plist */,
+				7EC9CDDC18DBB4E400AB3BFA /* InfoPlist.strings */,
+				7EC9CDDF18DBB4E400AB3BFA /* main.m */,
+				7EC9CDE118DBB4E400AB3BFA /* NightKnightsMobileApplication-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		7EC9CDF818DBB4E500AB3BFA /* NightKnightsMobileApplicationTests */ = {
+			isa = PBXGroup;
+			children = (
+				7EC9CDFE18DBB4E500AB3BFA /* NightKnightsMobileApplicationTests.m */,
+				7EC9CDF918DBB4E500AB3BFA /* Supporting Files */,
+			);
+			path = NightKnightsMobileApplicationTests;
+			sourceTree = "<group>";
+		};
+		7EC9CDF918DBB4E500AB3BFA /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				7EC9CDFA18DBB4E500AB3BFA /* NightKnightsMobileApplicationTests-Info.plist */,
+				7EC9CDFB18DBB4E500AB3BFA /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		7EC9CDCF18DBB4E400AB3BFA /* NightKnightsMobileApplication */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7EC9CE0218DBB4E500AB3BFA /* Build configuration list for PBXNativeTarget "NightKnightsMobileApplication" */;
+			buildPhases = (
+				7EC9CDCC18DBB4E400AB3BFA /* Sources */,
+				7EC9CDCD18DBB4E400AB3BFA /* Frameworks */,
+				7EC9CDCE18DBB4E400AB3BFA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = NightKnightsMobileApplication;
+			productName = NightKnightsMobileApplication;
+			productReference = 7EC9CDD018DBB4E400AB3BFA /* NightKnightsMobileApplication.app */;
+			productType = "com.apple.product-type.application";
+		};
+		7EC9CDF018DBB4E500AB3BFA /* NightKnightsMobileApplicationTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7EC9CE0518DBB4E500AB3BFA /* Build configuration list for PBXNativeTarget "NightKnightsMobileApplicationTests" */;
+			buildPhases = (
+				7EC9CDED18DBB4E500AB3BFA /* Sources */,
+				7EC9CDEE18DBB4E500AB3BFA /* Frameworks */,
+				7EC9CDEF18DBB4E500AB3BFA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				7EC9CDF718DBB4E500AB3BFA /* PBXTargetDependency */,
+			);
+			name = NightKnightsMobileApplicationTests;
+			productName = NightKnightsMobileApplicationTests;
+			productReference = 7EC9CDF118DBB4E500AB3BFA /* NightKnightsMobileApplicationTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		7EC9CDC818DBB4E400AB3BFA /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0510;
+				ORGANIZATIONNAME = DreamTeam;
+				TargetAttributes = {
+					7EC9CDF018DBB4E500AB3BFA = {
+						TestTargetID = 7EC9CDCF18DBB4E400AB3BFA;
+					};
+				};
+			};
+			buildConfigurationList = 7EC9CDCB18DBB4E400AB3BFA /* Build configuration list for PBXProject "NightKnightsMobileApplication" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 7EC9CDC718DBB4E400AB3BFA;
+			productRefGroup = 7EC9CDD118DBB4E400AB3BFA /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				7EC9CDCF18DBB4E400AB3BFA /* NightKnightsMobileApplication */,
+				7EC9CDF018DBB4E500AB3BFA /* NightKnightsMobileApplicationTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		7EC9CDCE18DBB4E400AB3BFA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7EC9CDEC18DBB4E400AB3BFA /* Images.xcassets in Resources */,
+				7EC9CDDE18DBB4E400AB3BFA /* InfoPlist.strings in Resources */,
+				7EC9CDE718DBB4E400AB3BFA /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7EC9CDEF18DBB4E500AB3BFA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7EC9CDFD18DBB4E500AB3BFA /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		7EC9CDCC18DBB4E400AB3BFA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7EC9CDEA18DBB4E400AB3BFA /* ViewController.m in Sources */,
+				7EC9CDE418DBB4E400AB3BFA /* AppDelegate.m in Sources */,
+				7EC9CDE018DBB4E400AB3BFA /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7EC9CDED18DBB4E500AB3BFA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7EC9CDFF18DBB4E500AB3BFA /* NightKnightsMobileApplicationTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		7EC9CDF718DBB4E500AB3BFA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 7EC9CDCF18DBB4E400AB3BFA /* NightKnightsMobileApplication */;
+			targetProxy = 7EC9CDF618DBB4E500AB3BFA /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		7EC9CDDC18DBB4E400AB3BFA /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7EC9CDDD18DBB4E400AB3BFA /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		7EC9CDE518DBB4E400AB3BFA /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7EC9CDE618DBB4E400AB3BFA /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		7EC9CDFB18DBB4E500AB3BFA /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7EC9CDFC18DBB4E500AB3BFA /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		7EC9CE0018DBB4E500AB3BFA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		7EC9CE0118DBB4E500AB3BFA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		7EC9CE0318DBB4E500AB3BFA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "NightKnightsMobileApplication/NightKnightsMobileApplication-Prefix.pch";
+				INFOPLIST_FILE = "NightKnightsMobileApplication/NightKnightsMobileApplication-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		7EC9CE0418DBB4E500AB3BFA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "NightKnightsMobileApplication/NightKnightsMobileApplication-Prefix.pch";
+				INFOPLIST_FILE = "NightKnightsMobileApplication/NightKnightsMobileApplication-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		7EC9CE0618DBB4E500AB3BFA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/NightKnightsMobileApplication.app/NightKnightsMobileApplication";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "NightKnightsMobileApplication/NightKnightsMobileApplication-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "NightKnightsMobileApplicationTests/NightKnightsMobileApplicationTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		7EC9CE0718DBB4E500AB3BFA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/NightKnightsMobileApplication.app/NightKnightsMobileApplication";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "NightKnightsMobileApplication/NightKnightsMobileApplication-Prefix.pch";
+				INFOPLIST_FILE = "NightKnightsMobileApplicationTests/NightKnightsMobileApplicationTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		7EC9CDCB18DBB4E400AB3BFA /* Build configuration list for PBXProject "NightKnightsMobileApplication" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7EC9CE0018DBB4E500AB3BFA /* Debug */,
+				7EC9CE0118DBB4E500AB3BFA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7EC9CE0218DBB4E500AB3BFA /* Build configuration list for PBXNativeTarget "NightKnightsMobileApplication" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7EC9CE0318DBB4E500AB3BFA /* Debug */,
+				7EC9CE0418DBB4E500AB3BFA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		7EC9CE0518DBB4E500AB3BFA /* Build configuration list for PBXNativeTarget "NightKnightsMobileApplicationTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7EC9CE0618DBB4E500AB3BFA /* Debug */,
+				7EC9CE0718DBB4E500AB3BFA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 7EC9CDC818DBB4E400AB3BFA /* Project object */;
+}
