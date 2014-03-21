@@ -42,6 +42,9 @@
                                 <state key="normal" title="Login">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="login:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="FHb-e4-7mE"/>
+                                </connections>
                             </button>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Password:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xvt-lH-0rH">
                                 <rect key="frame" x="0.0" y="302" width="89" height="16"/>
@@ -92,6 +95,10 @@
                             <constraint firstItem="EPE-En-Mbr" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="zju-zo-bun"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="emailTextField" destination="R28-R5-2fH" id="FM5-1N-ilc"/>
+                        <outlet property="passwordTextField" destination="bM3-oK-6FV" id="eFU-8s-j4z"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
