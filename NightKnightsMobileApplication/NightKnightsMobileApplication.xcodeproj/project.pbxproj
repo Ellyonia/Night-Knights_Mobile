@@ -14,13 +14,13 @@
 		7EC9CDE018DBB4E400AB3BFA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EC9CDDF18DBB4E400AB3BFA /* main.m */; };
 		7EC9CDE418DBB4E400AB3BFA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EC9CDE318DBB4E400AB3BFA /* AppDelegate.m */; };
 		7EC9CDE718DBB4E400AB3BFA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7EC9CDE518DBB4E400AB3BFA /* Main.storyboard */; };
-		7EC9CDEA18DBB4E400AB3BFA /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EC9CDE918DBB4E400AB3BFA /* ViewController.m */; };
 		7EC9CDEC18DBB4E400AB3BFA /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7EC9CDEB18DBB4E400AB3BFA /* Images.xcassets */; };
 		7EC9CDF318DBB4E500AB3BFA /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EC9CDF218DBB4E500AB3BFA /* XCTest.framework */; };
 		7EC9CDF418DBB4E500AB3BFA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EC9CDD318DBB4E400AB3BFA /* Foundation.framework */; };
 		7EC9CDF518DBB4E500AB3BFA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EC9CDD718DBB4E400AB3BFA /* UIKit.framework */; };
 		7EC9CDFD18DBB4E500AB3BFA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7EC9CDFB18DBB4E500AB3BFA /* InfoPlist.strings */; };
 		7EC9CDFF18DBB4E500AB3BFA /* NightKnightsMobileApplicationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EC9CDFE18DBB4E500AB3BFA /* NightKnightsMobileApplicationTests.m */; };
+		7EC9CE0A18DBB6BA00AB3BFA /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EC9CE0918DBB6BA00AB3BFA /* LoginViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,14 +45,14 @@
 		7EC9CDE218DBB4E400AB3BFA /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		7EC9CDE318DBB4E400AB3BFA /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		7EC9CDE618DBB4E400AB3BFA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		7EC9CDE818DBB4E400AB3BFA /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		7EC9CDE918DBB4E400AB3BFA /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		7EC9CDEB18DBB4E400AB3BFA /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		7EC9CDF118DBB4E500AB3BFA /* NightKnightsMobileApplicationTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NightKnightsMobileApplicationTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7EC9CDF218DBB4E500AB3BFA /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		7EC9CDFA18DBB4E500AB3BFA /* NightKnightsMobileApplicationTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "NightKnightsMobileApplicationTests-Info.plist"; sourceTree = "<group>"; };
 		7EC9CDFC18DBB4E500AB3BFA /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		7EC9CDFE18DBB4E500AB3BFA /* NightKnightsMobileApplicationTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NightKnightsMobileApplicationTests.m; sourceTree = "<group>"; };
+		7EC9CE0818DBB6BA00AB3BFA /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoginViewController.h; path = NightKnightsMobileApplication/ViewControllers/LoginViewController.h; sourceTree = "<group>"; };
+		7EC9CE0918DBB6BA00AB3BFA /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoginViewController.m; path = NightKnightsMobileApplication/ViewControllers/LoginViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,8 +115,7 @@
 				7EC9CDE218DBB4E400AB3BFA /* AppDelegate.h */,
 				7EC9CDE318DBB4E400AB3BFA /* AppDelegate.m */,
 				7EC9CDE518DBB4E400AB3BFA /* Main.storyboard */,
-				7EC9CDE818DBB4E400AB3BFA /* ViewController.h */,
-				7EC9CDE918DBB4E400AB3BFA /* ViewController.m */,
+				7EC9CE0B18DBB6C600AB3BFA /* ViewControllers */,
 				7EC9CDEB18DBB4E400AB3BFA /* Images.xcassets */,
 				7EC9CDDA18DBB4E400AB3BFA /* Supporting Files */,
 			);
@@ -150,6 +149,16 @@
 				7EC9CDFB18DBB4E500AB3BFA /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		7EC9CE0B18DBB6C600AB3BFA /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				7EC9CE0818DBB6BA00AB3BFA /* LoginViewController.h */,
+				7EC9CE0918DBB6BA00AB3BFA /* LoginViewController.m */,
+			);
+			name = ViewControllers;
+			path = ..;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -249,9 +258,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7EC9CDEA18DBB4E400AB3BFA /* ViewController.m in Sources */,
 				7EC9CDE418DBB4E400AB3BFA /* AppDelegate.m in Sources */,
 				7EC9CDE018DBB4E400AB3BFA /* main.m in Sources */,
+				7EC9CE0A18DBB6BA00AB3BFA /* LoginViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
