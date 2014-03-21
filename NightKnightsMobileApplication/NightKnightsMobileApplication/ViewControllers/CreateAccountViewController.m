@@ -9,10 +9,16 @@
 #import "CreateAccountViewController.h"
 
 @interface CreateAccountViewController ()
+@property (strong, nonatomic) IBOutlet UITextField *knightNameTextField;
+@property (strong, nonatomic) IBOutlet UITextField *passwordTextField;
+@property (strong, nonatomic) IBOutlet UITextField *emailTextField;
 
 @end
 
 @implementation CreateAccountViewController
+- (IBAction)createAccount:(UIButton *)sender {
+    
+}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
