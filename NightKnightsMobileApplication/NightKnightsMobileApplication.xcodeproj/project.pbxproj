@@ -21,6 +21,8 @@
 		7EC9CDFD18DBB4E500AB3BFA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7EC9CDFB18DBB4E500AB3BFA /* InfoPlist.strings */; };
 		7EC9CDFF18DBB4E500AB3BFA /* NightKnightsMobileApplicationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EC9CDFE18DBB4E500AB3BFA /* NightKnightsMobileApplicationTests.m */; };
 		7EC9CE0A18DBB6BA00AB3BFA /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EC9CE0918DBB6BA00AB3BFA /* LoginViewController.m */; };
+		7EC9CE0E18DBBECC00AB3BFA /* CreateAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EC9CE0D18DBBECC00AB3BFA /* CreateAccountViewController.m */; };
+		7EC9CE1118DBBF4C00AB3BFA /* SetAlarmViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EC9CE1018DBBF4C00AB3BFA /* SetAlarmViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +55,10 @@
 		7EC9CDFE18DBB4E500AB3BFA /* NightKnightsMobileApplicationTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NightKnightsMobileApplicationTests.m; sourceTree = "<group>"; };
 		7EC9CE0818DBB6BA00AB3BFA /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoginViewController.h; path = NightKnightsMobileApplication/ViewControllers/LoginViewController.h; sourceTree = "<group>"; };
 		7EC9CE0918DBB6BA00AB3BFA /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoginViewController.m; path = NightKnightsMobileApplication/ViewControllers/LoginViewController.m; sourceTree = "<group>"; };
+		7EC9CE0C18DBBECC00AB3BFA /* CreateAccountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CreateAccountViewController.h; path = NightKnightsMobileApplication/ViewControllers/CreateAccountViewController.h; sourceTree = "<group>"; };
+		7EC9CE0D18DBBECC00AB3BFA /* CreateAccountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CreateAccountViewController.m; path = NightKnightsMobileApplication/ViewControllers/CreateAccountViewController.m; sourceTree = "<group>"; };
+		7EC9CE0F18DBBF4C00AB3BFA /* SetAlarmViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SetAlarmViewController.h; path = NightKnightsMobileApplication/ViewControllers/SetAlarmViewController.h; sourceTree = "<group>"; };
+		7EC9CE1018DBBF4C00AB3BFA /* SetAlarmViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SetAlarmViewController.m; path = NightKnightsMobileApplication/ViewControllers/SetAlarmViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -154,6 +160,10 @@
 		7EC9CE0B18DBB6C600AB3BFA /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				7EC9CE0F18DBBF4C00AB3BFA /* SetAlarmViewController.h */,
+				7EC9CE1018DBBF4C00AB3BFA /* SetAlarmViewController.m */,
+				7EC9CE0C18DBBECC00AB3BFA /* CreateAccountViewController.h */,
+				7EC9CE0D18DBBECC00AB3BFA /* CreateAccountViewController.m */,
 				7EC9CE0818DBB6BA00AB3BFA /* LoginViewController.h */,
 				7EC9CE0918DBB6BA00AB3BFA /* LoginViewController.m */,
 			);
@@ -258,8 +268,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7EC9CE0E18DBBECC00AB3BFA /* CreateAccountViewController.m in Sources */,
 				7EC9CDE418DBB4E400AB3BFA /* AppDelegate.m in Sources */,
 				7EC9CDE018DBB4E400AB3BFA /* main.m in Sources */,
+				7EC9CE1118DBBF4C00AB3BFA /* SetAlarmViewController.m in Sources */,
 				7EC9CE0A18DBB6BA00AB3BFA /* LoginViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

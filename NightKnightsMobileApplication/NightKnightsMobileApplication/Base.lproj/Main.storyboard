@@ -32,6 +32,9 @@
                                 <state key="normal" title="Create Account">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <segue destination="b1R-rb-4YS" kind="push" id="aPZ-Gf-6Nl"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EPE-En-Mbr">
                                 <rect key="frame" x="137" y="401" width="46" height="30"/>
@@ -102,6 +105,43 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
+        </scene>
+        <!--Set Alarm View Controller-->
+        <scene sceneID="XdA-Dd-YSN">
+            <objects>
+                <viewController id="p8I-St-zcc" customClass="SetAlarmViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Xhd-tM-rbT"/>
+                        <viewControllerLayoutGuide type="bottom" id="pSh-Cx-ky1"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="hEX-BF-qUi">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bfG-iA-arz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="837" y="-360"/>
+        </scene>
+        <!--Create Account View Controller-->
+        <scene sceneID="SAb-Ng-MWr">
+            <objects>
+                <viewController id="b1R-rb-4YS" customClass="CreateAccountViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="qsY-b0-xD1"/>
+                        <viewControllerLayoutGuide type="bottom" id="hnG-Ha-WVa"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="d89-tp-0Fk">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="Nxm-c8-7AN"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ezg-QB-91k" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="837" y="458"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
