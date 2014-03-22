@@ -12,11 +12,31 @@
 @property (strong, nonatomic) IBOutlet UITextField *knightNameTextField;
 @property (strong, nonatomic) IBOutlet UITextField *passwordTextField;
 @property (strong, nonatomic) IBOutlet UITextField *emailTextField;
+@property (strong, nonatomic) NSUserDefaults* defaults;
+
 
 @end
 
 @implementation CreateAccountViewController
+-(NSUserDefaults *) defaults{
+    if(!_defaults){
+        _defaults = [NSUserDefaults standardUserDefaults];
+    }
+    return _defaults;
+    
+}
+
+
 - (IBAction)createAccount:(UIButton *)sender {
+    NSString *email = self.emailTextField.text;
+    NSString *password = self.passwordTextField.text;
+    
+    NSArray *loginInfo = [NSArray arrayWithObjects:email,password, nil];
+    
+    [self.defaults setObject:loginInfo forKey:@"loginInformation"];
+    [self.defaults synchronize];
+
+    
     
 }
 
@@ -42,4 +62,30 @@
 }
 
 
+
+
+//- (IBAction)load
+//{
+//    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+//    
+//    NSArray *texts = [defaults objectForKey:@"items"];
+//    for(NSString *currentText in texts)
+//    {
+//        [self setTheTextOfLabelWith:currentText];
+//    }
+//}
+//
+//- (void)savingData
+//{
+//    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+//    
+//    NSMutableArray *textToSave = [[NSMutableArray alloc] init];
+//    for(UILabel *currentLabel in _objects)
+//    {
+//        [textToSave addObject:currentLabel.text];
+//    }
+//    
+//    [defaults setObject:textToSave forKey:@"items"];
+//    [defaults synchronize];
+//}
 @end

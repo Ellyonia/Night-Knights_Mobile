@@ -182,13 +182,13 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Password:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IXr-2r-QXj">
-                                <rect key="frame" x="4" y="305" width="68" height="21"/>
+                                <rect key="frame" x="4" y="310" width="68" height="16"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6q7-bH-K1H">
-                                <rect key="frame" x="4" y="252" width="42" height="21"/>
+                                <rect key="frame" x="4" y="257" width="42" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="4JX-3s-HQe"/>
@@ -234,7 +234,6 @@
                             <constraint firstItem="2wd-H3-cU1" firstAttribute="top" secondItem="d89-tp-0Fk" secondAttribute="top" constant="20" symbolic="YES" id="YZN-o2-eMU"/>
                             <constraint firstItem="ktb-CJ-RDP" firstAttribute="top" secondItem="lHa-A0-zXI" secondAttribute="bottom" constant="24" id="b5c-tm-NNV"/>
                             <constraint firstItem="NhR-l8-hJa" firstAttribute="leading" secondItem="6q7-bH-K1H" secondAttribute="trailing" constant="43" id="dTq-Yi-vt9"/>
-                            <constraint firstItem="6q7-bH-K1H" firstAttribute="top" secondItem="qsY-b0-xD1" secondAttribute="bottom" constant="188" id="foK-3Q-shT"/>
                             <constraint firstItem="6q7-bH-K1H" firstAttribute="leading" secondItem="d89-tp-0Fk" secondAttribute="leading" constant="4" id="gJW-oj-wQ8"/>
                             <constraint firstItem="lHa-A0-zXI" firstAttribute="trailing" secondItem="NhR-l8-hJa" secondAttribute="trailing" id="jaH-sO-fQR"/>
                             <constraint firstItem="2wd-H3-cU1" firstAttribute="centerX" secondItem="4cK-sO-kxa" secondAttribute="centerX" id="ogb-t5-gpr"/>
