@@ -18,6 +18,15 @@
 
 @implementation LoginViewController
 
+
+-(NSUserDefaults *) defaults{
+    if(!_defaults){
+        _defaults = [NSUserDefaults standardUserDefaults];
+    }
+    return _defaults;
+    
+}
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -33,16 +42,6 @@
     // Do any additional setup after loading the view.
 }
 
-//- (IBAction)load
-//{
-//    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-//
-//    NSArray *texts = [defaults objectForKey:@"items"];
-//    for(NSString *currentText in texts)
-//    {
-//        [self setTheTextOfLabelWith:currentText];
-//    }
-//}
 
 - (void)viewWillAppear:(BOOL)animated
 {
@@ -50,7 +49,8 @@
     [super viewWillAppear:animated];
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
-    NSArray *texts = [defaults objectForKey:@"items"];
+    NSArray *texts = [defaults objectForKey:@"loginInformation"];
+    NSLog(@" %@ %@",texts[0], texts[1]);
     if(texts){
         self.emailTextField.text = texts[0];
         self.passwordTextField.text = texts[1];
@@ -74,8 +74,9 @@
     NSArray *loginInfo = [NSArray arrayWithObjects:email,password, nil];
     
     [self.defaults setObject:loginInfo forKey:@"loginInformation"];
-    [self.defaults synchronize];
-    
+    bool synch = [self.defaults synchronize];
+    NSLog(@" %@ %@", loginInfo[0],loginInfo[1]);
+    NSLog(@" %i", synch);
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {

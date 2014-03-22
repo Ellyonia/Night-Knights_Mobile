@@ -218,6 +218,9 @@
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = DreamTeam;
 				TargetAttributes = {
+					7EC9CDCF18DBB4E400AB3BFA = {
+						DevelopmentTeam = APD62CDC25;
+					};
 					7EC9CDF018DBB4E500AB3BFA = {
 						TestTargetID = 7EC9CDCF18DBB4E400AB3BFA;
 					};
@@ -397,9 +400,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "NightKnightsMobileApplication/NightKnightsMobileApplication-Prefix.pch";
 				INFOPLIST_FILE = "NightKnightsMobileApplication/NightKnightsMobileApplication-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -410,9 +415,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "NightKnightsMobileApplication/NightKnightsMobileApplication-Prefix.pch";
 				INFOPLIST_FILE = "NightKnightsMobileApplication/NightKnightsMobileApplication-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -477,6 +484,7 @@
 				7EC9CE0418DBB4E500AB3BFA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		7EC9CE0518DBB4E500AB3BFA /* Build configuration list for PBXNativeTarget "NightKnightsMobileApplicationTests" */ = {
 			isa = XCConfigurationList;
@@ -485,6 +493,7 @@
 				7EC9CE0718DBB4E500AB3BFA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
