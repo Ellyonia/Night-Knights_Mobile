@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7E83785A18DE2DA400B94636 /* AlarmRunningViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E83785918DE2DA400B94636 /* AlarmRunningViewController.m */; };
 		7EC9CDD418DBB4E400AB3BFA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EC9CDD318DBB4E400AB3BFA /* Foundation.framework */; };
 		7EC9CDD618DBB4E400AB3BFA /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EC9CDD518DBB4E400AB3BFA /* CoreGraphics.framework */; };
 		7EC9CDD818DBB4E400AB3BFA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EC9CDD718DBB4E400AB3BFA /* UIKit.framework */; };
@@ -36,6 +37,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7E83785818DE2DA400B94636 /* AlarmRunningViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlarmRunningViewController.h; sourceTree = "<group>"; };
+		7E83785918DE2DA400B94636 /* AlarmRunningViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlarmRunningViewController.m; sourceTree = "<group>"; };
 		7EC9CDD018DBB4E400AB3BFA /* NightKnightsMobileApplication.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NightKnightsMobileApplication.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7EC9CDD318DBB4E400AB3BFA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		7EC9CDD518DBB4E400AB3BFA /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -160,6 +163,8 @@
 		7EC9CE0B18DBB6C600AB3BFA /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				7E83785818DE2DA400B94636 /* AlarmRunningViewController.h */,
+				7E83785918DE2DA400B94636 /* AlarmRunningViewController.m */,
 				7EC9CE0F18DBBF4C00AB3BFA /* SetAlarmViewController.h */,
 				7EC9CE1018DBBF4C00AB3BFA /* SetAlarmViewController.m */,
 				7EC9CE0C18DBBECC00AB3BFA /* CreateAccountViewController.h */,
@@ -275,6 +280,7 @@
 				7EC9CDE418DBB4E400AB3BFA /* AppDelegate.m in Sources */,
 				7EC9CDE018DBB4E400AB3BFA /* main.m in Sources */,
 				7EC9CE1118DBBF4C00AB3BFA /* SetAlarmViewController.m in Sources */,
+				7E83785A18DE2DA400B94636 /* AlarmRunningViewController.m in Sources */,
 				7EC9CE0A18DBB6BA00AB3BFA /* LoginViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
