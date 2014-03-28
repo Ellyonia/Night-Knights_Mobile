@@ -253,6 +253,10 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="SDj-21-Udn"/>
+                    <connections>
+                        <outlet property="finalAlarmLabel" destination="9D8-CB-11E" id="RkG-jU-S6R"/>
+                        <outlet property="timeRemainingLabel" destination="G6m-Ca-cpK" id="JmT-U2-6Kj"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bxH-pK-BSg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
