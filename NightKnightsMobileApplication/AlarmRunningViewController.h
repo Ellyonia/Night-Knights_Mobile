@@ -10,4 +10,6 @@
 
 @interface AlarmRunningViewController : UIViewController
 
+@property (nonatomic) NSDate *alarmDate;
+
 @end

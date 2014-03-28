@@ -192,6 +192,9 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="urh-jB-blW"/>
+                    <connections>
+                        <outlet property="alarmPickerDisplay" destination="Vad-lB-XRn" id="hDD-ju-rVw"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="f3D-vx-MgW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -385,7 +388,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="fvm-eg-AbK"/>
+        <segue reference="ZOw-jL-4IH"/>
         <segue reference="6ik-rc-kVY"/>
     </inferredMetricsTieBreakers>
 </document>
