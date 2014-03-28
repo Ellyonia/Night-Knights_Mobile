@@ -34,11 +34,11 @@
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     
-    AlarmRunningViewController *transferViewController = segue.destinationViewController;
-
-    NSTimeZone *tz = [NSTimeZone localTimeZone];
-    NSInteger seconds = [tz secondsFromGMTForDate: self.alarmPickerDisplay.date];
-    transferViewController.alarmDate = [NSDate dateWithTimeInterval: seconds sinceDate: self.alarmPickerDisplay.date];
+    if([segue.identifier isEqualToString:@"startAlarm"])
+    {
+        AlarmRunningViewController *transferViewController = segue.destinationViewController;
+        transferViewController.alarmDate = self.alarmPickerDisplay.date;
+    }
     
 }
 

@@ -24,12 +24,28 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    NSString *stringDate = [NSString stringWithFormat:@"%@",self.alarmDate];
+    NSDate *convertedDate = [NSDate dateWithTimeInterval:-60*60*5 sinceDate:self.alarmDate];
+    NSString *stringDate = [NSString stringWithFormat:@"%@",convertedDate];
     NSString *timeWithSeconds = [self getSubstring:stringDate betweenString:@" "];
     NSString *timeNoSeconds = [timeWithSeconds substringToIndex:5];
     NSString *labelText = @"Until: ";
-    labelText = [labelText stringByAppendingString:timeNoSeconds];
-    
+//    labelText = [labelText stringByAppendingString:timeNoSeconds];
+    NSString *hour = [timeNoSeconds substringToIndex:3];
+    int iHour = [hour integerValue];
+    NSString *minutes = [timeNoSeconds substringFromIndex:3];
+    int iMinute = [minutes integerValue];
+    if (iHour < 12)
+    {
+        NSString *time = [NSString stringWithFormat:@"%d:%d",iHour,iMinute];
+        labelText = [labelText stringByAppendingString:time];
+        labelText = [labelText stringByAppendingString:@" AM"];
+    }
+    else
+    {
+        NSString *time = [NSString stringWithFormat:@"%d:%d",(iHour-12),iMinute];
+        labelText = [labelText stringByAppendingString:time];
+        labelText = [labelText stringByAppendingString:@" PM"];
+    }
     self.finalAlarmLabel.text = labelText;
 }
 
