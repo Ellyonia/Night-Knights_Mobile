@@ -7,6 +7,7 @@
 //
 
 #import "SetAlarmViewController.h"
+#import "AlarmRunningViewController.h"
 
 @interface SetAlarmViewController ()
 
@@ -25,5 +26,18 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    
+    AlarmRunningViewController *transferViewController = segue.destinationViewController;
+    
+    NSLog(@"prepareForSegue: %@", segue.identifier);
+   
+    
+}
+
+
+
 
 @end

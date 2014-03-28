@@ -7,6 +7,7 @@
 //
 
 #import "LoginViewController.h"
+#import "SetAlarmViewController.h"
 
 @interface LoginViewController ()
 @property (strong, nonatomic) IBOutlet UITextField *emailTextField;
@@ -41,7 +42,6 @@
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
     NSArray *texts = [defaults objectForKey:@"loginInformation"];
-    NSLog(@" %@ %@",texts[0], texts[1]);
     if(texts){
         self.emailTextField.text = texts[0];
         self.passwordTextField.text = texts[1];
@@ -65,13 +65,9 @@
     NSArray *loginInfo = [NSArray arrayWithObjects:email,password, nil];
     
     [self.defaults setObject:loginInfo forKey:@"loginInformation"];
-    bool synch = [self.defaults synchronize];
-    NSLog(@" %@ %@", loginInfo[0],loginInfo[1]);
-    NSLog(@" %i", synch);
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    NSLog(@"hello");
     
     
     if (textField == self.emailTextField) {
@@ -83,5 +79,15 @@
      }
     return YES;
 }
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    
+    SetAlarmViewController *transferViewController = segue.destinationViewController;
+    
+    NSLog(@"prepareForSegue: %@", segue.identifier);
+    
+    
+}
+
 
 @end

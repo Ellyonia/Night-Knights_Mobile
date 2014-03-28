@@ -7,6 +7,7 @@
 //
 
 #import "CreateAccountViewController.h"
+#import "SetAlarmViewController.h"
 
 @interface CreateAccountViewController ()
 @property (strong, nonatomic) IBOutlet UITextField *knightNameTextField;
@@ -53,7 +54,6 @@
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    NSLog(@"hello");
     
     
     if (textField == self.emailTextField) {
@@ -69,5 +69,15 @@
     }
     return YES;
 }
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    
+    SetAlarmViewController *transferViewController = segue.destinationViewController;
+    
+    NSLog(@"prepareForSegue: %@", segue.identifier);
+    
+    
+}
+
 
 @end
