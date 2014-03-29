@@ -14,11 +14,17 @@
 @property (strong, nonatomic) IBOutlet UIButton *wakeUpButton;
 @property (strong, nonatomic) IBOutlet UIButton *snooozeButton;
 @property (strong, nonatomic) IBOutlet UILabel *headerLabel;
+@property (nonatomic) NSTimer * minuteHourRemover;
 
 @end
 
 @implementation AlarmRunningViewController
 int snoozeCount = -1;
+bool alarmStillRunning = YES;
+int timeRemaining = 0.0;
+int iHour = 0;
+int iMinute = 0;
+
 
 - (IBAction)snoozedPressed:(UIButton *)sender {
     self.snooozeButton.hidden = YES;
@@ -34,6 +40,14 @@ int snoozeCount = -1;
                                                      repeats:NO];
     
     [[NSRunLoop mainRunLoop] addTimer:isSnoozing forMode:NSRunLoopCommonModes];
+    self.minuteHourRemover = [NSTimer scheduledTimerWithTimeInterval:60
+                                                              target:self
+                                                            selector:@selector(removeMinuteOrHour)
+                                                            userInfo:nil
+                                                             repeats:YES];
+    
+    [[NSRunLoop mainRunLoop] addTimer:self.minuteHourRemover forMode:NSRunLoopCommonModes];
+
     snoozeCount ++;
 }
 
@@ -51,11 +65,11 @@ int snoozeCount = -1;
     NSString *timeNoSeconds = [timeWithSeconds substringToIndex:5];
     NSString *labelText = @"Until: ";
 //    labelText = [labelText stringByAppendingString:timeNoSeconds];
-    NSString *hour = [timeNoSeconds substringToIndex:3];
-    int alarmHour = [hour integerValue];
+    NSString *hours = [timeNoSeconds substringToIndex:3];
+    int alarmHour = [hours integerValue];
     NSString *minutes = [timeNoSeconds substringFromIndex:3];
     int alarmMinute = [minutes integerValue];
-    if (alarmHour < 12)
+    if (alarmHour < 13)
     {
         NSString *time = [NSString stringWithFormat:@"%d:%d",alarmHour,alarmMinute];
         labelText = [labelText stringByAppendingString:time];
@@ -74,9 +88,31 @@ int snoozeCount = -1;
 
 
     NSTimeInterval alarmRunTime = [convertedDate timeIntervalSinceDate: convertedNow];
-    NSLog(@"%@",now);
-    NSLog(@"%@",convertedDate);
-    NSLog(@"%f",(float)alarmRunTime);
+    timeRemaining = (int)alarmRunTime;
+    
+    iHour = (int)timeRemaining/(60*60);
+    iMinute = timeRemaining%3600 / 60 + 1;
+    NSLog(@"hour: %d minute: %d",iHour,iMinute);
+    
+    NSString *remainingTimeLabel;
+    if(iHour < 10)
+    {
+        remainingTimeLabel = [NSString stringWithFormat:@"0%d:", iHour];
+    }
+    else
+    {
+        remainingTimeLabel = [NSString stringWithFormat:@"%d:",iHour];
+    }
+    if (iMinute < 10)
+    {
+        remainingTimeLabel = [remainingTimeLabel stringByAppendingString:[NSString stringWithFormat:@"0%d",iMinute]];
+        
+    }
+    else
+    {
+        remainingTimeLabel = [remainingTimeLabel stringByAppendingString:[NSString stringWithFormat:@"%d",iMinute]];
+    }
+    self.timeRemainingLabel.text = remainingTimeLabel;
     
     NSTimer *alarm = [NSTimer scheduledTimerWithTimeInterval:alarmRunTime
                                                           target:self
@@ -85,11 +121,52 @@ int snoozeCount = -1;
                                                         repeats:NO];
     
     [[NSRunLoop mainRunLoop] addTimer:alarm forMode:NSRunLoopCommonModes];
-
+    
+    self.minuteHourRemover = [NSTimer scheduledTimerWithTimeInterval:60
+                                                                target:self
+                                                                selector:@selector(removeMinuteOrHour)
+                                                                userInfo:nil
+                                                                repeats:YES];
+        
+    [[NSRunLoop mainRunLoop] addTimer:self.minuteHourRemover forMode:NSRunLoopCommonModes];
 }
 
-- (void)alarmComplete
+-(void) removeMinuteOrHour
 {
+    NSLog(@"Reached Here");
+    if (iMinute != 0)
+    {
+        iMinute --;
+    }
+    else
+    {
+        iMinute = 59;
+        iHour --;
+    }
+    NSString *remainingTimeLabel;
+    if(iHour < 10)
+    {
+        remainingTimeLabel = [NSString stringWithFormat:@"0%d:", iHour];
+    }
+    else
+    {
+        remainingTimeLabel = [NSString stringWithFormat:@"%d:",iHour];
+    }
+    if (iMinute < 10)
+    {
+        remainingTimeLabel = [remainingTimeLabel stringByAppendingString:[NSString stringWithFormat:@"0%d",iMinute]];
+
+    }
+    else
+    {
+        remainingTimeLabel = [remainingTimeLabel stringByAppendingString:[NSString stringWithFormat:@"%d",iMinute]];
+    }
+    self.timeRemainingLabel.text = remainingTimeLabel;
+}
+
+- (void) alarmComplete
+{
+    [self.minuteHourRemover invalidate];
     dispatch_async(dispatch_get_main_queue(), ^{
         self.snooozeButton.hidden = NO;
         self.wakeUpButton.hidden = NO;
