@@ -20,6 +20,8 @@
 {
     [super viewDidLoad];
 //    self.alarmPickerDisplay.locale = [NSLocale systemLocale];
+    NSDate *convertedDate = [NSDate dateWithTimeInterval:300 sinceDate:[NSDate date]];
+    self.alarmPickerDisplay.date = convertedDate;
     self.alarmPickerDisplay.datePickerMode = UIDatePickerModeTime;
     self.alarmPickerDisplay.timeZone = [NSTimeZone timeZoneWithAbbreviation:@"CDT"];
     // Do any additional setup after loading the view.

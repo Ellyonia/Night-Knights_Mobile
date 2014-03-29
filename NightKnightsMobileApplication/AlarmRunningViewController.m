@@ -11,6 +11,8 @@
 @interface AlarmRunningViewController ()
 @property (strong, nonatomic) IBOutlet UILabel *finalAlarmLabel;
 @property (strong, nonatomic) IBOutlet UILabel *timeRemainingLabel;
+@property (strong, nonatomic) IBOutlet UIButton *wakeUpButton;
+@property (strong, nonatomic) IBOutlet UIButton *snooozeButton;
 
 @end
 
@@ -31,25 +33,50 @@
     NSString *labelText = @"Until: ";
 //    labelText = [labelText stringByAppendingString:timeNoSeconds];
     NSString *hour = [timeNoSeconds substringToIndex:3];
-    int iHour = [hour integerValue];
+    int alarmHour = [hour integerValue];
     NSString *minutes = [timeNoSeconds substringFromIndex:3];
-    int iMinute = [minutes integerValue];
-    if (iHour < 12)
+    int alarmMinute = [minutes integerValue];
+    if (alarmHour < 12)
     {
-        NSString *time = [NSString stringWithFormat:@"%d:%d",iHour,iMinute];
+        NSString *time = [NSString stringWithFormat:@"%d:%d",alarmHour,alarmMinute];
         labelText = [labelText stringByAppendingString:time];
         labelText = [labelText stringByAppendingString:@" AM"];
     }
     else
     {
-        NSString *time = [NSString stringWithFormat:@"%d:%d",(iHour-12),iMinute];
+        NSString *time = [NSString stringWithFormat:@"%d:%d",(alarmHour-12),alarmMinute];
         labelText = [labelText stringByAppendingString:time];
         labelText = [labelText stringByAppendingString:@" PM"];
     }
     self.finalAlarmLabel.text = labelText;
+    
+    NSDate *now = [NSDate date];
+    NSDate *convertedNow = [NSDate dateWithTimeInterval:-60*60*5 sinceDate:now];
+
+
+    NSTimeInterval alarmRunTime = [convertedDate timeIntervalSinceDate: convertedNow];
+    NSLog(@"%@",now);
+    NSLog(@"%@",convertedDate);
+    NSLog(@"%f",(float)alarmRunTime);
+    
+    NSTimer *alarm = [NSTimer scheduledTimerWithTimeInterval:alarmRunTime
+                                                          target:self
+                                                        selector:@selector(alarmComplete)
+                                                        userInfo:nil
+                                                        repeats:NO];
+    
+    [[NSRunLoop mainRunLoop] addTimer:alarm forMode:NSRunLoopCommonModes];
+
 }
 
-
+- (void)alarmComplete
+{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        self.snooozeButton.hidden = false;
+        self.wakeUpButton.hidden = false;
+        self.timeRemainingLabel.text = @"Wake-Up!";
+    });
+}
 
 - (NSString *)getSubstring:(NSString *)value betweenString:(NSString *)separator
 {
