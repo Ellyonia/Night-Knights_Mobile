@@ -301,6 +301,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     <navigationItem key="navigationItem" id="SDj-21-Udn"/>
                     <connections>
                         <outlet property="finalAlarmLabel" destination="9D8-CB-11E" id="RkG-jU-S6R"/>
+                        <outlet property="headerLabel" destination="Kfe-MR-fkc" id="uSz-nX-PCt"/>
                         <outlet property="snooozeButton" destination="mkT-9l-Nzp" id="SBd-cQ-qoE"/>
                         <outlet property="timeRemainingLabel" destination="G6m-Ca-cpK" id="JmT-U2-6Kj"/>
                         <outlet property="wakeUpButton" destination="WYK-dl-NAB" id="ZTK-rU-NV0"/>

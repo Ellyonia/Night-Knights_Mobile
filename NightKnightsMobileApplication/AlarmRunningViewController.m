@@ -13,6 +13,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *timeRemainingLabel;
 @property (strong, nonatomic) IBOutlet UIButton *wakeUpButton;
 @property (strong, nonatomic) IBOutlet UIButton *snooozeButton;
+@property (strong, nonatomic) IBOutlet UILabel *headerLabel;
 
 @end
 
@@ -72,9 +73,12 @@
 - (void)alarmComplete
 {
     dispatch_async(dispatch_get_main_queue(), ^{
-        self.snooozeButton.hidden = false;
-        self.wakeUpButton.hidden = false;
+        self.snooozeButton.hidden = NO;
+        self.wakeUpButton.hidden = NO;
         self.timeRemainingLabel.text = @"Wake-Up!";
+        self.finalAlarmLabel.hidden = YES;
+        self.headerLabel.hidden = YES;
+        
     });
 }
 
