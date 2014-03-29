@@ -18,6 +18,24 @@
 @end
 
 @implementation AlarmRunningViewController
+int snoozeCount = -1;
+
+- (IBAction)snoozedPressed:(UIButton *)sender {
+    self.snooozeButton.hidden = YES;
+    self.wakeUpButton.hidden = YES;
+//    self.timeRemainingLabel.text = @"Wake-Up!";
+    self.headerLabel.hidden = NO;
+    self.headerLabel.text = @"Snoozing for";
+    self.timeRemainingLabel.text = @"05:00";
+    NSTimer *isSnoozing = [NSTimer scheduledTimerWithTimeInterval:300
+                                                      target:self
+                                                    selector:@selector(alarmComplete)
+                                                    userInfo:nil
+                                                     repeats:NO];
+    
+    [[NSRunLoop mainRunLoop] addTimer:isSnoozing forMode:NSRunLoopCommonModes];
+    snoozeCount ++;
+}
 
 - (void)viewDidLoad
 {
