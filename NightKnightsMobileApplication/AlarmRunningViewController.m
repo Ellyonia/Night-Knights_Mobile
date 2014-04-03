@@ -59,16 +59,20 @@ int iMinute = 0;
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    bool firstMinute = true;
     NSDate *convertedDate = [NSDate dateWithTimeInterval:-60*60*5 sinceDate:self.alarmDate];
+    NSLog(@"%@",convertedDate);
+    NSLog(@"%@",self.alarmDate);
     NSString *stringDate = [NSString stringWithFormat:@"%@",convertedDate];
     NSString *timeWithSeconds = [self getSubstring:stringDate betweenString:@" "];
     NSString *timeNoSeconds = [timeWithSeconds substringToIndex:5];
     NSString *labelText = @"Until: ";
-//    labelText = [labelText stringByAppendingString:timeNoSeconds];
+    
     NSString *hours = [timeNoSeconds substringToIndex:3];
-    int alarmHour = [hours integerValue];
+    int alarmHour = (int)[hours integerValue];
     NSString *minutes = [timeNoSeconds substringFromIndex:3];
-    int alarmMinute = [minutes integerValue];
+    int alarmMinute = (int)[minutes integerValue];
+    
     if (alarmHour < 13)
     {
         NSString *time = [NSString stringWithFormat:@"%d:%d",alarmHour,alarmMinute];
@@ -86,13 +90,19 @@ int iMinute = 0;
     NSDate *now = [NSDate date];
     NSDate *convertedNow = [NSDate dateWithTimeInterval:-60*60*5 sinceDate:now];
 
-
+    NSString *sSeconds = [self getSubstring:stringDate betweenString:@" "];
+    sSeconds = [sSeconds substringFromIndex:6];
+    int seconds = (int)[sSeconds integerValue];
     NSTimeInterval alarmRunTime = [convertedDate timeIntervalSinceDate: convertedNow];
-    timeRemaining = (int)alarmRunTime;
+    timeRemaining = (int)alarmRunTime - seconds;
+    
+    // Checks to see if you want an alarm time for the morning.
+    if (timeRemaining < 0)
+        timeRemaining = timeRemaining + 60*60*24;
     
     iHour = (int)timeRemaining/(60*60);
     iMinute = timeRemaining%3600 / 60 + 1;
-    NSLog(@"hour: %d minute: %d",iHour,iMinute);
+    NSLog(@"%i",seconds);
     
     NSString *remainingTimeLabel;
     if(iHour < 10)
@@ -114,14 +124,22 @@ int iMinute = 0;
     }
     self.timeRemainingLabel.text = remainingTimeLabel;
     
-    NSTimer *alarm = [NSTimer scheduledTimerWithTimeInterval:alarmRunTime
+    NSTimer *alarm = [NSTimer scheduledTimerWithTimeInterval:timeRemaining
                                                           target:self
                                                         selector:@selector(alarmComplete)
                                                         userInfo:nil
                                                         repeats:NO];
     
     [[NSRunLoop mainRunLoop] addTimer:alarm forMode:NSRunLoopCommonModes];
-    
+    if (firstMinute)
+    {
+        self.minuteHourRemover = [NSTimer scheduledTimerWithTimeInterval:60-seconds+1
+                                                                  target:self
+                                                                selector:@selector(removeMinuteOrHour)
+                                                                userInfo:nil
+                                                                 repeats:NO];
+        firstMinute = NO;
+    }
     self.minuteHourRemover = [NSTimer scheduledTimerWithTimeInterval:60
                                                                 target:self
                                                                 selector:@selector(removeMinuteOrHour)
