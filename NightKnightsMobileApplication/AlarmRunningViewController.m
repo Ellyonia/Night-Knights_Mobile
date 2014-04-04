@@ -15,6 +15,7 @@
 @property (strong, nonatomic) IBOutlet UIButton *snooozeButton;
 @property (strong, nonatomic) IBOutlet UILabel *headerLabel;
 @property (nonatomic) NSTimer * minuteHourRemover;
+@property (nonatomic) NSTimer *alarm;
 
 @end
 
@@ -72,15 +73,29 @@ int second = 0;
     
     if (alarmHour < 13)
     {
+        if (alarmMinute > 9){
         NSString *time = [NSString stringWithFormat:@"%d:%d",alarmHour,alarmMinute];
         labelText = [labelText stringByAppendingString:time];
         labelText = [labelText stringByAppendingString:@" AM"];
+        }
+        else{
+            NSString *time = [NSString stringWithFormat:@"%d:0%d",alarmHour,alarmMinute];
+            labelText = [labelText stringByAppendingString:time];
+            labelText = [labelText stringByAppendingString:@" AM"];
+        }
     }
     else
     {
-        NSString *time = [NSString stringWithFormat:@"%d:%d",(alarmHour-12),alarmMinute];
-        labelText = [labelText stringByAppendingString:time];
-        labelText = [labelText stringByAppendingString:@" PM"];
+        if (alarmMinute > 9){
+            NSString *time = [NSString stringWithFormat:@"%d:%d",(alarmHour-12),alarmMinute];
+            labelText = [labelText stringByAppendingString:time];
+            labelText = [labelText stringByAppendingString:@" AM"];
+        }
+        else{
+            NSString *time = [NSString stringWithFormat:@"%d:0%d",(alarmHour-12),alarmMinute];
+            labelText = [labelText stringByAppendingString:time];
+            labelText = [labelText stringByAppendingString:@" AM"];
+        }
     }
     self.finalAlarmLabel.text = labelText;
     
@@ -121,13 +136,13 @@ int second = 0;
     }
     self.timeRemainingLabel.text = remainingTimeLabel;
     
-    NSTimer *alarm = [NSTimer scheduledTimerWithTimeInterval:timeRemaining
+    self.alarm = [NSTimer scheduledTimerWithTimeInterval:timeRemaining
                                                           target:self
                                                         selector:@selector(alarmComplete)
                                                         userInfo:nil
                                                         repeats:NO];
     
-    [[NSRunLoop mainRunLoop] addTimer:alarm forMode:NSRunLoopCommonModes];
+    [[NSRunLoop mainRunLoop] addTimer:self.alarm forMode:NSRunLoopCommonModes];
 
     sSeconds = [NSString stringWithFormat:@"%@",convertedNow];
     sSeconds = [self getSubstring:sSeconds betweenString:@" "];
@@ -156,7 +171,7 @@ int second = 0;
             iMinute = 59;
             iHour --;
         }
-        second = 0;
+        second = 1;
     }
     else
     {
@@ -210,8 +225,12 @@ int second = 0;
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    //Cancel the current alarms running.
+    if([segue.identifier isEqualToString:@"cancel"])
+    {
+        [self.minuteHourRemover invalidate];
+        [self.alarm invalidate];
+    }
 }
 
 
