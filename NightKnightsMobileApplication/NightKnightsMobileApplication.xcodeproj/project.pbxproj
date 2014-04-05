@@ -24,6 +24,7 @@
 		7EC9CE0A18DBB6BA00AB3BFA /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EC9CE0918DBB6BA00AB3BFA /* LoginViewController.m */; };
 		7EC9CE0E18DBBECC00AB3BFA /* CreateAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EC9CE0D18DBBECC00AB3BFA /* CreateAccountViewController.m */; };
 		7EC9CE1118DBBF4C00AB3BFA /* SetAlarmViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EC9CE1018DBBF4C00AB3BFA /* SetAlarmViewController.m */; };
+		7EEB71D818F0718A00E75514 /* AlarmSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EEB71D718F0718A00E75514 /* AlarmSettingsViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +63,8 @@
 		7EC9CE0D18DBBECC00AB3BFA /* CreateAccountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CreateAccountViewController.m; path = NightKnightsMobileApplication/ViewControllers/CreateAccountViewController.m; sourceTree = "<group>"; };
 		7EC9CE0F18DBBF4C00AB3BFA /* SetAlarmViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SetAlarmViewController.h; path = NightKnightsMobileApplication/ViewControllers/SetAlarmViewController.h; sourceTree = "<group>"; };
 		7EC9CE1018DBBF4C00AB3BFA /* SetAlarmViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SetAlarmViewController.m; path = NightKnightsMobileApplication/ViewControllers/SetAlarmViewController.m; sourceTree = "<group>"; };
+		7EEB71D618F0718A00E75514 /* AlarmSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AlarmSettingsViewController.h; path = NightKnightsMobileApplication/ViewControllers/AlarmSettingsViewController.h; sourceTree = "<group>"; };
+		7EEB71D718F0718A00E75514 /* AlarmSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AlarmSettingsViewController.m; path = NightKnightsMobileApplication/ViewControllers/AlarmSettingsViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -165,6 +168,8 @@
 			children = (
 				7E83785818DE2DA400B94636 /* AlarmRunningViewController.h */,
 				7E83785918DE2DA400B94636 /* AlarmRunningViewController.m */,
+				7EEB71D618F0718A00E75514 /* AlarmSettingsViewController.h */,
+				7EEB71D718F0718A00E75514 /* AlarmSettingsViewController.m */,
 				7EC9CE0F18DBBF4C00AB3BFA /* SetAlarmViewController.h */,
 				7EC9CE1018DBBF4C00AB3BFA /* SetAlarmViewController.m */,
 				7EC9CE0C18DBBECC00AB3BFA /* CreateAccountViewController.h */,
@@ -280,6 +285,7 @@
 				7EC9CDE418DBB4E400AB3BFA /* AppDelegate.m in Sources */,
 				7EC9CDE018DBB4E400AB3BFA /* main.m in Sources */,
 				7EC9CE1118DBBF4C00AB3BFA /* SetAlarmViewController.m in Sources */,
+				7EEB71D818F0718A00E75514 /* AlarmSettingsViewController.m in Sources */,
 				7E83785A18DE2DA400B94636 /* AlarmRunningViewController.m in Sources */,
 				7EC9CE0A18DBB6BA00AB3BFA /* LoginViewController.m in Sources */,
 			);
