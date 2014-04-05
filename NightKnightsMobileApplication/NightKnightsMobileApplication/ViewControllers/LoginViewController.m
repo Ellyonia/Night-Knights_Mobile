@@ -48,7 +48,7 @@
     }
     self.emailTextField.delegate = self;
     self.passwordTextField.delegate = self;
-    
+
 }
 
 - (void)didReceiveMemoryWarning
@@ -89,5 +89,17 @@
     
 }
 
+-(void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
+    UITouch *touch = [touches anyObject];
+    if(touch.phase==UITouchPhaseBegan){
+        //find first response view
+        for (UIView *view in [self.view subviews]) {
+            if ([view isFirstResponder]) {
+                [view resignFirstResponder];
+                break;
+            }
+        }
+    }
+}
 
 @end
