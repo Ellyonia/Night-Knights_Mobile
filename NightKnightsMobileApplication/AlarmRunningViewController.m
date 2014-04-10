@@ -22,10 +22,11 @@
 @implementation AlarmRunningViewController
 int snoozeCount = -1;
 bool alarmStillRunning = YES;
-int timeRemaining = 0.0;
+int timeRemaining = 0;
 int iHour = 0;
 int iMinute = 0;
 int second = 0;
+int energyGained = 0;
 
 
 - (IBAction)snoozedPressed:(UIButton *)sender {
@@ -71,8 +72,10 @@ int second = 0;
     timePart = [timeNoSeconds substringFromIndex:3];
     int alarmMinute = (int)[timePart integerValue];
     
+    NSLog(@"AlarmHour%i",alarmHour);
     if (alarmHour < 13)
     {
+        NSLog(@"Reached Here2");
         if (alarmMinute > 9){
         NSString *time = [NSString stringWithFormat:@"%d:%d",alarmHour,alarmMinute];
         labelText = [labelText stringByAppendingString:time];
@@ -86,15 +89,16 @@ int second = 0;
     }
     else
     {
+        NSLog(@"Reached Here1");
         if (alarmMinute > 9){
             NSString *time = [NSString stringWithFormat:@"%d:%d",(alarmHour-12),alarmMinute];
             labelText = [labelText stringByAppendingString:time];
-            labelText = [labelText stringByAppendingString:@" AM"];
+            labelText = [labelText stringByAppendingString:@" PM"];
         }
         else{
             NSString *time = [NSString stringWithFormat:@"%d:0%d",(alarmHour-12),alarmMinute];
             labelText = [labelText stringByAppendingString:time];
-            labelText = [labelText stringByAppendingString:@" AM"];
+            labelText = [labelText stringByAppendingString:@" PM"];
         }
     }
     self.finalAlarmLabel.text = labelText;
@@ -230,6 +234,12 @@ int second = 0;
     {
         [self.minuteHourRemover invalidate];
         [self.alarm invalidate];
+        NSLog(@"Alarm Exiting");
+    }
+    if([segue.identifier isEqualToString:@"wakeUp"])
+    {
+        energyGained = timeRemaining/100*(snoozeCount*0.05);
+        NSLog(@"Energy gained: %i",energyGained);
     }
 }
 

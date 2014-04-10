@@ -269,7 +269,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="qSt-2j-xi9" kind="push" id="ZOw-jL-4IH"/>
+                                    <segue destination="qSt-2j-xi9" kind="push" identifier="wakeUp" id="ZOw-jL-4IH"/>
                                 </connections>
                             </button>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mkT-9l-Nzp">
@@ -510,7 +510,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="dhn-gc-wte"/>
+        <segue reference="ZOw-jL-4IH"/>
         <segue reference="45V-4u-xfi"/>
     </inferredMetricsTieBreakers>
 </document>
