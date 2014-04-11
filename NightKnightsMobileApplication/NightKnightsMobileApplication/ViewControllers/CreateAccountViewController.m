@@ -20,6 +20,7 @@
 @property (strong, nonatomic) NSNumber *value;
 @property (strong,nonatomic) NSURLSession *session;
 @property (strong,nonatomic) NSNumber *dsid;
+@property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 
 
 @end
