@@ -38,7 +38,6 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="loginButtonPushed:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="65f-MR-MKG"/>
                                     <segue destination="b1R-rb-4YS" kind="push" id="qfc-qW-XPV"/>
                                 </connections>
                             </button>
@@ -89,10 +88,6 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="foc-lb-nof">
-                                <rect key="frame" x="150" y="257" width="20" height="20"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
@@ -121,7 +116,6 @@
                     <connections>
                         <outlet property="emailTextField" destination="R28-R5-2fH" id="FM5-1N-ilc"/>
                         <outlet property="passwordTextField" destination="bM3-oK-6FV" id="eFU-8s-j4z"/>
-                        <outlet property="spinner" destination="foc-lb-nof" id="8M8-8B-L13"/>
                         <segue destination="qSt-2j-xi9" kind="push" identifier="loginSuccess" id="gvE-KZ-2TX"/>
                     </connections>
                 </viewController>
@@ -519,6 +513,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="45V-4u-xfi"/>
-        <segue reference="jyW-x2-vmY"/>
+        <segue reference="gvE-KZ-2TX"/>
     </inferredMetricsTieBreakers>
 </document>

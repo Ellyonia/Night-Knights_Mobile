@@ -118,7 +118,9 @@
                                                          NSDictionary *jsonDictionary = [NSJSONSerialization JSONObjectWithData:data options: NSJSONReadingMutableContainers error: &error];
                                                          NSLog(@"%@",jsonDictionary);
                                                          if ([jsonDictionary[@"success"] isEqual:@1]){
+                                                             NSLog(@"hi");
                                                          dispatch_sync(dispatch_get_main_queue(), ^{
+                                                             NSLog(@"hi");
                                                              [self performSegueWithIdentifier:@"createAccount" sender:self];                                                         });
                                                          }
                                                      }];
