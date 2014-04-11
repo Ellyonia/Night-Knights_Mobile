@@ -22,6 +22,7 @@
     if(!_defaults){
         _defaults = [NSUserDefaults standardUserDefaults];
     }
+    
     return _defaults;
     
 }
@@ -46,19 +47,11 @@
         NSLog(@"%@",midnight);
         while ([dateFromPrevious compare:midnight] == NSOrderedAscending)
         {
-            //dateFromPrevious = [NSDate dateWithTimeInterval:60*60*24 sinceDate:dateFromPrevious];
             NSLog(@"%@",dateFromPrevious);
         }
-//        NSTimeInterval convertDateToToday = [[NSDate date] timeIntervalSinceDate: dateFromPrevious];
-//        int dayInSeconds = 60*60*24;
-//        int daysBetween = (int)convertDateToToday%dayInSeconds;
-//        daysBetween *=dayInSeconds;
-//
-//        NSDate *newPickerDate = [NSDate dateWithTimeInterval:convertDateToToday sinceDate:dateFromPrevious];
         self.alarmPickerDisplay.date = dateFromPrevious;
         self.alarmPickerDisplay.datePickerMode = UIDatePickerModeTime;
         self.alarmPickerDisplay.timeZone = [NSTimeZone timeZoneWithAbbreviation:@"CDT"];
-//
     }
     else
     {

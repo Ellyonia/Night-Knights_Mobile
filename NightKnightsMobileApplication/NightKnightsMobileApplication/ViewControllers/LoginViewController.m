@@ -9,16 +9,23 @@
 #import "LoginViewController.h"
 #import "SetAlarmViewController.h"
 
-@interface LoginViewController ()
+#define SERVER_URL "http://54.84.248.48"
+
+@interface LoginViewController () <NSURLSessionTaskDelegate>
 @property (strong, nonatomic) IBOutlet UITextField *emailTextField;
 @property (strong, nonatomic) IBOutlet UITextField *passwordTextField;
 @property (strong, nonatomic) NSUserDefaults* defaults;
+@property (strong, nonatomic) NSNumber *value;
+@property (strong,nonatomic) NSURLSession *session;
+@property (strong,nonatomic) NSNumber *dsid;
+@property (strong, nonatomic) IBOutlet UIActivityIndicatorView *spinner;
 
 
 @end
 
 @implementation LoginViewController
 
+bool loginSuccessful;
 
 -(NSUserDefaults *) defaults{
     if(!_defaults){
@@ -32,6 +39,21 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.value = @(0.5);
+    _dsid = @1;
+    
+    //setup NSURLSession (ephemeral)
+    NSURLSessionConfiguration *sessionConfig =
+    [NSURLSessionConfiguration ephemeralSessionConfiguration];
+    
+    sessionConfig.timeoutIntervalForRequest = 5.0;
+    sessionConfig.timeoutIntervalForResource = 8.0;
+    sessionConfig.HTTPMaximumConnectionsPerHost = 1;
+    
+    self.session =
+    [NSURLSession sessionWithConfiguration:sessionConfig
+                                  delegate:self
+                             delegateQueue:nil];
 }
 
 
@@ -80,15 +102,6 @@
     return YES;
 }
 
--(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
-    
-    SetAlarmViewController *transferViewController = segue.destinationViewController;
-    
-    NSLog(@"prepareForSegue: %@", segue.identifier);
-    
-    
-}
-
 -(void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
     UITouch *touch = [touches anyObject];
     if(touch.phase==UITouchPhaseBegan){
@@ -100,6 +113,39 @@
             }
         }
     }
+}
+- (IBAction)loginButtonPushed:(UIButton*)sender {
+    
+    // an example for sending some data as JSON in the HTTP body
+    // setup the url
+    NSString *baseURL = [NSString stringWithFormat:@"%s/api/login",SERVER_URL];
+    NSURL *postUrl = [NSURL URLWithString:baseURL];
+    
+    // data to send in body of post request (send arguments as json)
+    NSError *error = nil;
+    NSDictionary *jsonUpload = @{@"email":self.emailTextField.text,@"password":self.passwordTextField.text};
+    NSData *requestBody=[NSJSONSerialization dataWithJSONObject:jsonUpload options:NSJSONWritingPrettyPrinted error:&error];
+    
+    // create a custom HTTP POST request
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:postUrl];
+    NSLog(@"%@",request);
+    NSLog(@"%@",baseURL);
+    [request setHTTPMethod:@"POST"];
+    [request setHTTPBody:requestBody];
+    
+    // start the request, print the responses etc.
+    NSURLSessionDataTask *postTask = [self.session dataTaskWithRequest:request
+                                                     completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                                         //NSLog(@"11%@",response);
+                                                         NSDictionary *jsonDictionary = [NSJSONSerialization JSONObjectWithData:data options: NSJSONReadingMutableContainers error: &error];
+                                                         NSLog(@"%@",jsonDictionary);
+                                                         NSLog(@"%@",jsonDictionary[@"success"]);
+                                                         if ([jsonDictionary[@"success"] isEqual:@1]){
+                                                         dispatch_sync(dispatch_get_main_queue(), ^{
+                                                             [self performSegueWithIdentifier:@"loginSuccess" sender:self];                                                         });
+                                                         }
+                                                     }];
+    [postTask resume];
 }
 
 @end
