@@ -7,6 +7,7 @@
 //
 
 #import "AlarmRunningViewController.h"
+#import <AudioToolbox/AudioToolbox.h>
 
 @interface AlarmRunningViewController ()
 @property (strong, nonatomic) IBOutlet UILabel *finalAlarmLabel;
@@ -22,11 +23,11 @@
 @implementation AlarmRunningViewController
 int snoozeCount = -1;
 bool alarmStillRunning = YES;
-int timeRemaining = 0;
-int iHour = 0;
+int timeRemaining = 0;int iHour = 0;
 int iMinute = 0;
 int second = 0;
 int energyGained = 0;
+int systemSoundID  = 1030;
 
 
 - (IBAction)snoozedPressed:(UIButton *)sender {
@@ -211,6 +212,8 @@ int energyGained = 0;
         self.timeRemainingLabel.text = @"Wake-Up!";
         self.finalAlarmLabel.hidden = YES;
         self.headerLabel.hidden = YES;
+        AudioServicesPlaySystemSound (systemSoundID);
+
         
     });
 }
@@ -240,6 +243,7 @@ int energyGained = 0;
     {
         energyGained = timeRemaining/100*(snoozeCount*0.05);
         NSLog(@"Energy gained: %i",energyGained);
+        
     }
 }
 
