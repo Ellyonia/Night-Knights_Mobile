@@ -7,6 +7,7 @@
 //
 
 #import "AlarmSettingsViewController.h"
+#import <AVFoundation/AVFoundation.h>
 
 @interface AlarmSettingsViewController ()
 

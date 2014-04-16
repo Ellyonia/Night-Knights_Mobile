@@ -48,7 +48,7 @@
     
     //setup NSURLSession (ephemeral)
     NSURLSessionConfiguration *sessionConfig =
-    [NSURLSessionConfiguration ephemeralSessionConfiguration];
+    [NSURLSessionConfiguration defaultSessionConfiguration];
     
     sessionConfig.timeoutIntervalForRequest = 5.0;
     sessionConfig.timeoutIntervalForResource = 8.0;
@@ -139,6 +139,18 @@
             }
         }
     }
+}
+
+
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    
+    if([segue.identifier isEqualToString:@"createAccount"])
+    {
+        SetAlarmViewController * transferViewController = segue.destinationViewController;
+        transferViewController.session = self.session;
+    }
+    
 }
 
 

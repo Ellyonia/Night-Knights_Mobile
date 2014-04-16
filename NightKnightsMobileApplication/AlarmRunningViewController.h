@@ -11,5 +11,7 @@
 @interface AlarmRunningViewController : UIViewController
 
 @property (nonatomic) NSDate *alarmDate;
+@property (strong,nonatomic) NSURLSession *session;
+
 
 @end

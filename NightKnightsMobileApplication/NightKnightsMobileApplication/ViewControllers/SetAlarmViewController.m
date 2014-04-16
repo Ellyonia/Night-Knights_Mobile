@@ -14,6 +14,7 @@
 @property (strong, nonatomic) IBOutlet UIDatePicker *alarmPickerDisplay;
 @property (strong, nonatomic) NSUserDefaults* defaults;
 
+
 @end
 
 @implementation SetAlarmViewController
@@ -80,6 +81,7 @@
     {
         AlarmRunningViewController *transferViewController = segue.destinationViewController;
         transferViewController.alarmDate = self.alarmPickerDisplay.date;
+        transferViewController.session = self.session;
     }
     
 }
@@ -103,6 +105,8 @@
     NSDate *beginningOfDay = [calendar dateFromComponents:dateComps];
     return beginningOfDay;
 }
+
+
 
 
 @end

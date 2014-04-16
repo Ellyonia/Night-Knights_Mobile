@@ -18,7 +18,6 @@
 @property (strong, nonatomic) NSNumber *value;
 @property (strong,nonatomic) NSURLSession *session;
 @property (strong,nonatomic) NSNumber *dsid;
-@property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 
 
 @end
@@ -44,7 +43,7 @@ bool loginSuccessful;
     
     //setup NSURLSession (ephemeral)
     NSURLSessionConfiguration *sessionConfig =
-    [NSURLSessionConfiguration ephemeralSessionConfiguration];
+    [NSURLSessionConfiguration defaultSessionConfiguration];
     
     sessionConfig.timeoutIntervalForRequest = 5.0;
     sessionConfig.timeoutIntervalForResource = 8.0;
@@ -146,6 +145,16 @@ bool loginSuccessful;
                                                          }
                                                      }];
     [postTask resume];
+}
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    
+    if([segue.identifier isEqualToString:@"login"])
+    {
+        SetAlarmViewController * transferViewController = segue.destinationViewController;
+        transferViewController.session = self.session;
+    }
+    
 }
 
 @end

@@ -8,8 +8,11 @@
 
 #import "AlarmRunningViewController.h"
 #import <AudioToolbox/AudioToolbox.h>
+#import <AVFoundation/AVFoundation.h>
 
-@interface AlarmRunningViewController ()
+#define SERVER_URL "http://54.84.248.48"
+
+@interface AlarmRunningViewController () <NSURLSessionTaskDelegate>
 @property (strong, nonatomic) IBOutlet UILabel *finalAlarmLabel;
 @property (strong, nonatomic) IBOutlet UILabel *timeRemainingLabel;
 @property (strong, nonatomic) IBOutlet UIButton *wakeUpButton;
@@ -17,6 +20,9 @@
 @property (strong, nonatomic) IBOutlet UILabel *headerLabel;
 @property (nonatomic) NSTimer * minuteHourRemover;
 @property (nonatomic) NSTimer *alarm;
+@property (strong, nonatomic) NSNumber *value;
+@property (strong,nonatomic) NSNumber *dsid;
+
 
 @end
 
@@ -27,7 +33,7 @@ int timeRemaining = 0;int iHour = 0;
 int iMinute = 0;
 int second = 0;
 int energyGained = 0;
-int systemSoundID  = 1030;
+int systemSoundID  = 1304;
 
 
 - (IBAction)snoozedPressed:(UIButton *)sender {
@@ -36,6 +42,7 @@ int systemSoundID  = 1030;
     self.headerLabel.hidden = NO;
     self.headerLabel.text = @"Snoozing for";
     self.timeRemainingLabel.text = @"05:00";
+    second = 0;
     NSTimer *isSnoozing = [NSTimer scheduledTimerWithTimeInterval:300
                                                       target:self
                                                     selector:@selector(alarmComplete)
@@ -43,7 +50,7 @@ int systemSoundID  = 1030;
                                                      repeats:NO];
     
     [[NSRunLoop mainRunLoop] addTimer:isSnoozing forMode:NSRunLoopCommonModes];
-    self.minuteHourRemover = [NSTimer scheduledTimerWithTimeInterval:60
+    self.minuteHourRemover = [NSTimer scheduledTimerWithTimeInterval:1
                                                               target:self
                                                             selector:@selector(removeMinuteOrHour)
                                                             userInfo:nil
@@ -58,6 +65,11 @@ int systemSoundID  = 1030;
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    self.value = @(0.5);
+    _dsid = @1;
+    
+   
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -167,6 +179,7 @@ int systemSoundID  = 1030;
     NSLog(@"%i",second);
     if (second == 60)
     {
+        AudioServicesPlaySystemSound (systemSoundID);
         if (iMinute != 0)
         {
             iMinute --;
@@ -244,6 +257,29 @@ int systemSoundID  = 1030;
         energyGained = timeRemaining/100*(snoozeCount*0.05);
         NSLog(@"Energy gained: %i",energyGained);
         
+        NSString *baseURL = [NSString stringWithFormat:@"%s/api/character/energy",SERVER_URL];
+        NSURL *postUrl = [NSURL URLWithString:baseURL];
+        
+        // data to send in body of post request (send arguments as json)
+        NSError *error = nil;
+        NSDictionary *jsonUpload = @{@"energy":@(energyGained)};
+        NSData *requestBody=[NSJSONSerialization dataWithJSONObject:jsonUpload options:NSJSONWritingPrettyPrinted error:&error];
+        
+        // create a custom HTTP POST request
+        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:postUrl];
+        [request setHTTPMethod:@"PUT"];
+        [request setHTTPBody:requestBody];
+        
+        // start the request, print the responses etc.
+        NSURLSessionDataTask *postTask = [self.session dataTaskWithRequest:request
+                                                         completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                                             
+                                                             NSLog(@"123%@",response);
+                                                             NSLog(@"1234%@",error);
+                                                             
+                                                         }];
+
+        [postTask resume];
     }
 }
 

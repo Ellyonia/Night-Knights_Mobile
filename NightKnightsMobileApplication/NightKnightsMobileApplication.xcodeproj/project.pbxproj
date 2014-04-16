@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7E60981A18FDEA33007D490E /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E60981918FDEA33007D490E /* AVFoundation.framework */; };
 		7E83785A18DE2DA400B94636 /* AlarmRunningViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E83785918DE2DA400B94636 /* AlarmRunningViewController.m */; };
 		7EC9CDD418DBB4E400AB3BFA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EC9CDD318DBB4E400AB3BFA /* Foundation.framework */; };
 		7EC9CDD618DBB4E400AB3BFA /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EC9CDD518DBB4E400AB3BFA /* CoreGraphics.framework */; };
@@ -38,6 +39,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7E60981918FDEA33007D490E /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		7E83785818DE2DA400B94636 /* AlarmRunningViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlarmRunningViewController.h; sourceTree = "<group>"; };
 		7E83785918DE2DA400B94636 /* AlarmRunningViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlarmRunningViewController.m; sourceTree = "<group>"; };
 		7EC9CDD018DBB4E400AB3BFA /* NightKnightsMobileApplication.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NightKnightsMobileApplication.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -72,6 +74,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7E60981A18FDEA33007D490E /* AVFoundation.framework in Frameworks */,
 				7EC9CDD618DBB4E400AB3BFA /* CoreGraphics.framework in Frameworks */,
 				7EC9CDD818DBB4E400AB3BFA /* UIKit.framework in Frameworks */,
 				7EC9CDD418DBB4E400AB3BFA /* Foundation.framework in Frameworks */,
@@ -113,6 +116,7 @@
 		7EC9CDD218DBB4E400AB3BFA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7E60981918FDEA33007D490E /* AVFoundation.framework */,
 				7EC9CDD318DBB4E400AB3BFA /* Foundation.framework */,
 				7EC9CDD518DBB4E400AB3BFA /* CoreGraphics.framework */,
 				7EC9CDD718DBB4E400AB3BFA /* UIKit.framework */,

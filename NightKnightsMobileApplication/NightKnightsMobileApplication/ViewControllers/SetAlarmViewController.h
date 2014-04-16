@@ -9,5 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface SetAlarmViewController : UIViewController
+@property (strong,nonatomic) NSURLSession *session;
+
 
 @end
