@@ -16,6 +16,7 @@
 @property (strong, nonatomic) IBOutlet UITextField *knightNameTextField;
 @property (strong, nonatomic) IBOutlet UITextField *passwordTextField;
 @property (strong, nonatomic) IBOutlet UITextField *emailTextField;
+@property (strong, nonatomic) IBOutlet UITextField *passwordDoubleCheck;
 @property (strong, nonatomic) NSUserDefaults* defaults;
 @property (strong, nonatomic) NSNumber *value;
 @property (strong,nonatomic) NSURLSession *session;
@@ -86,6 +87,11 @@
     }
     else if (textField == self.passwordTextField) {
         [textField resignFirstResponder];
+        [self.passwordDoubleCheck becomeFirstResponder];
+    }
+    else if (textField == self.passwordDoubleCheck)
+    {
+        [textField resignFirstResponder];
         [self.knightNameTextField becomeFirstResponder];
     }
     else if (textField == self.knightNameTextField) {
@@ -97,35 +103,40 @@
 - (IBAction)createAccountButton:(UIButton *)sender {
     // an example for sending some data as JSON in the HTTP body
     // setup the url
-    NSString *baseURL = [NSString stringWithFormat:@"%s/api/users",SERVER_URL];
-    NSURL *postUrl = [NSURL URLWithString:baseURL];
-    
-    // data to send in body of post request (send arguments as json)
-    NSError *error = nil;
-    NSDictionary *jsonUpload = @{@"email":self.emailTextField.text,@"password":self.passwordTextField.text,@"username":self.knightNameTextField.text};
-    NSData *requestBody=[NSJSONSerialization dataWithJSONObject:jsonUpload options:NSJSONWritingPrettyPrinted error:&error];
-    
-    // create a custom HTTP POST request
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:postUrl];
-    NSLog(@"%@",request);
-    NSLog(@"%@",baseURL);
-    [request setHTTPMethod:@"POST"];
-    [request setHTTPBody:requestBody];
-    
-    // start the request, print the responses etc.
-    NSURLSessionDataTask *postTask = [self.session dataTaskWithRequest:request
-                                                     completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-                                                         //NSLog(@"11%@",response);
-                                                         NSDictionary *jsonDictionary = [NSJSONSerialization JSONObjectWithData:data options: NSJSONReadingMutableContainers error: &error];
-                                                         NSLog(@"%@",jsonDictionary);
-                                                         if ([jsonDictionary[@"success"] isEqual:@1]){
-                                                             NSLog(@"hi");
-                                                         dispatch_sync(dispatch_get_main_queue(), ^{
-                                                             NSLog(@"hi");
-                                                             [self performSegueWithIdentifier:@"createAccount" sender:self];                                                         });
-                                                         }
-                                                     }];
-    [postTask resume];
+    NSString *originalPass = self.passwordTextField.text;
+    NSString *retypedPass = self.passwordDoubleCheck.text;
+    if ([originalPass isEqualToString:retypedPass])
+    {
+        NSString *baseURL = [NSString stringWithFormat:@"%s/api/users",SERVER_URL];
+        NSURL *postUrl = [NSURL URLWithString:baseURL];
+        
+        // data to send in body of post request (send arguments as json)
+        NSError *error = nil;
+        NSDictionary *jsonUpload = @{@"email":self.emailTextField.text,@"password":self.passwordTextField.text,@"username":self.knightNameTextField.text};
+        NSData *requestBody=[NSJSONSerialization dataWithJSONObject:jsonUpload options:NSJSONWritingPrettyPrinted error:&error];
+        
+        // create a custom HTTP POST request
+        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:postUrl];
+        NSLog(@"%@",request);
+        NSLog(@"%@",baseURL);
+        [request setHTTPMethod:@"POST"];
+        [request setHTTPBody:requestBody];
+        
+        // start the request, print the responses etc.
+        NSURLSessionDataTask *postTask = [self.session dataTaskWithRequest:request
+                                                         completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                                             //NSLog(@"11%@",response);
+                                                             NSDictionary *jsonDictionary = [NSJSONSerialization JSONObjectWithData:data options: NSJSONReadingMutableContainers error: &error];
+                                                             NSLog(@"%@",jsonDictionary);
+                                                             if ([jsonDictionary[@"success"] isEqual:@1]){
+                                                                 NSLog(@"hi");
+                                                             dispatch_sync(dispatch_get_main_queue(), ^{
+                                                                 NSLog(@"hi");
+                                                                 [self performSegueWithIdentifier:@"createAccount" sender:self];                                                         });
+                                                             }
+                                                         }];
+        [postTask resume];
+    }
 }
 
 -(void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{

@@ -15,11 +15,17 @@
 
 @implementation AlarmSettingsViewController
 
+AVAudioPlayer *audioPlayer;
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+}
+- (IBAction)changeVolume:(UISlider *)sender {
+    audioPlayer.volume = sender.value;
+    NSLog(@"%f",sender.value);
+    
 }
 
 /*

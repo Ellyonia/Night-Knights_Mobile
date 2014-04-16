@@ -27,6 +27,8 @@
 @end
 
 @implementation AlarmRunningViewController
+
+AVAudioPlayer *audioPlayer;
 int snoozeCount = -1;
 bool alarmStillRunning = YES;
 int timeRemaining = 0;int iHour = 0;
