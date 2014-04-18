@@ -21,12 +21,41 @@
 @property (nonatomic) NSTimer * minuteHourRemover;
 @property (nonatomic) NSTimer *alarm;
 @property (strong, nonatomic) NSNumber *value;
-@property (strong,nonatomic) NSNumber *dsid;
 
 
 @end
 
 @implementation AlarmRunningViewController
+
+- (IBAction)wakeUpButtonPushed:(id)sender
+{
+    energyGained = timeRemaining/100*(1-(snoozeCount*0.05));
+    NSLog(@"Energy gained: %i",energyGained);
+
+    NSString *baseURL = [NSString stringWithFormat:@"%s/api/character/energy",SERVER_URL];
+    NSURL *postUrl = [NSURL URLWithString:baseURL];
+    
+    // data to send in body of post request (send arguments as json)
+    NSError *error = nil;
+    NSDictionary *jsonUpload = @{@"energy":@(energyGained)};
+    NSData *requestBody=[NSJSONSerialization dataWithJSONObject:jsonUpload options:NSJSONWritingPrettyPrinted error:&error];
+    // create a custom HTTP POST request
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:postUrl];
+    [request setHTTPMethod:@"PUT"];
+    [request setHTTPBody:requestBody];
+    NSLog(@"%@",self.session);
+    // start the request, print the responses etc.
+    NSURLSessionDataTask *postTask = [self.session dataTaskWithRequest:request
+                                                        completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                                            
+                                                        dispatch_sync(dispatch_get_main_queue(), ^{
+                                                            [self performSegueWithIdentifier:@"wakeUpButtonPushed" sender:self];                                                         });
+                                                        }];
+    
+    [postTask resume];
+
+    
+}
 
 AVAudioPlayer *audioPlayer;
 int snoozeCount = -1;
@@ -68,8 +97,19 @@ int systemSoundID  = 1304;
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    self.value = @(0.5);
-    _dsid = @1;
+    
+    //setup NSURLSession (ephemeral)
+    NSURLSessionConfiguration *sessionConfig =
+    [NSURLSessionConfiguration defaultSessionConfiguration];
+    
+    sessionConfig.timeoutIntervalForRequest = 5.0;
+    sessionConfig.timeoutIntervalForResource = 8.0;
+    sessionConfig.HTTPMaximumConnectionsPerHost = 1;
+    
+    self.session =
+    [NSURLSession sessionWithConfiguration:sessionConfig
+                                  delegate:self
+                             delegateQueue:nil];
     
    
 }
@@ -254,35 +294,9 @@ int systemSoundID  = 1304;
         [self.alarm invalidate];
         NSLog(@"Alarm Exiting");
     }
-    if([segue.identifier isEqualToString:@"wakeUp"])
-    {
-        energyGained = timeRemaining/100*(snoozeCount*0.05);
-        NSLog(@"Energy gained: %i",energyGained);
-        
-        NSString *baseURL = [NSString stringWithFormat:@"%s/api/character/energy",SERVER_URL];
-        NSURL *postUrl = [NSURL URLWithString:baseURL];
-        
-        // data to send in body of post request (send arguments as json)
-        NSError *error = nil;
-        NSDictionary *jsonUpload = @{@"energy":@(energyGained)};
-        NSData *requestBody=[NSJSONSerialization dataWithJSONObject:jsonUpload options:NSJSONWritingPrettyPrinted error:&error];
-        
-        // create a custom HTTP POST request
-        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:postUrl];
-        [request setHTTPMethod:@"PUT"];
-        [request setHTTPBody:requestBody];
-        
-        // start the request, print the responses etc.
-        NSURLSessionDataTask *postTask = [self.session dataTaskWithRequest:request
-                                                         completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-                                                             
-                                                             NSLog(@"123%@",response);
-                                                             NSLog(@"1234%@",error);
-                                                             
-                                                         }];
-
-        [postTask resume];
-    }
+//    if([segue.identifier isEqualToString:@"wakeUp"])
+//    {
+////       //    }
 }
 
 

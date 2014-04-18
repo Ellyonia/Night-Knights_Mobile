@@ -83,7 +83,6 @@
     {
         AlarmRunningViewController *transferViewController = segue.destinationViewController;
         transferViewController.alarmDate = self.alarmPickerDisplay.date;
-        transferViewController.session = self.session;
     }
     
 }

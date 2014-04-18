@@ -131,6 +131,7 @@ bool loginSuccessful;
     NSLog(@"%@",baseURL);
     [request setHTTPMethod:@"POST"];
     [request setHTTPBody:requestBody];
+    NSLog(@"%@",self.session);
     
     // start the request, print the responses etc.
     NSURLSessionDataTask *postTask = [self.session dataTaskWithRequest:request
@@ -145,16 +146,6 @@ bool loginSuccessful;
                                                          }
                                                      }];
     [postTask resume];
-}
-
--(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
-    
-    if([segue.identifier isEqualToString:@"login"])
-    {
-        SetAlarmViewController * transferViewController = segue.destinationViewController;
-        transferViewController.session = self.session;
-    }
-    
 }
 
 @end
