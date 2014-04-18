@@ -37,11 +37,7 @@ bool loginSuccessful;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    self.value = @(0.5);
-    _dsid = @1;
-    
-    //setup NSURLSession (ephemeral)
+
     NSURLSessionConfiguration *sessionConfig =
     [NSURLSessionConfiguration defaultSessionConfiguration];
     

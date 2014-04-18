@@ -539,7 +539,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     <connections>
                         <outlet property="emailTextField" destination="NhR-l8-hJa" id="e8J-6f-eIp"/>
                         <outlet property="knightNameTextField" destination="ktb-CJ-RDP" id="2sU-Xl-vMB"/>
-                        <outlet property="passwordDoubleCheck" destination="Rja-Of-YAc" id="Hgp-jM-nNU"/>
+                        <outlet property="passwordCheckTextField" destination="Rja-Of-YAc" id="aZW-5b-8dH"/>
                         <outlet property="passwordTextField" destination="lHa-A0-zXI" id="09r-7W-LCc"/>
                         <segue destination="qSt-2j-xi9" kind="push" identifier="createAccount" id="5Py-V9-Xuz"/>
                     </connections>
@@ -556,6 +556,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="45V-4u-xfi"/>
-        <segue reference="BYG-zV-Yof"/>
+        <segue reference="5Py-V9-Xuz"/>
     </inferredMetricsTieBreakers>
 </document>

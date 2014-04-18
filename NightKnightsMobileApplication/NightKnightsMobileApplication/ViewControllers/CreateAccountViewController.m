@@ -16,12 +16,11 @@
 @property (strong, nonatomic) IBOutlet UITextField *knightNameTextField;
 @property (strong, nonatomic) IBOutlet UITextField *passwordTextField;
 @property (strong, nonatomic) IBOutlet UITextField *emailTextField;
-@property (strong, nonatomic) IBOutlet UITextField *passwordDoubleCheck;
+@property (strong, nonatomic) IBOutlet UITextField *passwordCheckTextField;
 @property (strong, nonatomic) NSUserDefaults* defaults;
 @property (strong, nonatomic) NSNumber *value;
 @property (strong,nonatomic) NSURLSession *session;
 @property (strong,nonatomic) NSNumber *dsid;
-@property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 
 
 @end
@@ -43,11 +42,8 @@
     self.knightNameTextField.delegate = self;
     self.emailTextField.delegate = self;
     self.passwordTextField.delegate = self;
-    // Do any additional setup after loading the view.
-    self.value = @(0.5);
-    _dsid = @1;
+    self.passwordCheckTextField.delegate = self;
     
-    //setup NSURLSession (ephemeral)
     NSURLSessionConfiguration *sessionConfig =
     [NSURLSessionConfiguration defaultSessionConfiguration];
     
@@ -80,23 +76,28 @@
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     
-    
+    NSLog(@"asdf:");
     if (textField == self.emailTextField) {
+        NSLog(@"email");
         [textField resignFirstResponder];
         [self.passwordTextField becomeFirstResponder];
     }
     else if (textField == self.passwordTextField) {
+        NSLog(@"pass");
         [textField resignFirstResponder];
-        [self.passwordDoubleCheck becomeFirstResponder];
+        [self.passwordCheckTextField becomeFirstResponder];
     }
-    else if (textField == self.passwordDoubleCheck)
-    {
+    else if (textField == self.passwordCheckTextField){
+        NSLog(@"check");
         [textField resignFirstResponder];
         [self.knightNameTextField becomeFirstResponder];
     }
     else if (textField == self.knightNameTextField) {
+        NSLog(@"knight");
         [textField resignFirstResponder];
+        //[self.passwordCheckTextField becomeFirstResponder];
     }
+    NSLog(@"end");
     return YES;
 }
 
@@ -104,7 +105,7 @@
     // an example for sending some data as JSON in the HTTP body
     // setup the url
     NSString *originalPass = self.passwordTextField.text;
-    NSString *retypedPass = self.passwordDoubleCheck.text;
+    NSString *retypedPass = self.passwordCheckTextField.text;
     if ([originalPass isEqualToString:retypedPass])
     {
         NSString *baseURL = [NSString stringWithFormat:@"%s/api/users",SERVER_URL];
