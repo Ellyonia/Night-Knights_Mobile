@@ -77,28 +77,21 @@
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     
-    NSLog(@"asdf:");
     if (textField == self.emailTextField) {
-        NSLog(@"email");
         [textField resignFirstResponder];
         [self.passwordTextField becomeFirstResponder];
     }
     else if (textField == self.passwordTextField) {
-        NSLog(@"pass");
         [textField resignFirstResponder];
         [self.passwordCheckTextField becomeFirstResponder];
     }
     else if (textField == self.passwordCheckTextField){
-        NSLog(@"check");
         [textField resignFirstResponder];
         [self.knightNameTextField becomeFirstResponder];
     }
     else if (textField == self.knightNameTextField) {
-        NSLog(@"knight");
         [textField resignFirstResponder];
-        //[self.passwordCheckTextField becomeFirstResponder];
     }
-    NSLog(@"end");
     return YES;
 }
 
@@ -111,42 +104,48 @@
     // setup the url
     NSString *originalPass = self.passwordTextField.text;
     NSString *retypedPass = self.passwordCheckTextField.text;
-    if ([originalPass isEqualToString:retypedPass])
-    {
-        NSString *baseURL = [NSString stringWithFormat:@"%s/api/users",SERVER_URL];
-        NSURL *postUrl = [NSURL URLWithString:baseURL];
-        
-        // data to send in body of post request (send arguments as json)
-        NSError *error = nil;
-        NSDictionary *jsonUpload = @{@"email":self.emailTextField.text,@"password":self.passwordTextField.text,@"username":self.knightNameTextField.text};
-        NSData *requestBody=[NSJSONSerialization dataWithJSONObject:jsonUpload options:NSJSONWritingPrettyPrinted error:&error];
-        
-        // create a custom HTTP POST request
-        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:postUrl];
-        NSLog(@"%@",request);
-        NSLog(@"%@",baseURL);
-        [request setHTTPMethod:@"POST"];
-        [request setHTTPBody:requestBody];
-        
-        // start the request, print the responses etc.
-        NSURLSessionDataTask *postTask = [self.session dataTaskWithRequest:request
-                                                         completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-                                                             //NSLog(@"11%@",response);
-                                                             NSDictionary *jsonDictionary = [NSJSONSerialization JSONObjectWithData:data options: NSJSONReadingMutableContainers error: &error];
-                                                             NSLog(@"%@",jsonDictionary);
-                                                             if ([jsonDictionary[@"success"] isEqual:@1]){
-                                                                 NSLog(@"hi");
-                                                             dispatch_sync(dispatch_get_main_queue(), ^{
-                                                                 NSLog(@"hi");
-                                                                 [self performSegueWithIdentifier:@"createAccount" sender:self];                                                         });
-                                                             }
-                                                         }];
-        [postTask resume];
+    NSString *email = self.emailTextField.text;
+    if ([self validateEmail:email]) {
+        if ([originalPass isEqualToString:retypedPass])
+        {
+            NSString *baseURL = [NSString stringWithFormat:@"%s/api/users",SERVER_URL];
+            NSURL *postUrl = [NSURL URLWithString:baseURL];
+            
+            // data to send in body of post request (send arguments as json)
+            NSError *error = nil;
+            NSDictionary *jsonUpload = @{@"email":self.emailTextField.text,@"password":self.passwordTextField.text,@"username":self.knightNameTextField.text};
+            NSData *requestBody=[NSJSONSerialization dataWithJSONObject:jsonUpload options:NSJSONWritingPrettyPrinted error:&error];
+            
+            // create a custom HTTP POST request
+            NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:postUrl];
+            [request setHTTPMethod:@"POST"];
+            [request setHTTPBody:requestBody];
+            
+            // start the request, print the responses etc.
+            NSURLSessionDataTask *postTask = [self.session dataTaskWithRequest:request
+                                                             completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                                                 //NSLog(@"11%@",response);
+                                                                 NSDictionary *jsonDictionary = [NSJSONSerialization JSONObjectWithData:data options: NSJSONReadingMutableContainers error: &error];
+                                                                 NSLog(@"%@",jsonDictionary);
+                                                                 if ([jsonDictionary[@"success"] isEqual:@1]){
+                                                                     NSLog(@"hi");
+                                                                 dispatch_sync(dispatch_get_main_queue(), ^{
+                                                                     NSLog(@"hi");
+                                                                     [self performSegueWithIdentifier:@"createAccount" sender:self];                                                         });
+                                                                 }
+                                                             }];
+            [postTask resume];
+        }
+        else{
+            self.warningLabel.hidden = NO;
+            self.passwordCheckTextField.text = @"";
+            self.passwordTextField.text = @"";
+        }
     }
-    else{
+    else
+    {
         self.warningLabel.hidden = NO;
-        self.passwordCheckTextField.text = @"";
-        self.passwordTextField.text = @"";
+        self.warningLabel.text = @"Invalide Email";
     }
 }
 
@@ -161,6 +160,20 @@
             }
         }
     }
+}
+
+- (BOOL) validateEmail: (NSString *) candidate {
+    NSString *emailRegex =
+    @"(?:[a-z0-9!#$%\\&'*+/=?\\^_`{|}~-]+(?:\\.[a-z0-9!#$%\\&'*+/=?\\^_`{|}"
+    @"~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\"
+    @"x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-z0-9](?:[a-"
+    @"z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:25[0-5"
+    @"]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-"
+    @"9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21"
+    @"-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])";
+    NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES[c] %@", emailRegex];
+    
+    return [emailTest evaluateWithObject:candidate];
 }
 
 
