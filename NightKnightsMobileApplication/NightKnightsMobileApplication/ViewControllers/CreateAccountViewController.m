@@ -145,6 +145,7 @@
     else
     {
         self.warningLabel.hidden = NO;
+        self.emailTextField.backgroundColor = [UIColor redColor];
         self.warningLabel.text = @"Invalide Email";
     }
 }

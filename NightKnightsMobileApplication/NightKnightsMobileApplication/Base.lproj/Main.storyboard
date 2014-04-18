@@ -396,6 +396,9 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="sO1-G0-jxE"/>
+                    <connections>
+                        <outlet property="volumeSlider" destination="XYL-kG-u3s" id="YTn-pP-7x3"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2gJ-we-ax3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -570,6 +573,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="45V-4u-xfi"/>
-        <segue reference="5Py-V9-Xuz"/>
+        <segue reference="jyW-x2-vmY"/>
     </inferredMetricsTieBreakers>
 </document>
