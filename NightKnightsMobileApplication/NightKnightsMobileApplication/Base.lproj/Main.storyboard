@@ -497,14 +497,26 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Password field must be the same" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="120" translatesAutoresizingMaskIntoConstraints="NO" id="uu7-N0-70U">
+                                <rect key="frame" x="111" y="86" width="120" height="70"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="70" id="Tnl-3E-wg2"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="1" green="0.067420175617102673" blue="0.04628051151476531" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="FDe-KC-0ZK" firstAttribute="leading" secondItem="6q7-bH-K1H" secondAttribute="leading" id="1bW-87-WiC"/>
                             <constraint firstItem="FDe-KC-0ZK" firstAttribute="top" secondItem="d89-tp-0Fk" secondAttribute="top" constant="20" symbolic="YES" id="4pU-6Q-WsQ"/>
+                            <constraint firstItem="uu7-N0-70U" firstAttribute="centerX" secondItem="NhR-l8-hJa" secondAttribute="centerX" id="80C-Bi-4kq"/>
                             <constraint firstItem="4cK-sO-kxa" firstAttribute="top" secondItem="ktb-CJ-RDP" secondAttribute="bottom" constant="23" id="8HM-y6-Wqy"/>
                             <constraint firstItem="IXr-2r-QXj" firstAttribute="leading" secondItem="Upt-tD-wga" secondAttribute="leading" id="9tc-yB-svR"/>
                             <constraint firstAttribute="trailing" secondItem="2wd-H3-cU1" secondAttribute="trailing" constant="67" id="D8L-r4-bzf"/>
+                            <constraint firstAttribute="trailing" secondItem="uu7-N0-70U" secondAttribute="trailing" constant="89" id="I22-uu-N5S"/>
                             <constraint firstItem="ktb-CJ-RDP" firstAttribute="leading" secondItem="Rja-Of-YAc" secondAttribute="leading" id="Q6d-y5-7JZ"/>
                             <constraint firstItem="ktb-CJ-RDP" firstAttribute="top" secondItem="Upt-tD-wga" secondAttribute="bottom" constant="13" id="Qkj-Ih-Jq5"/>
                             <constraint firstItem="Rja-Of-YAc" firstAttribute="leading" secondItem="d89-tp-0Fk" secondAttribute="leading" constant="89" id="UCG-dc-Cnb"/>
@@ -517,6 +529,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                             <constraint firstItem="NhR-l8-hJa" firstAttribute="leading" secondItem="lHa-A0-zXI" secondAttribute="leading" id="eMF-ET-zF0"/>
                             <constraint firstItem="hnG-Ha-WVa" firstAttribute="top" secondItem="J7O-Ja-f1N" secondAttribute="bottom" constant="270" id="exi-sY-A9d"/>
                             <constraint firstItem="NhR-l8-hJa" firstAttribute="trailing" secondItem="lHa-A0-zXI" secondAttribute="trailing" id="f6e-bo-Mcv"/>
+                            <constraint firstItem="uu7-N0-70U" firstAttribute="top" secondItem="2wd-H3-cU1" secondAttribute="bottom" constant="8" symbolic="YES" id="hni-od-486"/>
                             <constraint firstItem="ktb-CJ-RDP" firstAttribute="trailing" secondItem="Rja-Of-YAc" secondAttribute="trailing" id="i2U-s1-szF"/>
                             <constraint firstItem="2wd-H3-cU1" firstAttribute="leading" secondItem="FDe-KC-0ZK" secondAttribute="trailing" constant="8" symbolic="YES" id="iB9-wp-6Hb"/>
                             <constraint firstItem="J7O-Ja-f1N" firstAttribute="leading" secondItem="Upt-tD-wga" secondAttribute="leading" id="iho-f7-jMI"/>
@@ -541,6 +554,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <outlet property="knightNameTextField" destination="ktb-CJ-RDP" id="2sU-Xl-vMB"/>
                         <outlet property="passwordCheckTextField" destination="Rja-Of-YAc" id="aZW-5b-8dH"/>
                         <outlet property="passwordTextField" destination="lHa-A0-zXI" id="09r-7W-LCc"/>
+                        <outlet property="warningLabel" destination="uu7-N0-70U" id="juy-qf-9hi"/>
                         <segue destination="qSt-2j-xi9" kind="push" identifier="createAccount" id="5Py-V9-Xuz"/>
                     </connections>
                 </viewController>

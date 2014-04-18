@@ -21,6 +21,7 @@
 @property (strong, nonatomic) NSNumber *value;
 @property (strong,nonatomic) NSURLSession *session;
 @property (strong,nonatomic) NSNumber *dsid;
+@property (strong, nonatomic) IBOutlet UILabel *warningLabel;
 
 
 @end
@@ -101,6 +102,10 @@
     return YES;
 }
 
+- (void) textFieldDidBeginEditing:(UITextField *)textField{
+    self.warningLabel.hidden = YES;
+}
+
 - (IBAction)createAccountButton:(UIButton *)sender {
     // an example for sending some data as JSON in the HTTP body
     // setup the url
@@ -137,6 +142,11 @@
                                                              }
                                                          }];
         [postTask resume];
+    }
+    else{
+        self.warningLabel.hidden = NO;
+        self.passwordCheckTextField.text = @"";
+        self.passwordTextField.text = @"";
     }
 }
 
