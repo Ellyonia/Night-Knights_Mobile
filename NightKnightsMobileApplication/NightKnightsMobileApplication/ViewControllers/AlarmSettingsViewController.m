@@ -10,9 +10,10 @@
 #import <AVFoundation/AVFoundation.h>
 
 
-@interface AlarmSettingsViewController ()
+@interface AlarmSettingsViewController () <UIPickerViewDataSource, UIPickerViewDelegate>
 @property (strong, nonatomic) NSUserDefaults* defaults;
 @property (strong, nonatomic) IBOutlet UISlider *volumeSlider;
+@property (strong, nonatomic) IBOutlet UIPickerView *alarmTonePicker;
 
 
 @end
@@ -20,6 +21,17 @@
 @implementation AlarmSettingsViewController
 
 AVAudioPlayer *audioPlayer;
+NSArray *alarmTones;
+
+-(NSUserDefaults *) defaults{
+    if(!_defaults){
+        _defaults = [NSUserDefaults standardUserDefaults];
+    }
+    
+    return _defaults;
+    
+}
+
 
 - (void)viewDidLoad
 {
@@ -40,7 +52,7 @@ AVAudioPlayer *audioPlayer;
     if(settings){
         self.volumeSlider.value = [settings[0] floatValue];
             }
-    NSArray *alarmTones = @[@"/alarmChimes.mp3",@"/birdsChirping.mp3",@"/danceRave.mp3",@"/videogame.mp3",@"/progressiveAnnoyanceAlarm.mp3",@"/basicAlarm.mp3"];
+    alarmTones = @[@"/alarmChimes.mp3",@"/birdsChirping.mp3",@"/danceRave.mp3",@"/videogame.mp3",@"/progressiveAnnoyanceAlarm.mp3",@"/basicAlarm.mp3"];
     
     NSURL *url = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@", [[NSBundle mainBundle] resourcePath]]];
 	NSLog(@"%@",url);
@@ -82,6 +94,34 @@ AVAudioPlayer *audioPlayer;
 - (IBAction)changeVolume:(UISlider *)sender {
     audioPlayer.volume = sender.value;
     NSLog(@"%f",sender.value);
+    
+}
+
+
+// returns the number of 'columns' to display.
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
+{
+    return 1;
+    
+}
+
+// returns the # of rows in each component..
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent: (NSInteger)component
+{
+    return 6;
+    
+}
+
+-(NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row   forComponent:(NSInteger)component
+
+{
+    return [alarmTones objectAtIndex: component];
+    
+}
+
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row   inComponent:(NSInteger)component{
+    NSString *data = [alarmTones objectAtIndex:row];
+        NSLog(@"%@",data);
     
 }
 

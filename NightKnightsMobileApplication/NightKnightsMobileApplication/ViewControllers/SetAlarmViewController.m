@@ -72,7 +72,6 @@
     NSArray *alarmTime = [NSArray arrayWithObjects:alarmInfo, nil];
     [self.defaults setObject:alarmTime forKey:@"alarmInformation"];
     [self.defaults synchronize];
-    NSLog(@"%i",[self.defaults synchronize]);
 
 }
 
