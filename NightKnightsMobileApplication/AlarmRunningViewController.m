@@ -30,7 +30,6 @@
 - (IBAction)wakeUpButtonPushed:(id)sender
 {
     energyGained = timeRemaining/100*(1-(snoozeCount*0.05));
-    NSLog(@"Energy gained: %i",energyGained);
 
     NSString *baseURL = [NSString stringWithFormat:@"%s/api/character/energy",SERVER_URL];
     NSURL *postUrl = [NSURL URLWithString:baseURL];
@@ -43,7 +42,6 @@
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:postUrl];
     [request setHTTPMethod:@"PUT"];
     [request setHTTPBody:requestBody];
-    NSLog(@"%@",self.session);
     // start the request, print the responses etc.
     NSURLSessionDataTask *postTask = [self.session dataTaskWithRequest:request
                                                         completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
@@ -127,10 +125,8 @@ int systemSoundID  = 1304;
     timePart = [timeNoSeconds substringFromIndex:3];
     int alarmMinute = (int)[timePart integerValue];
     
-    NSLog(@"AlarmHour%i",alarmHour);
     if (alarmHour < 13)
     {
-        NSLog(@"Reached Here2");
         if (alarmMinute > 9){
         NSString *time = [NSString stringWithFormat:@"%d:%d",alarmHour,alarmMinute];
         labelText = [labelText stringByAppendingString:time];
@@ -218,7 +214,6 @@ int systemSoundID  = 1304;
 
 -(void) removeMinuteOrHour
 {
-    NSLog(@"%i",second);
     if (second == 60)
     {
         AudioServicesPlaySystemSound (systemSoundID);
@@ -292,7 +287,6 @@ int systemSoundID  = 1304;
     {
         [self.minuteHourRemover invalidate];
         [self.alarm invalidate];
-        NSLog(@"Alarm Exiting");
     }
 //    if([segue.identifier isEqualToString:@"wakeUp"])
 //    {

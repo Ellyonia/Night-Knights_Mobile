@@ -24,7 +24,7 @@
 
 @implementation LoginViewController
 
-bool loginSuccessful;
+bool loginSuccessful = NO;
 
 -(NSUserDefaults *) defaults{
     if(!_defaults){
@@ -123,25 +123,51 @@ bool loginSuccessful;
     
     // create a custom HTTP POST request
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:postUrl];
-    NSLog(@"%@",request);
-    NSLog(@"%@",baseURL);
     [request setHTTPMethod:@"POST"];
     [request setHTTPBody:requestBody];
-    NSLog(@"%@",self.session);
     
     // start the request, print the responses etc.
     NSURLSessionDataTask *postTask = [self.session dataTaskWithRequest:request
                                                      completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
                                                          //NSLog(@"11%@",response);
                                                          NSDictionary *jsonDictionary = [NSJSONSerialization JSONObjectWithData:data options: NSJSONReadingMutableContainers error: &error];
-                                                         NSLog(@"%@",jsonDictionary);
-                                                         NSLog(@"%@",jsonDictionary[@"success"]);
                                                          if ([jsonDictionary[@"success"] isEqual:@1]){
                                                          dispatch_sync(dispatch_get_main_queue(), ^{
-                                                             [self performSegueWithIdentifier:@"loginSuccess" sender:self];                                                         });
+                                                             [self performSegueWithIdentifier:@"login" sender:self];
+                                                             loginSuccessful = YES;
+                                                         });
                                                          }
                                                      }];
     [postTask resume];
 }
+
+- (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender
+{
+    if([identifier isEqualToString:@"login"])
+    {
+    if (loginSuccessful)
+    {
+        return YES;
+    }
+    else
+    {
+    return NO;
+    
+    }
+    }
+    else
+    {
+        return YES;
+    }
+}
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    NSLog(@"preparing");
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+}
+
 
 @end

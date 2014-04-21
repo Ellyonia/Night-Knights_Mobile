@@ -33,24 +33,23 @@
 - (void) viewDidLoad
 {
     [super viewDidLoad];
+    NSLog(@"View Loaded");
    
 }
 - (void) viewWillAppear:(BOOL)animated
 {
+    NSLog(@"View Appearing");
     NSDate *dateFromPrevious;
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
     NSArray *alarmDate = [defaults objectForKey:@"alarmInformation"];
     if(alarmDate){
-        NSLog(@"Loading from Save");
         dateFromPrevious = alarmDate[0];
-        NSLog(@"%@",dateFromPrevious);
         NSDate *midnight = [self dateAtBeginningOfDayForDate:[NSDate date]];
-        NSLog(@"%@",midnight);
         while ([dateFromPrevious compare:midnight] == NSOrderedAscending)
         {
-            NSLog(@"%@",dateFromPrevious);
+            dateFromPrevious = [NSDate dateWithTimeInterval:24*60*60 sinceDate:dateFromPrevious];
         }
         self.alarmPickerDisplay.date = dateFromPrevious;
         self.alarmPickerDisplay.datePickerMode = UIDatePickerModeTime;
@@ -58,12 +57,16 @@
     }
     else
     {
-        NSLog(@"Loading Current Date");
         NSDate *convertedDate = [NSDate dateWithTimeInterval:300 sinceDate:[NSDate date]];
         self.alarmPickerDisplay.date = convertedDate;
         self.alarmPickerDisplay.datePickerMode = UIDatePickerModeTime;
         self.alarmPickerDisplay.timeZone = [NSTimeZone timeZoneWithAbbreviation:@"CDT"];
     }
+}
+
+- (void) viewDidAppear:(BOOL)animated
+{
+    NSLog(@"View Did Appear");
 }
 
 - (void)viewWillDisappear:(BOOL)animated

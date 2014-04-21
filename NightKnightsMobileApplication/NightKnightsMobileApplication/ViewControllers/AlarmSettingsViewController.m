@@ -22,6 +22,7 @@
 
 AVAudioPlayer *audioPlayer;
 NSArray *alarmTones;
+NSArray *alarmNames;
 
 -(NSUserDefaults *) defaults{
     if(!_defaults){
@@ -53,6 +54,7 @@ NSArray *alarmTones;
         self.volumeSlider.value = [settings[0] floatValue];
             }
     alarmTones = @[@"/alarmChimes.mp3",@"/birdsChirping.mp3",@"/danceRave.mp3",@"/videogame.mp3",@"/progressiveAnnoyanceAlarm.mp3",@"/basicAlarm.mp3"];
+//    alarmNames
     
     NSURL *url = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@", [[NSBundle mainBundle] resourcePath]]];
 	NSLog(@"%@",url);
@@ -121,7 +123,7 @@ NSArray *alarmTones;
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row   inComponent:(NSInteger)component{
     NSString *data = [alarmTones objectAtIndex:row];
-        NSLog(@"%@",data);
+    //NSLog(@"%@",data);
     
 }
 

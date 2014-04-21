@@ -116,7 +116,7 @@
                     <connections>
                         <outlet property="emailTextField" destination="R28-R5-2fH" id="FM5-1N-ilc"/>
                         <outlet property="passwordTextField" destination="bM3-oK-6FV" id="eFU-8s-j4z"/>
-                        <segue destination="qSt-2j-xi9" kind="push" identifier="loginSuccess" id="gvE-KZ-2TX"/>
+                        <segue destination="qSt-2j-xi9" kind="push" identifier="login" id="Dap-aa-GLw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
@@ -229,7 +229,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="f3D-vx-MgW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="249" y="-707"/>
+            <point key="canvasLocation" x="223" y="-320"/>
         </scene>
         <!--Alarm Running View Controller-->
         <scene sceneID="50q-qK-iN7">
@@ -577,7 +577,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="gvE-KZ-2TX"/>
-        <segue reference="45V-4u-xfi"/>
+        <segue reference="5Py-V9-Xuz"/>
+        <segue reference="6ik-rc-kVY"/>
     </inferredMetricsTieBreakers>
 </document>
