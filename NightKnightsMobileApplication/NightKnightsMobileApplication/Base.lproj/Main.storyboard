@@ -332,6 +332,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     </view>
                     <navigationItem key="navigationItem" id="SDj-21-Udn"/>
                     <connections>
+                        <outlet property="cancelAlarm" destination="S8w-l8-F67" id="shN-2a-rbP"/>
                         <outlet property="finalAlarmLabel" destination="9D8-CB-11E" id="RkG-jU-S6R"/>
                         <outlet property="headerLabel" destination="Kfe-MR-fkc" id="uSz-nX-PCt"/>
                         <outlet property="snooozeButton" destination="mkT-9l-Nzp" id="SBd-cQ-qoE"/>
@@ -401,7 +402,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     </view>
                     <navigationItem key="navigationItem" id="sO1-G0-jxE"/>
                     <connections>
-                        <outlet property="alarmTonePicker" destination="hG7-gB-bnY" id="5lh-Zt-mA1"/>
+                        <outlet property="pickerView" destination="hG7-gB-bnY" id="xZt-4L-OHL"/>
                         <outlet property="volumeSlider" destination="XYL-kG-u3s" id="YTn-pP-7x3"/>
                     </connections>
                 </viewController>
@@ -577,7 +578,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="5Py-V9-Xuz"/>
         <segue reference="6ik-rc-kVY"/>
+        <segue reference="iQi-ea-p2L"/>
     </inferredMetricsTieBreakers>
 </document>

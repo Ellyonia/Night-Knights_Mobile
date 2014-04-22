@@ -13,6 +13,7 @@
 #define SERVER_URL "http://54.84.248.48"
 
 @interface AlarmRunningViewController () <NSURLSessionTaskDelegate>
+@property (strong, nonatomic) IBOutlet UIButton *cancelAlarm;
 @property (strong, nonatomic) IBOutlet UILabel *finalAlarmLabel;
 @property (strong, nonatomic) IBOutlet UILabel *timeRemainingLabel;
 @property (strong, nonatomic) IBOutlet UIButton *wakeUpButton;
@@ -21,14 +22,38 @@
 @property (nonatomic) NSTimer * minuteHourRemover;
 @property (nonatomic) NSTimer *alarm;
 @property (strong, nonatomic) NSNumber *value;
+@property (strong, nonatomic) NSUserDefaults *defaults;
+@property (nonatomic) AVAudioPlayer *audioPlayer;
+
 
 
 @end
 
 @implementation AlarmRunningViewController
 
+
+-(AVAudioPlayer *)audioPlayer{
+    if (!_audioPlayer)
+    {
+        NSURL *url = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@%@", [[NSBundle mainBundle] resourcePath],@"/basicAlarm.mp3"]];
+        //	NSLog(@"%@",url);
+        NSError *error;
+        _audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
+    }
+    return _audioPlayer;
+}
+
+-(NSUserDefaults *) defaults{
+    if(!_defaults){
+        _defaults = [NSUserDefaults standardUserDefaults];
+    }
+    
+    return _defaults;
+    
+}
 - (IBAction)wakeUpButtonPushed:(id)sender
 {
+    [self.audioPlayer stop];
     energyGained = timeRemaining/100*(1-(snoozeCount*0.05));
 
     NSString *baseURL = [NSString stringWithFormat:@"%s/api/character/energy",SERVER_URL];
@@ -66,6 +91,7 @@ int systemSoundID  = 1304;
 
 
 - (IBAction)snoozedPressed:(UIButton *)sender {
+    [self.audioPlayer stop];
     self.snooozeButton.hidden = YES;
     self.wakeUpButton.hidden = YES;
     self.headerLabel.hidden = NO;
@@ -94,6 +120,22 @@ int systemSoundID  = 1304;
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    NSArray *settings = [self.defaults objectForKey:@"alarmSettings"];
+    if(settings)
+    {
+        self.audioPlayer = nil;
+        self.audioPlayer.volume = [settings[0] floatValue];
+        NSString *urlEnding = [NSString stringWithString:settings[1]];
+        NSURL *url = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@%@", [[NSBundle mainBundle] resourcePath],urlEnding]];
+        NSError *error;
+        self.audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
+        self.audioPlayer.volume = [settings[0] floatValue];
+        self.audioPlayer.numberOfLoops = 5;
+
+        
+    }
+    
+    
     
     
     //setup NSURLSession (ephemeral)
@@ -214,9 +256,9 @@ int systemSoundID  = 1304;
 
 -(void) removeMinuteOrHour
 {
+    NSLog(@"%i",second);
     if (second == 60)
     {
-        AudioServicesPlaySystemSound (systemSoundID);
         if (iMinute != 0)
         {
             iMinute --;
@@ -262,8 +304,8 @@ int systemSoundID  = 1304;
         self.timeRemainingLabel.text = @"Wake-Up!";
         self.finalAlarmLabel.hidden = YES;
         self.headerLabel.hidden = YES;
-        AudioServicesPlaySystemSound (systemSoundID);
-
+        self.cancelAlarm.hidden = YES;
+        [self.audioPlayer play];
         
     });
 }
