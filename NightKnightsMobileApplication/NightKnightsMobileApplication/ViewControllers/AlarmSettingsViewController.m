@@ -10,7 +10,7 @@
 #import <AVFoundation/AVFoundation.h>
 
 
-@interface AlarmSettingsViewController () <UIPickerViewDataSource, UIPickerViewDelegate>
+@interface AlarmSettingsViewController () <UIPickerViewDataSource, UIPickerViewDelegate, AVAudioPlayerDelegate, AVAudioSessionDelegate>
 @property (strong, nonatomic) NSUserDefaults* defaults;
 @property (strong, nonatomic) IBOutlet UISlider *volumeSlider;
 @property (strong, nonatomic) IBOutlet UIPickerView *pickerView;
@@ -42,7 +42,7 @@ NSString *pickedAlarm;
     self.pickerView.delegate = self;
     self.pickerView.dataSource = self;
     
-    alarmTones = @[@"/alarmChimes.mp3",@"/birdsChirping.mp3",@"/danceRave.mp3",@"/videogame.mp3",@"/progressiveAnnoyanceAlarm.mp3",@"/basicAlarm.mp3"];
+    alarmTones = @[@"/alarmChimes.mp3",@"/birdsChirping.mp3",@"/danceRave.mp3",@"/videogame.mp3",@"/progressiveAnnoyance.mp3",@"/basicAlarm.mp3"];
     alarmNames = @[@"Chimes", @"Chirping Birds", @"Techo", @"VideoGame Theme", @"Random Sounds", @"Standard Alarm"];
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -63,6 +63,11 @@ NSString *pickedAlarm;
         }
         [self.pickerView selectRow:nameRow inComponent:0 animated:NO];
     }
+    
+    AVAudioSession *session = [AVAudioSession sharedInstance];
+    [session setCategory:AVAudioSessionCategoryPlayback error:nil];
+    
+
     // Do any additional setup after loading the view.
 }
 
@@ -118,9 +123,9 @@ NSString *pickedAlarm;
 	audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
 	audioPlayer.numberOfLoops = 0;
     audioPlayer.volume = self.volumeSlider.value;
+    [audioPlayer setDelegate:self];
+    [audioPlayer prepareToPlay];
     [audioPlayer play];
-    
-
     
 }
 

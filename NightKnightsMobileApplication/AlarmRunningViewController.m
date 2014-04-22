@@ -12,7 +12,7 @@
 
 #define SERVER_URL "http://54.84.248.48"
 
-@interface AlarmRunningViewController () <NSURLSessionTaskDelegate , AVAudioSessionDelegate>
+@interface AlarmRunningViewController () <NSURLSessionTaskDelegate , AVAudioSessionDelegate, AVAudioPlayerDelegate>
 @property (strong, nonatomic) IBOutlet UIButton *cancelAlarm;
 @property (strong, nonatomic) IBOutlet UILabel *finalAlarmLabel;
 @property (strong, nonatomic) IBOutlet UILabel *timeRemainingLabel;
@@ -43,6 +43,7 @@
         //	NSLog(@"%@",url);
         NSError *error;
         _audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
+        _audioPlayer.numberOfLoops = 5;
     }
     return _audioPlayer;
 }
@@ -125,6 +126,10 @@ int systemSoundID  = 1304;
 {
     [super viewDidLoad];
     
+    AVAudioSession *session = [AVAudioSession sharedInstance];
+    [session setCategory:AVAudioSessionCategoryPlayback error:nil];
+    
+    
     NSArray *settings = [self.defaults objectForKey:@"alarmSettings"];
     if(settings)
     {
@@ -140,10 +145,6 @@ int systemSoundID  = 1304;
         
     }
     
-    
-    
-    
-    //setup NSURLSession (ephemeral)
     NSURLSessionConfiguration *sessionConfig =
     [NSURLSessionConfiguration defaultSessionConfiguration];
     
@@ -156,7 +157,6 @@ int systemSoundID  = 1304;
                                   delegate:self
                              delegateQueue:nil];
     
-//    self.audioPlayer = nil;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -325,7 +325,9 @@ int systemSoundID  = 1304;
         self.finalAlarmLabel.hidden = YES;
         self.headerLabel.hidden = YES;
         self.cancelAlarm.hidden = YES;
-//        [self.audioPlayer play];
+        [audioPlayer setDelegate:self];
+        [audioPlayer prepareToPlay];
+        [self.audioPlayer play];
         
     });
 }
