@@ -12,7 +12,7 @@
 
 #define SERVER_URL "http://54.84.248.48"
 
-@interface AlarmRunningViewController () <NSURLSessionTaskDelegate>
+@interface AlarmRunningViewController () <NSURLSessionTaskDelegate , AVAudioSessionDelegate>
 @property (strong, nonatomic) IBOutlet UIButton *cancelAlarm;
 @property (strong, nonatomic) IBOutlet UILabel *finalAlarmLabel;
 @property (strong, nonatomic) IBOutlet UILabel *timeRemainingLabel;
@@ -24,12 +24,16 @@
 @property (strong, nonatomic) NSNumber *value;
 @property (strong, nonatomic) NSUserDefaults *defaults;
 @property (nonatomic) AVAudioPlayer *audioPlayer;
+@property (nonatomic) NSString *toneLocal;
 
 
 
 @end
 
 @implementation AlarmRunningViewController
+- (IBAction)cancelHit:(UIButton *)sender {
+    [self.audioPlayer stop];
+}
 
 
 -(AVAudioPlayer *)audioPlayer{
@@ -89,14 +93,15 @@ int second = 0;
 int energyGained = 0;
 int systemSoundID  = 1304;
 
-
 - (IBAction)snoozedPressed:(UIButton *)sender {
     [self.audioPlayer stop];
     self.snooozeButton.hidden = YES;
+    self.cancelAlarm.hidden = NO;
     self.wakeUpButton.hidden = YES;
     self.headerLabel.hidden = NO;
     self.headerLabel.text = @"Snoozing for";
-    self.timeRemainingLabel.text = @"05:00";
+//    self.timeRemainingLabel.text = @"05:00";
+    self.timeRemainingLabel.hidden = YES;
     second = 0;
     NSTimer *isSnoozing = [NSTimer scheduledTimerWithTimeInterval:300
                                                       target:self
@@ -105,13 +110,13 @@ int systemSoundID  = 1304;
                                                      repeats:NO];
     
     [[NSRunLoop mainRunLoop] addTimer:isSnoozing forMode:NSRunLoopCommonModes];
-    self.minuteHourRemover = [NSTimer scheduledTimerWithTimeInterval:1
-                                                              target:self
-                                                            selector:@selector(removeMinuteOrHour)
-                                                            userInfo:nil
-                                                             repeats:YES];
-    
-    [[NSRunLoop mainRunLoop] addTimer:self.minuteHourRemover forMode:NSRunLoopCommonModes];
+//    self.minuteHourRemover = [NSTimer scheduledTimerWithTimeInterval:1
+//                                                              target:self
+//                                                            selector:@selector(removeMinuteOrHour)
+//                                                            userInfo:nil
+//                                                             repeats:YES];
+//    
+//    [[NSRunLoop mainRunLoop] addTimer:self.minuteHourRemover forMode:NSRunLoopCommonModes];
 
     snoozeCount ++;
 }
@@ -119,7 +124,7 @@ int systemSoundID  = 1304;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
     NSArray *settings = [self.defaults objectForKey:@"alarmSettings"];
     if(settings)
     {
@@ -151,7 +156,7 @@ int systemSoundID  = 1304;
                                   delegate:self
                              delegateQueue:nil];
     
-   
+//    self.audioPlayer = nil;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -182,7 +187,6 @@ int systemSoundID  = 1304;
     }
     else
     {
-        NSLog(@"Reached Here1");
         if (alarmMinute > 9){
             NSString *time = [NSString stringWithFormat:@"%d:%d",(alarmHour-12),alarmMinute];
             labelText = [labelText stringByAppendingString:time];
@@ -252,11 +256,27 @@ int systemSoundID  = 1304;
                               
     
     [[NSRunLoop mainRunLoop] addTimer:self.minuteHourRemover forMode:NSRunLoopCommonModes];
+    
+//    UILocalNotification *localNotif = [[UILocalNotification alloc] init];
+//    if (localNotif == nil)
+//        return;
+//    localNotif.fireDate = self.alarmDate;
+//    localNotif.timeZone = [NSTimeZone defaultTimeZone];
+//    NSLog(@"%@",self.alarmDate);
+//    // Notification details
+// //   localNotif.alertBody = [eventText text];
+//    // Set the action button
+//    localNotif.alertAction = @"View";
+//    localNotif.alertBody = @"things";
+//    localNotif.applicationIconBadgeNumber = 1;
+//    localNotif.soundName = @"basicAlarm.caf";
+//        // Schedule the notification
+//    [[UIApplication sharedApplication] scheduleLocalNotification:localNotif];
+////    [localNotif release];
 }
 
 -(void) removeMinuteOrHour
 {
-    NSLog(@"%i",second);
     if (second == 60)
     {
         if (iMinute != 0)
@@ -305,7 +325,7 @@ int systemSoundID  = 1304;
         self.finalAlarmLabel.hidden = YES;
         self.headerLabel.hidden = YES;
         self.cancelAlarm.hidden = YES;
-        [self.audioPlayer play];
+//        [self.audioPlayer play];
         
     });
 }
@@ -329,11 +349,11 @@ int systemSoundID  = 1304;
     {
         [self.minuteHourRemover invalidate];
         [self.alarm invalidate];
+        [self.audioPlayer stop];
     }
-//    if([segue.identifier isEqualToString:@"wakeUp"])
-//    {
-////       //    }
 }
+
+
 
 
 @end

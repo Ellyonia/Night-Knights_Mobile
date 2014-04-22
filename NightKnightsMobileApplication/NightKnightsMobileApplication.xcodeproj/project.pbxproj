@@ -7,12 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		7E38407E1900B69400B26E77 /* birdsChirping.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 7E3840781900B69400B26E77 /* birdsChirping.mp3 */; };
-		7E38407F1900B69400B26E77 /* alarmChimes.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 7E3840791900B69400B26E77 /* alarmChimes.mp3 */; };
-		7E3840801900B69400B26E77 /* danceRave.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 7E38407A1900B69400B26E77 /* danceRave.mp3 */; };
-		7E3840811900B69400B26E77 /* videogame.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 7E38407B1900B69400B26E77 /* videogame.mp3 */; };
-		7E3840821900B69400B26E77 /* progressiveAnnoianceAlarm.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 7E38407C1900B69400B26E77 /* progressiveAnnoianceAlarm.mp3 */; };
-		7E3840831900B69400B26E77 /* basicAlarm.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 7E38407D1900B69400B26E77 /* basicAlarm.mp3 */; };
+		7E0905FC1907160B003D6677 /* alarmChimes.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 7E0905F61907160B003D6677 /* alarmChimes.mp3 */; };
+		7E0905FD1907160B003D6677 /* basicAlarm.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 7E0905F71907160B003D6677 /* basicAlarm.mp3 */; };
+		7E0905FE1907160B003D6677 /* birdsChirping.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 7E0905F81907160B003D6677 /* birdsChirping.mp3 */; };
+		7E0905FF1907160B003D6677 /* danceRave.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 7E0905F91907160B003D6677 /* danceRave.mp3 */; };
+		7E0906001907160B003D6677 /* progressiveAnnoyance.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 7E0905FA1907160B003D6677 /* progressiveAnnoyance.mp3 */; };
+		7E0906011907160C003D6677 /* videogame.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 7E0905FB1907160B003D6677 /* videogame.mp3 */; };
 		7E60981A18FDEA33007D490E /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E60981918FDEA33007D490E /* AVFoundation.framework */; };
 		7E83785A18DE2DA400B94636 /* AlarmRunningViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E83785918DE2DA400B94636 /* AlarmRunningViewController.m */; };
 		7EC9CDD418DBB4E400AB3BFA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EC9CDD318DBB4E400AB3BFA /* Foundation.framework */; };
@@ -45,12 +45,18 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		7E3840781900B69400B26E77 /* birdsChirping.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = birdsChirping.mp3; path = alarmTones/birdsChirping.mp3; sourceTree = "<group>"; };
-		7E3840791900B69400B26E77 /* alarmChimes.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = alarmChimes.mp3; path = alarmTones/alarmChimes.mp3; sourceTree = "<group>"; };
-		7E38407A1900B69400B26E77 /* danceRave.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = danceRave.mp3; path = alarmTones/danceRave.mp3; sourceTree = "<group>"; };
-		7E38407B1900B69400B26E77 /* videogame.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = videogame.mp3; path = alarmTones/videogame.mp3; sourceTree = "<group>"; };
-		7E38407C1900B69400B26E77 /* progressiveAnnoianceAlarm.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = progressiveAnnoianceAlarm.mp3; path = alarmTones/progressiveAnnoianceAlarm.mp3; sourceTree = "<group>"; };
-		7E38407D1900B69400B26E77 /* basicAlarm.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = basicAlarm.mp3; path = alarmTones/basicAlarm.mp3; sourceTree = "<group>"; };
+		7E0905F01907141D003D6677 /* alarmChimes.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = alarmChimes.caf; sourceTree = "<group>"; };
+		7E0905F11907141D003D6677 /* basicAlarm.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = basicAlarm.caf; sourceTree = "<group>"; };
+		7E0905F21907141D003D6677 /* birdsChirping.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = birdsChirping.caf; sourceTree = "<group>"; };
+		7E0905F31907141D003D6677 /* progressiveAnnoiance.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = progressiveAnnoiance.caf; sourceTree = "<group>"; };
+		7E0905F41907141D003D6677 /* techno.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = techno.caf; sourceTree = "<group>"; };
+		7E0905F51907141D003D6677 /* videogame.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = videogame.caf; sourceTree = "<group>"; };
+		7E0905F61907160B003D6677 /* alarmChimes.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = alarmChimes.mp3; sourceTree = "<group>"; };
+		7E0905F71907160B003D6677 /* basicAlarm.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = basicAlarm.mp3; sourceTree = "<group>"; };
+		7E0905F81907160B003D6677 /* birdsChirping.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = birdsChirping.mp3; sourceTree = "<group>"; };
+		7E0905F91907160B003D6677 /* danceRave.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = danceRave.mp3; sourceTree = "<group>"; };
+		7E0905FA1907160B003D6677 /* progressiveAnnoyance.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = progressiveAnnoyance.mp3; sourceTree = "<group>"; };
+		7E0905FB1907160B003D6677 /* videogame.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = videogame.mp3; sourceTree = "<group>"; };
 		7E60981918FDEA33007D490E /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		7E83785818DE2DA400B94636 /* AlarmRunningViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlarmRunningViewController.h; sourceTree = "<group>"; };
 		7E83785918DE2DA400B94636 /* AlarmRunningViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlarmRunningViewController.m; sourceTree = "<group>"; };
@@ -153,12 +159,18 @@
 		7EC9CDDA18DBB4E400AB3BFA /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				7E3840791900B69400B26E77 /* alarmChimes.mp3 */,
-				7E3840781900B69400B26E77 /* birdsChirping.mp3 */,
-				7E38407A1900B69400B26E77 /* danceRave.mp3 */,
-				7E38407B1900B69400B26E77 /* videogame.mp3 */,
-				7E38407C1900B69400B26E77 /* progressiveAnnoianceAlarm.mp3 */,
-				7E38407D1900B69400B26E77 /* basicAlarm.mp3 */,
+				7E0905F61907160B003D6677 /* alarmChimes.mp3 */,
+				7E0905F71907160B003D6677 /* basicAlarm.mp3 */,
+				7E0905F81907160B003D6677 /* birdsChirping.mp3 */,
+				7E0905F91907160B003D6677 /* danceRave.mp3 */,
+				7E0905FA1907160B003D6677 /* progressiveAnnoyance.mp3 */,
+				7E0905FB1907160B003D6677 /* videogame.mp3 */,
+				7E0905F01907141D003D6677 /* alarmChimes.caf */,
+				7E0905F11907141D003D6677 /* basicAlarm.caf */,
+				7E0905F21907141D003D6677 /* birdsChirping.caf */,
+				7E0905F31907141D003D6677 /* progressiveAnnoiance.caf */,
+				7E0905F41907141D003D6677 /* techno.caf */,
+				7E0905F51907141D003D6677 /* videogame.caf */,
 				7EC9CDDB18DBB4E400AB3BFA /* NightKnightsMobileApplication-Info.plist */,
 				7EC9CDDC18DBB4E400AB3BFA /* InfoPlist.strings */,
 				7EC9CDDF18DBB4E400AB3BFA /* main.m */,
@@ -282,15 +294,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7E3840801900B69400B26E77 /* danceRave.mp3 in Resources */,
-				7E38407F1900B69400B26E77 /* alarmChimes.mp3 in Resources */,
-				7E38407E1900B69400B26E77 /* birdsChirping.mp3 in Resources */,
-				7E3840811900B69400B26E77 /* videogame.mp3 in Resources */,
-				7E3840831900B69400B26E77 /* basicAlarm.mp3 in Resources */,
+				7E0905FD1907160B003D6677 /* basicAlarm.mp3 in Resources */,
+				7E0905FF1907160B003D6677 /* danceRave.mp3 in Resources */,
 				7EC9CDEC18DBB4E400AB3BFA /* Images.xcassets in Resources */,
+				7E0906001907160B003D6677 /* progressiveAnnoyance.mp3 in Resources */,
 				7EC9CDDE18DBB4E400AB3BFA /* InfoPlist.strings in Resources */,
+				7E0905FE1907160B003D6677 /* birdsChirping.mp3 in Resources */,
 				7EC9CDE718DBB4E400AB3BFA /* Main.storyboard in Resources */,
-				7E3840821900B69400B26E77 /* progressiveAnnoianceAlarm.mp3 in Resources */,
+				7E0906011907160C003D6677 /* videogame.mp3 in Resources */,
+				7E0905FC1907160B003D6677 /* alarmChimes.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

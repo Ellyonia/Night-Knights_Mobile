@@ -189,7 +189,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="vXZ-lx-hvc" kind="push" id="6ik-rc-kVY"/>
+                                    <segue destination="pwS-T3-ZZw" kind="unwind" identifier="logOut" unwindAction="unwindToLogin:" id="wBd-YL-mKy"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5mh-dx-Pcl">
@@ -228,6 +228,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="f3D-vx-MgW" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="pwS-T3-ZZw" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="223" y="-320"/>
         </scene>
@@ -307,7 +308,8 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="qSt-2j-xi9" kind="push" identifier="cancel" id="iQi-ea-p2L"/>
+                                    <action selector="cancelHit:" destination="O6T-c8-CWt" eventType="touchUpInside" id="Phl-eo-vrB"/>
+                                    <segue destination="0i6-xJ-jCp" kind="unwind" identifier="cancelAlarm" unwindAction="unwindToSetAlarm:" id="znc-7C-TQY"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -342,6 +344,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bxH-pK-BSg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="0i6-xJ-jCp" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="725" y="-707"/>
         </scene>
@@ -488,7 +491,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="vXZ-lx-hvc" kind="push" id="45V-4u-xfi"/>
+                                    <segue destination="sxz-Oj-pJ9" kind="unwind" identifier="cancelCreateAccount" unwindAction="cancelCreateAccount:" id="XwY-mo-rCS"/>
                                 </connections>
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Rja-Of-YAc">
@@ -568,6 +571,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ezg-QB-91k" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="sxz-Oj-pJ9" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="249" y="865"/>
         </scene>
@@ -578,7 +582,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="6ik-rc-kVY"/>
-        <segue reference="iQi-ea-p2L"/>
+        <segue reference="5Py-V9-Xuz"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -176,6 +176,4 @@
     
     return [emailTest evaluateWithObject:candidate];
 }
-
-
 @end

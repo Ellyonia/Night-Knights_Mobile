@@ -42,14 +42,8 @@ NSString *pickedAlarm;
     self.pickerView.delegate = self;
     self.pickerView.dataSource = self;
     
-    alarmTones = @[@"/alarmChimes.mp3",@"/birdsChirping.mp3",@"/danceRave.mp3",@"/videogame.mp3",@"/progressiveAnnoianceAlarm.mp3",@"/basicAlarm.mp3"];
+    alarmTones = @[@"/alarmChimes.mp3",@"/birdsChirping.mp3",@"/danceRave.mp3",@"/videogame.mp3",@"/progressiveAnnoyanceAlarm.mp3",@"/basicAlarm.mp3"];
     alarmNames = @[@"Chimes", @"Chirping Birds", @"Techo", @"VideoGame Theme", @"Random Sounds", @"Standard Alarm"];
-    
-    //
-    //
-    // NOT FINISHED WITH THIS AREA
-    //
-    //
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSString *defaultsName;
@@ -65,36 +59,10 @@ NSString *pickedAlarm;
             if ([findToneName isEqualToString:defaultsName])
             {
                 nameRow = i;
-                NSLog(@"%i",nameRow);
             }
-            //if (toneName = )
         }
         [self.pickerView selectRow:nameRow inComponent:0 animated:NO];
     }
-
-//
-//    NSURL *url = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@", [[NSBundle mainBundle] resourcePath]]];
-////	NSLog(@"%@",url);
-//	NSError *error;
-//	audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
-//	audioPlayer.numberOfLoops = -1;
-//	
-//	if (audioPlayer == nil)
-//    {
-//        NSLog(@"%@",error);
-//    }
-//	else
-//		[audioPlayer play];
-//
-
-    //
-    //
-    // END AREA
-    //
-    //
-    
-    
-    
     // Do any additional setup after loading the view.
 }
 
@@ -105,7 +73,6 @@ NSString *pickedAlarm;
     NSArray *loginInfo = [NSArray arrayWithObjects:volume, pickedAlarm, nil];
     
     [self.defaults setObject:loginInfo forKey:@"alarmSettings"];
-    NSLog(@"%i",[self.defaults synchronize]);
     [audioPlayer stop];
 }
 
@@ -113,7 +80,6 @@ NSString *pickedAlarm;
 
 - (IBAction)changeVolume:(UISlider *)sender {
     audioPlayer.volume = sender.value;
-    NSLog(@"%f",sender.value);
     
 }
 
@@ -135,22 +101,19 @@ NSString *pickedAlarm;
 -(NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row   forComponent:(NSInteger)component
 
 {
-    NSLog(@"Reached");
     return [alarmNames objectAtIndex: row];
     
 }
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row   inComponent:(NSInteger)component{
     pickedAlarm = [alarmTones objectAtIndex:row];
-    
     if (audioPlayer == nil)
     {
     }
     else{
-        [audioPlayer stop];
+        audioPlayer = nil;
     }
     NSURL *url = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@%@", [[NSBundle mainBundle] resourcePath],pickedAlarm]];
-    //	NSLog(@"%@",url);
     NSError *error;
 	audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
 	audioPlayer.numberOfLoops = 0;
