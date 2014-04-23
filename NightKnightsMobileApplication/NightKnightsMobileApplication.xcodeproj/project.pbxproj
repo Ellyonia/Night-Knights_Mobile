@@ -45,12 +45,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		7E0905F01907141D003D6677 /* alarmChimes.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = alarmChimes.caf; sourceTree = "<group>"; };
-		7E0905F11907141D003D6677 /* basicAlarm.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = basicAlarm.caf; sourceTree = "<group>"; };
-		7E0905F21907141D003D6677 /* birdsChirping.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = birdsChirping.caf; sourceTree = "<group>"; };
-		7E0905F31907141D003D6677 /* progressiveAnnoiance.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = progressiveAnnoiance.caf; sourceTree = "<group>"; };
-		7E0905F41907141D003D6677 /* techno.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = techno.caf; sourceTree = "<group>"; };
-		7E0905F51907141D003D6677 /* videogame.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = videogame.caf; sourceTree = "<group>"; };
 		7E0905F61907160B003D6677 /* alarmChimes.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = alarmChimes.mp3; sourceTree = "<group>"; };
 		7E0905F71907160B003D6677 /* basicAlarm.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = basicAlarm.mp3; sourceTree = "<group>"; };
 		7E0905F81907160B003D6677 /* birdsChirping.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = birdsChirping.mp3; sourceTree = "<group>"; };
@@ -165,12 +159,6 @@
 				7E0905F91907160B003D6677 /* danceRave.mp3 */,
 				7E0905FA1907160B003D6677 /* progressiveAnnoyance.mp3 */,
 				7E0905FB1907160B003D6677 /* videogame.mp3 */,
-				7E0905F01907141D003D6677 /* alarmChimes.caf */,
-				7E0905F11907141D003D6677 /* basicAlarm.caf */,
-				7E0905F21907141D003D6677 /* birdsChirping.caf */,
-				7E0905F31907141D003D6677 /* progressiveAnnoiance.caf */,
-				7E0905F41907141D003D6677 /* techno.caf */,
-				7E0905F51907141D003D6677 /* videogame.caf */,
 				7EC9CDDB18DBB4E400AB3BFA /* NightKnightsMobileApplication-Info.plist */,
 				7EC9CDDC18DBB4E400AB3BFA /* InfoPlist.strings */,
 				7EC9CDDF18DBB4E400AB3BFA /* main.m */,
@@ -264,6 +252,11 @@
 				TargetAttributes = {
 					7EC9CDCF18DBB4E400AB3BFA = {
 						DevelopmentTeam = APD62CDC25;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 					7EC9CDF018DBB4E500AB3BFA = {
 						TestTargetID = 7EC9CDCF18DBB4E400AB3BFA;

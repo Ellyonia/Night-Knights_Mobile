@@ -31,6 +31,9 @@
 @end
 
 @implementation AlarmRunningViewController
+
+NSString *soundLocation;
+
 - (IBAction)cancelHit:(UIButton *)sender {
     [self.audioPlayer stop];
 }
@@ -133,6 +136,7 @@ int systemSoundID  = 1304;
     NSArray *settings = [self.defaults objectForKey:@"alarmSettings"];
     if(settings)
     {
+        soundLocation = settings[1];
         self.audioPlayer = nil;
         self.audioPlayer.volume = [settings[0] floatValue];
         NSString *urlEnding = [NSString stringWithString:settings[1]];
@@ -161,6 +165,8 @@ int systemSoundID  = 1304;
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    
+    NSDate* convertedAlarmDate = self.alarmDate;
     self.alarmDate = [NSDate dateWithTimeInterval:-60*60*5 sinceDate:self.alarmDate];
     NSString *stringDate = [NSString stringWithFormat:@"%@",self.alarmDate];
     NSString *timeWithSeconds = [self getSubstring:stringDate betweenString:@" "];
@@ -210,6 +216,9 @@ int systemSoundID  = 1304;
     NSTimeInterval alarmRunTime = [self.alarmDate timeIntervalSinceDate: convertedNow];
     timeRemaining = (int)alarmRunTime - second;
     
+    convertedAlarmDate = [NSDate dateWithTimeInterval:-second sinceDate:convertedAlarmDate];
+
+    
     // Checks to see if you want an alarm time for the morning.
     if (timeRemaining < 0)
         timeRemaining = timeRemaining + 60*60*24;
@@ -257,22 +266,32 @@ int systemSoundID  = 1304;
     
     [[NSRunLoop mainRunLoop] addTimer:self.minuteHourRemover forMode:NSRunLoopCommonModes];
     
-//    UILocalNotification *localNotif = [[UILocalNotification alloc] init];
-//    if (localNotif == nil)
-//        return;
-//    localNotif.fireDate = self.alarmDate;
-//    localNotif.timeZone = [NSTimeZone defaultTimeZone];
-//    NSLog(@"%@",self.alarmDate);
-//    // Notification details
-// //   localNotif.alertBody = [eventText text];
-//    // Set the action button
-//    localNotif.alertAction = @"View";
-//    localNotif.alertBody = @"things";
-//    localNotif.applicationIconBadgeNumber = 1;
-//    localNotif.soundName = @"basicAlarm.caf";
-//        // Schedule the notification
-//    [[UIApplication sharedApplication] scheduleLocalNotification:localNotif];
-////    [localNotif release];
+    UILocalNotification *localNotif = [[UILocalNotification alloc] init];
+    if (localNotif == nil)
+        return;
+    localNotif.fireDate = convertedAlarmDate;
+    NSLog(@"%@",convertedAlarmDate);
+    localNotif.timeZone = [NSTimeZone defaultTimeZone];
+
+    localNotif.alertAction = @"View";
+    localNotif.alertBody = @"things";
+    localNotif.applicationIconBadgeNumber = 1;
+    localNotif.soundName = soundLocation;
+        // Schedule the notification
+    [[UIApplication sharedApplication] scheduleLocalNotification:localNotif];
+    
+    convertedAlarmDate = [NSDate dateWithTimeInterval:30 sinceDate:convertedAlarmDate];
+    UILocalNotification *localNotif2 = [[UILocalNotification alloc] init];
+    if (localNotif2 == nil)
+        return;
+    localNotif2.fireDate = convertedAlarmDate;
+    localNotif2.timeZone = [NSTimeZone defaultTimeZone];
+
+    localNotif2.alertAction = @"View";
+    localNotif2.alertBody = @"things";
+    localNotif2.applicationIconBadgeNumber = 1;
+    localNotif2.soundName = soundLocation;
+    [[UIApplication sharedApplication] scheduleLocalNotification:localNotif2];
 }
 
 -(void) removeMinuteOrHour

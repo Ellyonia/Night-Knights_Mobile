@@ -32,13 +32,10 @@
 
 - (void) viewDidLoad
 {
-    [super viewDidLoad];
-    NSLog(@"View Loaded");
-   
+    [super viewDidLoad];   
 }
 - (void) viewWillAppear:(BOOL)animated
 {
-    NSLog(@"View Appearing");
     NSDate *dateFromPrevious;
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -62,11 +59,6 @@
         self.alarmPickerDisplay.datePickerMode = UIDatePickerModeTime;
         self.alarmPickerDisplay.timeZone = [NSTimeZone timeZoneWithAbbreviation:@"CDT"];
     }
-}
-
-- (void) viewDidAppear:(BOOL)animated
-{
-    NSLog(@"View Did Appear");
 }
 
 - (void)viewWillDisappear:(BOOL)animated
