@@ -43,7 +43,6 @@ NSString *soundLocation;
     if (!_audioPlayer)
     {
         NSURL *url = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@%@", [[NSBundle mainBundle] resourcePath],@"/basicAlarm.mp3"]];
-        //	NSLog(@"%@",url);
         NSError *error;
         _audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
         _audioPlayer.numberOfLoops = 5;
@@ -67,15 +66,14 @@ NSString *soundLocation;
     NSString *baseURL = [NSString stringWithFormat:@"%s/api/character/energy",SERVER_URL];
     NSURL *postUrl = [NSURL URLWithString:baseURL];
     
-    // data to send in body of post request (send arguments as json)
     NSError *error = nil;
     NSDictionary *jsonUpload = @{@"energy":@(energyGained)};
     NSData *requestBody=[NSJSONSerialization dataWithJSONObject:jsonUpload options:NSJSONWritingPrettyPrinted error:&error];
-    // create a custom HTTP POST request
+
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:postUrl];
     [request setHTTPMethod:@"PUT"];
     [request setHTTPBody:requestBody];
-    // start the request, print the responses etc.
+
     NSURLSessionDataTask *postTask = [self.session dataTaskWithRequest:request
                                                         completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
                                                             
@@ -90,12 +88,12 @@ NSString *soundLocation;
 
 AVAudioPlayer *audioPlayer;
 int snoozeCount = -1;
-bool alarmStillRunning = YES;
-int timeRemaining = 0;int iHour = 0;
+int timeRemaining = 0;
+int iHour = 0;
 int iMinute = 0;
 int second = 0;
 int energyGained = 0;
-int systemSoundID  = 1304;
+
 
 - (IBAction)snoozedPressed:(UIButton *)sender {
     [self.audioPlayer stop];
@@ -114,14 +112,6 @@ int systemSoundID  = 1304;
                                                      repeats:NO];
     
     [[NSRunLoop mainRunLoop] addTimer:isSnoozing forMode:NSRunLoopCommonModes];
-//    self.minuteHourRemover = [NSTimer scheduledTimerWithTimeInterval:1
-//                                                              target:self
-//                                                            selector:@selector(removeMinuteOrHour)
-//                                                            userInfo:nil
-//                                                             repeats:YES];
-//    
-//    [[NSRunLoop mainRunLoop] addTimer:self.minuteHourRemover forMode:NSRunLoopCommonModes];
-
     snoozeCount ++;
 }
 
@@ -277,7 +267,7 @@ int systemSoundID  = 1304;
     localNotif.alertBody = @"things";
     localNotif.applicationIconBadgeNumber = 1;
     localNotif.soundName = soundLocation;
-        // Schedule the notification
+    
     [[UIApplication sharedApplication] scheduleLocalNotification:localNotif];
     
     convertedAlarmDate = [NSDate dateWithTimeInterval:30 sinceDate:convertedAlarmDate];
@@ -291,6 +281,7 @@ int systemSoundID  = 1304;
     localNotif2.alertBody = @"things";
     localNotif2.applicationIconBadgeNumber = 1;
     localNotif2.soundName = soundLocation;
+    
     [[UIApplication sharedApplication] scheduleLocalNotification:localNotif2];
 }
 
@@ -351,6 +342,7 @@ int systemSoundID  = 1304;
     });
 }
 
+
 - (NSString *)getSubstring:(NSString *)value betweenString:(NSString *)separator
 {
     NSRange firstInstance = [value rangeOfString:separator];
@@ -362,7 +354,6 @@ int systemSoundID  = 1304;
 
 
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     //Cancel the current alarms running.

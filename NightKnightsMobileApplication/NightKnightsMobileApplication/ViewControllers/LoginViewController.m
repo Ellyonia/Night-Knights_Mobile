@@ -15,16 +15,13 @@
 @property (strong, nonatomic) IBOutlet UITextField *emailTextField;
 @property (strong, nonatomic) IBOutlet UITextField *passwordTextField;
 @property (strong, nonatomic) NSUserDefaults* defaults;
-@property (strong, nonatomic) NSNumber *value;
 @property (strong,nonatomic) NSURLSession *session;
-@property (strong,nonatomic) NSNumber *dsid;
 
 
 @end
 
 @implementation LoginViewController
 
-bool loginSuccessful = NO;
 
 -(NSUserDefaults *) defaults{
     if(!_defaults){
@@ -54,11 +51,9 @@ bool loginSuccessful = NO;
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    [self.navigationController setNavigationBarHidden:YES animated:animated];
     [super viewWillAppear:animated];
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
-    NSArray *texts = [defaults objectForKey:@"loginInformation"];
+    NSArray *texts = [self.defaults objectForKey:@"loginInformation"];
     if(texts){
         self.emailTextField.text = texts[0];
         self.passwordTextField.text = texts[1];
@@ -68,22 +63,7 @@ bool loginSuccessful = NO;
 
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
--(void) viewWillDisappear:(BOOL)animated
-{
-    NSString *email = self.emailTextField.text;
-    NSString *password = self.passwordTextField.text;
-    
-    NSArray *loginInfo = [NSArray arrayWithObjects:email,password, nil];
-    
-    [self.defaults setObject:loginInfo forKey:@"loginInformation"];
-}
-
+// Function to pass the Keyboard Delegate to the Next UITextField
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     
     
@@ -97,6 +77,7 @@ bool loginSuccessful = NO;
     return YES;
 }
 
+// Dismiss the keyboard When the User touches outside of a UITextField.
 -(void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
     UITouch *touch = [touches anyObject];
     if(touch.phase==UITouchPhaseBegan){
@@ -109,70 +90,53 @@ bool loginSuccessful = NO;
         }
     }
 }
+
 - (IBAction)loginButtonPushed:(UIButton*)sender {
     
-    // an example for sending some data as JSON in the HTTP body
-    // setup the url
     NSString *baseURL = [NSString stringWithFormat:@"%s/api/login",SERVER_URL];
     NSURL *postUrl = [NSURL URLWithString:baseURL];
     
-    // data to send in body of post request (send arguments as json)
     NSError *error = nil;
     NSDictionary *jsonUpload = @{@"email":self.emailTextField.text,@"password":self.passwordTextField.text};
     NSData *requestBody=[NSJSONSerialization dataWithJSONObject:jsonUpload options:NSJSONWritingPrettyPrinted error:&error];
     
-    // create a custom HTTP POST request
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:postUrl];
     [request setHTTPMethod:@"POST"];
     [request setHTTPBody:requestBody];
     
-    // start the request, print the responses etc.
     NSURLSessionDataTask *postTask = [self.session dataTaskWithRequest:request
                                                      completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-                                                         //NSLog(@"11%@",response);
-                                                         NSDictionary *jsonDictionary = [NSJSONSerialization JSONObjectWithData:data options: NSJSONReadingMutableContainers error: &error];
+                                                         
+                                                         
+                                                         NSDictionary *jsonDictionary = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error: &error];
+                                                         
                                                          if ([jsonDictionary[@"success"] isEqual:@1]){
                                                          dispatch_sync(dispatch_get_main_queue(), ^{
                                                              [self performSegueWithIdentifier:@"login" sender:self];
-                                                             loginSuccessful = YES;
                                                          });
                                                          }
                                                      }];
     [postTask resume];
 }
 
-- (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender
-{
-    if([identifier isEqualToString:@"login"])
-    {
-    if (loginSuccessful)
-    {
-        return YES;
-    }
-    else
-    {
-    return NO;
-    
-    }
-    }
-    else
-    {
-        return YES;
-    }
-}
+#pragma mark - Methods for Segues
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    NSLog(@"preparing");
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    if([segue.identifier isEqualToString:@"login"])
+    {
+        
+        NSString *email = self.emailTextField.text;
+        NSString *password = self.passwordTextField.text;
+        
+        NSArray *loginInfo = [NSArray arrayWithObjects:email,password, nil];
+        
+        [self.defaults setObject:loginInfo forKey:@"loginInformation"];
+    }
 }
 
 - (IBAction)unwindToLogin:(UIStoryboardSegue *)unwindSegue
 {
-    NSLog(@"HI");
-    
 }
 - (IBAction)cancelCreateAccount:(UIStoryboardSegue *)unwindSegue
 {

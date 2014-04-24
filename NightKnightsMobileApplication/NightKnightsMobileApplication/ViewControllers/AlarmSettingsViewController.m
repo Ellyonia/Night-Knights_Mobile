@@ -45,10 +45,9 @@ NSString *pickedAlarm;
     alarmTones = @[@"/alarmChimes.mp3",@"/birdsChirping.mp3",@"/danceRave.mp3",@"/videogame.mp3",@"/progressiveAnnoyance.mp3",@"/basicAlarm.mp3"];
     alarmNames = @[@"Chimes", @"Chirping Birds", @"Techo", @"VideoGame Theme", @"Random Sounds", @"Standard Alarm"];
     
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSString *defaultsName;
     NSString *findToneName;
-    NSArray *settings = [defaults objectForKey:@"alarmSettings"];
+    NSArray *settings = [self.defaults objectForKey:@"alarmSettings"];
     if(settings)
     {
         defaultsName  = settings[1];
@@ -68,7 +67,6 @@ NSString *pickedAlarm;
     [session setCategory:AVAudioSessionCategoryPlayback error:nil];
     
 
-    // Do any additional setup after loading the view.
 }
 
 -(void) viewWillDisappear:(BOOL)animated

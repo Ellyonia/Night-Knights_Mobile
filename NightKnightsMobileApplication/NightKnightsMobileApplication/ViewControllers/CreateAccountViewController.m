@@ -18,9 +18,7 @@
 @property (strong, nonatomic) IBOutlet UITextField *emailTextField;
 @property (strong, nonatomic) IBOutlet UITextField *passwordCheckTextField;
 @property (strong, nonatomic) NSUserDefaults* defaults;
-@property (strong, nonatomic) NSNumber *value;
 @property (strong,nonatomic) NSURLSession *session;
-@property (strong,nonatomic) NSNumber *dsid;
 @property (strong, nonatomic) IBOutlet UILabel *warningLabel;
 
 
@@ -58,23 +56,22 @@
                              delegateQueue:nil];
 }
 
-- (void)didReceiveMemoryWarning
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    if([segue.identifier isEqualToString:@"createAccount"])
+    {
+        // Save the Users Login Information to NSUserDefaults
+        NSString *email = self.emailTextField.text;
+        NSString *password = self.passwordTextField.text;
+        
+        NSArray *loginInfo = [NSArray arrayWithObjects:email,password, nil];
+        
+        [self.defaults setObject:loginInfo forKey:@"loginInformation"];
+    }
 }
 
--(void) viewWillDisappear:(BOOL)animated
-{
-    NSString *email = self.emailTextField.text;
-    NSString *password = self.passwordTextField.text;
-    
-    NSArray *loginInfo = [NSArray arrayWithObjects:email,password, nil];
-    
-    [self.defaults setObject:loginInfo forKey:@"loginInformation"];
-    [self.defaults synchronize];
-}
-
+// Function to pass the Keyboard Delegate to the Next UITextField
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     
     if (textField == self.emailTextField) {
@@ -95,6 +92,7 @@
     return YES;
 }
 
+// Hide the error message when the User begins typing
 - (void) textFieldDidBeginEditing:(UITextField *)textField{
     self.warningLabel.hidden = YES;
 }
@@ -105,23 +103,22 @@
     NSString *originalPass = self.passwordTextField.text;
     NSString *retypedPass = self.passwordCheckTextField.text;
     NSString *email = self.emailTextField.text;
-    if ([self validateEmail:email]) {
+    
+    if ([self validateEmail:email])
+    {
         if ([originalPass isEqualToString:retypedPass])
         {
             NSString *baseURL = [NSString stringWithFormat:@"%s/api/users",SERVER_URL];
             NSURL *postUrl = [NSURL URLWithString:baseURL];
             
-            // data to send in body of post request (send arguments as json)
             NSError *error = nil;
             NSDictionary *jsonUpload = @{@"email":self.emailTextField.text,@"password":self.passwordTextField.text,@"username":self.knightNameTextField.text};
             NSData *requestBody=[NSJSONSerialization dataWithJSONObject:jsonUpload options:NSJSONWritingPrettyPrinted error:&error];
             
-            // create a custom HTTP POST request
             NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:postUrl];
             [request setHTTPMethod:@"POST"];
             [request setHTTPBody:requestBody];
             
-            // start the request, print the responses etc.
             NSURLSessionDataTask *postTask = [self.session dataTaskWithRequest:request
                                                              completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
                                                                  //NSLog(@"11%@",response);
@@ -136,13 +133,14 @@
                                                              }];
             [postTask resume];
         }
-        else{
+        else // If Passwords are mismatched clear the Password UITextFields
+        {
             self.warningLabel.hidden = NO;
             self.passwordCheckTextField.text = @"";
             self.passwordTextField.text = @"";
         }
     }
-    else
+    else // If Email regex failed.
     {
         self.warningLabel.hidden = NO;
         self.emailTextField.backgroundColor = [UIColor redColor];
@@ -150,6 +148,7 @@
     }
 }
 
+// Dismiss the Keyboard when the User touches outside of a UITextField.
 -(void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
     UITouch *touch = [touches anyObject];
     if(touch.phase==UITouchPhaseBegan){
@@ -163,6 +162,7 @@
     }
 }
 
+// Email regex.
 - (BOOL) validateEmail: (NSString *) candidate {
     NSString *emailRegex =
     @"(?:[a-z0-9!#$%\\&'*+/=?\\^_`{|}~-]+(?:\\.[a-z0-9!#$%\\&'*+/=?\\^_`{|}"

@@ -34,6 +34,7 @@
 {
     [super viewDidLoad];   
 }
+
 - (void) viewWillAppear:(BOOL)animated
 {
     NSDate *dateFromPrevious;
@@ -41,6 +42,8 @@
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
     NSArray *alarmDate = [defaults objectForKey:@"alarmInformation"];
+    
+    //A User has previously Saved an Alarm Time.
     if(alarmDate){
         dateFromPrevious = alarmDate[0];
         NSDate *midnight = [self dateAtBeginningOfDayForDate:[NSDate date]];
@@ -52,7 +55,7 @@
         self.alarmPickerDisplay.datePickerMode = UIDatePickerModeTime;
         self.alarmPickerDisplay.timeZone = [NSTimeZone timeZoneWithAbbreviation:@"CDT"];
     }
-    else
+    else //Set the Date to the current Time.
     {
         NSDate *convertedDate = [NSDate dateWithTimeInterval:300 sinceDate:[NSDate date]];
         self.alarmPickerDisplay.date = convertedDate;
@@ -61,22 +64,19 @@
     }
 }
 
-- (void)viewWillDisappear:(BOOL)animated
-{
-    NSDate *alarmInfo = self.alarmPickerDisplay.date;
-    NSArray *alarmTime = [NSArray arrayWithObjects:alarmInfo, nil];
-    [self.defaults setObject:alarmTime forKey:@"alarmInformation"];
-    [self.defaults synchronize];
-
-}
-
-
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     
     if([segue.identifier isEqualToString:@"startAlarm"])
     {
+        // Send the Alarm time info to the AlarmRunningViewController
         AlarmRunningViewController *transferViewController = segue.destinationViewController;
         transferViewController.alarmDate = self.alarmPickerDisplay.date;
+        
+        // Save the Alarm to NSUserDefaults
+        NSDate *alarmInfo = self.alarmPickerDisplay.date;
+        NSArray *alarmTime = [NSArray arrayWithObjects:alarmInfo, nil];
+        [self.defaults setObject:alarmTime forKey:@"alarmInformation"];
+        [self.defaults synchronize];
     }
     
 }
@@ -106,7 +106,6 @@
 
 - (IBAction)unwindToSetAlarm:(UIStoryboardSegue *)unwindSegue
 {
-    NSLog(@"hi");    
 }
 
 
