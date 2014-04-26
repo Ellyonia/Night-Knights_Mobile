@@ -161,7 +161,7 @@ int energyGained = 0;
     NSString *stringDate = [NSString stringWithFormat:@"%@",self.alarmDate];
     NSString *timeWithSeconds = [self getSubstring:stringDate betweenString:@" "];
     NSString *timeNoSeconds = [timeWithSeconds substringToIndex:5];
-    NSString *labelText = @"Until: ";
+    NSString *labelText = @"";
     
     NSString *timePart = [timeNoSeconds substringToIndex:3];
     int alarmHour = (int)[timePart integerValue];
@@ -194,7 +194,7 @@ int energyGained = 0;
             labelText = [labelText stringByAppendingString:@" PM"];
         }
     }
-    self.finalAlarmLabel.text = labelText;
+    self.timeRemainingLabel.text = labelText;
     
     NSDate *now = [NSDate date];
     NSDate *convertedNow = [NSDate dateWithTimeInterval:-60*60*5 sinceDate:now];
@@ -213,48 +213,48 @@ int energyGained = 0;
     if (timeRemaining < 0)
         timeRemaining = timeRemaining + 60*60*24;
     
-    iHour = (int)timeRemaining/(60*60);
-    iMinute = timeRemaining%3600 / 60 + 1;
-    
-    NSString *remainingTimeLabel;
-    if(iHour < 10)
-    {
-        remainingTimeLabel = [NSString stringWithFormat:@"0%d:", iHour];
-    }
-    else
-    {
-        remainingTimeLabel = [NSString stringWithFormat:@"%d:",iHour];
-    }
-    if (iMinute < 10)
-    {
-        remainingTimeLabel = [remainingTimeLabel stringByAppendingString:[NSString stringWithFormat:@"0%d",iMinute]];
-        
-    }
-    else
-    {
-        remainingTimeLabel = [remainingTimeLabel stringByAppendingString:[NSString stringWithFormat:@"%d",iMinute]];
-    }
-    self.timeRemainingLabel.text = remainingTimeLabel;
-    
-    self.alarm = [NSTimer scheduledTimerWithTimeInterval:timeRemaining
-                                                          target:self
-                                                        selector:@selector(alarmComplete)
-                                                        userInfo:nil
-                                                        repeats:NO];
-    
-    [[NSRunLoop mainRunLoop] addTimer:self.alarm forMode:NSRunLoopCommonModes];
-
-    sSeconds = [NSString stringWithFormat:@"%@",convertedNow];
-    sSeconds = [self getSubstring:sSeconds betweenString:@" "];
-    sSeconds = [sSeconds substringFromIndex:6];
-    second = (int)[sSeconds integerValue] + 1;
-    self.minuteHourRemover = [NSTimer scheduledTimerWithTimeInterval:1 target:self
-                                                            selector:@selector(removeMinuteOrHour)
-                                                            userInfo:nil
-                                                            repeats:YES];
-                              
-    
-    [[NSRunLoop mainRunLoop] addTimer:self.minuteHourRemover forMode:NSRunLoopCommonModes];
+//    iHour = (int)timeRemaining/(60*60);
+//    iMinute = timeRemaining%3600 / 60 + 1;
+//
+//    NSString *remainingTimeLabel;
+//    if(iHour < 10)
+//    {
+//        remainingTimeLabel = [NSString stringWithFormat:@"0%d:", iHour];
+//    }
+//    else
+//    {
+//        remainingTimeLabel = [NSString stringWithFormat:@"%d:",iHour];
+//    }
+//    if (iMinute < 10)
+//    {
+//        remainingTimeLabel = [remainingTimeLabel stringByAppendingString:[NSString stringWithFormat:@"0%d",iMinute]];
+//        
+//    }
+//    else
+//    {
+//        remainingTimeLabel = [remainingTimeLabel stringByAppendingString:[NSString stringWithFormat:@"%d",iMinute]];
+//    }
+//    self.timeRemainingLabel.text = remainingTimeLabel;
+//    
+//    self.alarm = [NSTimer scheduledTimerWithTimeInterval:timeRemaining
+//                                                          target:self
+//                                                        selector:@selector(alarmComplete)
+//                                                        userInfo:nil
+//                                                        repeats:NO];
+//    
+//    [[NSRunLoop mainRunLoop] addTimer:self.alarm forMode:NSRunLoopCommonModes];
+//
+//    sSeconds = [NSString stringWithFormat:@"%@",convertedNow];
+//    sSeconds = [self getSubstring:sSeconds betweenString:@" "];
+//    sSeconds = [sSeconds substringFromIndex:6];
+//    second = (int)[sSeconds integerValue] + 1;
+//    self.minuteHourRemover = [NSTimer scheduledTimerWithTimeInterval:1 target:self
+//                                                            selector:@selector(removeMinuteOrHour)
+//                                                            userInfo:nil
+//                                                            repeats:YES];
+//                              
+//    
+//    [[NSRunLoop mainRunLoop] addTimer:self.minuteHourRemover forMode:NSRunLoopCommonModes];
     
     UILocalNotification *localNotif = [[UILocalNotification alloc] init];
     if (localNotif == nil)
@@ -284,46 +284,46 @@ int energyGained = 0;
     
     [[UIApplication sharedApplication] scheduleLocalNotification:localNotif2];
 }
-
--(void) removeMinuteOrHour
-{
-    if (second == 60)
-    {
-        if (iMinute != 0)
-        {
-            iMinute --;
-        }
-        else
-        {
-            iMinute = 59;
-            iHour --;
-        }
-        second = 1;
-    }
-    else
-    {
-        second ++;
-    }
-    NSString *remainingTimeLabel;
-    if(iHour < 10)
-    {
-        remainingTimeLabel = [NSString stringWithFormat:@"0%d:", iHour];
-    }
-    else
-    {
-        remainingTimeLabel = [NSString stringWithFormat:@"%d:",iHour];
-    }
-    if (iMinute < 10)
-    {
-        remainingTimeLabel = [remainingTimeLabel stringByAppendingString:[NSString stringWithFormat:@"0%d",iMinute]];
-
-    }
-    else
-    {
-        remainingTimeLabel = [remainingTimeLabel stringByAppendingString:[NSString stringWithFormat:@"%d",iMinute]];
-    }
-    self.timeRemainingLabel.text = remainingTimeLabel;
-}
+//
+//-(void) removeMinuteOrHour
+//{
+//    if (second == 60)
+//    {
+//        if (iMinute != 0)
+//        {
+//            iMinute --;
+//        }
+//        else
+//        {
+//            iMinute = 59;
+//            iHour --;
+//        }
+//        second = 1;
+//    }
+//    else
+//    {
+//        second ++;
+//    }
+//    NSString *remainingTimeLabel;
+//    if(iHour < 10)
+//    {
+//        remainingTimeLabel = [NSString stringWithFormat:@"0%d:", iHour];
+//    }
+//    else
+//    {
+//        remainingTimeLabel = [NSString stringWithFormat:@"%d:",iHour];
+//    }
+//    if (iMinute < 10)
+//    {
+//        remainingTimeLabel = [remainingTimeLabel stringByAppendingString:[NSString stringWithFormat:@"0%d",iMinute]];
+//
+//    }
+//    else
+//    {
+//        remainingTimeLabel = [remainingTimeLabel stringByAppendingString:[NSString stringWithFormat:@"%d",iMinute]];
+//    }
+//    self.timeRemainingLabel.text = remainingTimeLabel;
+//}
 
 - (void) alarmComplete
 {
@@ -362,6 +362,8 @@ int energyGained = 0;
         [self.minuteHourRemover invalidate];
         [self.alarm invalidate];
         [self.audioPlayer stop];
+        [[UIApplication sharedApplication] cancelAllLocalNotifications];
+        
     }
 }
 

@@ -49,7 +49,7 @@ NSString *pickedAlarm;
     NSArray *settings = [self.defaults objectForKey:@"alarmSettings"];
     if(settings)
     {
-        defaultsName  = settings[1];
+        defaultsName  = settings[0];
         for (int i = 0; i < alarmTones.count ; i++)
         {
             findToneName = alarmTones[i];

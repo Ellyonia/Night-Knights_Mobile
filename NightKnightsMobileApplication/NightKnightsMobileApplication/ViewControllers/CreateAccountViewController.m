@@ -99,57 +99,12 @@ bool emailIsValid = NO;
     return YES;
 }
 
-//// Hide the error message when the User begins typing
-//- (void) textFieldDidBeginEditing:(UITextField *)textField{
-//    self.warningLabel.hidden = YES;
-//}
-
 - (IBAction)createAccountButton:(UIButton *)sender {
     if (emailIsValid)
     {
         if (passwordsMatch)
         {
-            NSString *baseURL = [NSString stringWithFormat:@"%s/api/users",SERVER_URL];
-            NSURL *postUrl = [NSURL URLWithString:baseURL];
-            NSError *error = nil;
-            NSDictionary *jsonUpload = @{@"email":self.emailTextField.text,@"password":self.passwordTextField.text,@"username":self.knightNameTextField.text};
-            NSData *requestBody=[NSJSONSerialization dataWithJSONObject:jsonUpload options:NSJSONWritingPrettyPrinted error:&error];
-            
-            NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:postUrl];
-            [request setHTTPMethod:@"POST"];
-            [request setHTTPBody:requestBody];
-            
-            NSURLSessionDataTask *postTask = [self.session dataTaskWithRequest:request
-                                                             completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-                                                                 //NSLog(@"11%@",response);
-                                                                 NSDictionary *jsonDictionary = [NSJSONSerialization JSONObjectWithData:data options: NSJSONReadingMutableContainers error: &error];
-                                                                 NSLog(@"%@",jsonDictionary);
-                                                                 
-                                                                 
-                                                                 if ([jsonDictionary[@"success"] isEqual:@1])
-                                                                 {
-                                                                     dispatch_sync(dispatch_get_main_queue(), ^{
-                                                                         [self performSegueWithIdentifier:@"createAccount" sender:self];                                                         });
-                                                                 }
-                                                                 else
-                                                                 {
-                                                                     if (response == nil)
-                                                                     {
-                                                                         dispatch_sync(dispatch_get_main_queue(), ^{
-                                                                             [self.warningLabel setHidden:NO];
-                                                                             [self.warningLabel setText:@"Please connect to the Internet"];
-                                                                         });
-                                                                     }
-                                                                     if ([jsonDictionary[@"message"] isEqualToString: invalidEmailMessage])
-                                                                     {
-                                                                         dispatch_sync(dispatch_get_main_queue(), ^{
-                                                                         [self.warningLabel setHidden:NO];
-                                                                         [self.warningLabel setText:@"Email or Knight name is already in use"];
-                                                                         });
-                                                                     }
-                                                                 }
-                                                             }];
-            [postTask resume];
+            [self createAccount];
         }
         else
         {
@@ -218,7 +173,6 @@ bool emailIsValid = NO;
         [self.warningLabel setText:@"Password fields must match"];
         self.warningLabel.hidden = NO;
         self.passwordCheckTextField.text = @"";
-        self.passwordTextField.text = @"";
     }
 }
 
@@ -240,7 +194,51 @@ bool emailIsValid = NO;
     }
 }
 
+- (void) createAccount
+{
+    NSString *baseURL = [NSString stringWithFormat:@"%s/api/users",SERVER_URL];
+    NSURL *postUrl = [NSURL URLWithString:baseURL];
+    NSError *error = nil;
+    NSDictionary *jsonUpload = @{@"email":self.emailTextField.text,@"password":self.passwordTextField.text,@"username":self.knightNameTextField.text};
+    NSData *requestBody=[NSJSONSerialization dataWithJSONObject:jsonUpload options:NSJSONWritingPrettyPrinted error:&error];
+    
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:postUrl];
+    [request setHTTPMethod:@"POST"];
+    [request setHTTPBody:requestBody];
+    
+    NSURLSessionDataTask *postTask = [self.session dataTaskWithRequest:request
+                                                     completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                                         //NSLog(@"11%@",response);
+                                                         NSDictionary *jsonDictionary = [NSJSONSerialization JSONObjectWithData:data options: NSJSONReadingMutableContainers error: &error];
+                                                         NSLog(@"%@",jsonDictionary);
+                                                         
+                                                         
+                                                         if ([jsonDictionary[@"success"] isEqual:@1])
+                                                         {
+                                                             dispatch_sync(dispatch_get_main_queue(), ^{
+                                                                 [self performSegueWithIdentifier:@"createAccount" sender:self];                                                         });
+                                                         }
+                                                         else
+                                                         {
+                                                             if (response == nil)
+                                                             {
+                                                                 dispatch_sync(dispatch_get_main_queue(), ^{
+                                                                     [self.warningLabel setHidden:NO];
+                                                                     [self.warningLabel setText:@"Please connect to the Internet"];
+                                                                 });
+                                                             }
+                                                             if ([jsonDictionary[@"message"] isEqualToString: invalidEmailMessage])
+                                                             {
+                                                                 dispatch_sync(dispatch_get_main_queue(), ^{
+                                                                     [self.warningLabel setHidden:NO];
+                                                                     [self.warningLabel setText:@"Email or Knight name is already in use"];
+                                                                 });
+                                                             }
+                                                         }
+                                                     }];
+    [postTask resume];
 
+}
 
 
 
