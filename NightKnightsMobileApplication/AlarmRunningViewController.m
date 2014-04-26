@@ -194,30 +194,65 @@ int energyGained = 0;
     timePart = [timeNoSeconds substringFromIndex:3];
     int alarmMinute = (int)[timePart integerValue];
     
-    if (alarmHour < 13)
+    if (alarmHour < 12)
     {
-        if (alarmMinute > 9){
-        NSString *time = [NSString stringWithFormat:@"%d:%d",alarmHour,alarmMinute];
-        labelText = [labelText stringByAppendingString:time];
-        labelText = [labelText stringByAppendingString:@" AM"];
-        }
-        else{
-            NSString *time = [NSString stringWithFormat:@"%d:0%d",alarmHour,alarmMinute];
+        if (alarmHour == 0)
+        {
+            if (alarmMinute > 9){
+            NSString *time = [NSString stringWithFormat:@"12:%d",alarmMinute];
             labelText = [labelText stringByAppendingString:time];
             labelText = [labelText stringByAppendingString:@" AM"];
+            }
+            else
+            {
+                NSString *time = [NSString stringWithFormat:@"12:0%d",alarmMinute];
+                labelText = [labelText stringByAppendingString:time];
+                labelText = [labelText stringByAppendingString:@" AM"];
+            }
+        }
+        else
+        {
+                if (alarmMinute > 9){
+                    NSString *time = [NSString stringWithFormat:@"%d:%d",alarmHour,alarmMinute];
+                    labelText = [labelText stringByAppendingString:time];
+                    labelText = [labelText stringByAppendingString:@" AM"];
+                }
+                else
+                {
+                    NSString *time = [NSString stringWithFormat:@"%d:0%d",alarmHour,alarmMinute];
+                    labelText = [labelText stringByAppendingString:time];
+                    labelText = [labelText stringByAppendingString:@" AM"];
+                }
         }
     }
     else
     {
-        if (alarmMinute > 9){
-            NSString *time = [NSString stringWithFormat:@"%d:%d",(alarmHour-12),alarmMinute];
-            labelText = [labelText stringByAppendingString:time];
-            labelText = [labelText stringByAppendingString:@" PM"];
+        if (alarmHour == 12)
+        {
+            if (alarmMinute > 9){
+                NSString *time = [NSString stringWithFormat:@"12:%d",alarmMinute];
+                labelText = [labelText stringByAppendingString:time];
+                labelText = [labelText stringByAppendingString:@" PM"];
+            }
+            else
+            {
+                NSString *time = [NSString stringWithFormat:@"12:0%d",alarmMinute];
+                labelText = [labelText stringByAppendingString:time];
+                labelText = [labelText stringByAppendingString:@" PM"];
+            }
         }
-        else{
-            NSString *time = [NSString stringWithFormat:@"%d:0%d",(alarmHour-12),alarmMinute];
-            labelText = [labelText stringByAppendingString:time];
-            labelText = [labelText stringByAppendingString:@" PM"];
+        else
+        {
+            if (alarmMinute > 9){
+                NSString *time = [NSString stringWithFormat:@"%d:%d",(alarmHour-12),alarmMinute];
+                labelText = [labelText stringByAppendingString:time];
+                labelText = [labelText stringByAppendingString:@" PM"];
+            }
+            else{
+                NSString *time = [NSString stringWithFormat:@"%d:0%d",(alarmHour-12),alarmMinute];
+                labelText = [labelText stringByAppendingString:time];
+                labelText = [labelText stringByAppendingString:@" PM"];
+            }
         }
     }
     self.timeRemainingLabel.text = labelText;
