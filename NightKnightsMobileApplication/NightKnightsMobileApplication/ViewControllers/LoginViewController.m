@@ -16,6 +16,7 @@
 @property (strong, nonatomic) IBOutlet UITextField *passwordTextField;
 @property (strong, nonatomic) NSUserDefaults* defaults;
 @property (strong,nonatomic) NSURLSession *session;
+@property (strong, nonatomic) IBOutlet UILabel *warningLabel;
 
 
 @end
@@ -63,6 +64,13 @@
 
 }
 
+
+// Hide the error message when the User begins typing
+- (void) textFieldDidBeginEditing:(UITextField *)textField
+{
+    [self.warningLabel setHidden:YES];
+}
+
 // Function to pass the Keyboard Delegate to the Next UITextField
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     
@@ -107,13 +115,29 @@
     NSURLSessionDataTask *postTask = [self.session dataTaskWithRequest:request
                                                      completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
                                                          
-                                                         
                                                          NSDictionary *jsonDictionary = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error: &error];
                                                          
-                                                         if ([jsonDictionary[@"success"] isEqual:@1]){
-                                                         dispatch_sync(dispatch_get_main_queue(), ^{
-                                                             [self performSegueWithIdentifier:@"login" sender:self];
-                                                         });
+                                                         NSLog(@"%@",jsonDictionary);
+                                                         
+                                                         if ([jsonDictionary[@"success"] isEqual:@1])
+                                                         {
+                                                             dispatch_sync(dispatch_get_main_queue(), ^{
+                                                                 [self performSegueWithIdentifier:@"login" sender:self];
+                                                            });
+                                                         }
+                                                         else
+                                                         {
+                                                             dispatch_sync(dispatch_get_main_queue(), ^{
+                                                             [self.warningLabel setText:@"Email or Password is incorrect"];
+                                                             [self.warningLabel setHidden:NO];
+                                                             });
+                                                         }
+                                                         if (response == nil)
+                                                         {
+                                                             dispatch_sync(dispatch_get_main_queue(), ^{
+                                                             [self.warningLabel setText:@"Please Connect to the Internet"];
+                                                             [self.warningLabel setHidden:NO];
+                                                             });
                                                          }
                                                      }];
     [postTask resume];

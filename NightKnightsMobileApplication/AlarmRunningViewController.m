@@ -36,6 +36,7 @@ NSString *soundLocation;
 
 - (IBAction)cancelHit:(UIButton *)sender {
     [self.audioPlayer stop];
+    [[UIApplication sharedApplication] cancelAllLocalNotifications];
 }
 
 
@@ -83,7 +84,7 @@ NSString *soundLocation;
     
     [postTask resume];
 
-    
+    [[UIApplication sharedApplication] cancelAllLocalNotifications];
 }
 
 AVAudioPlayer *audioPlayer;
@@ -102,7 +103,6 @@ int energyGained = 0;
     self.wakeUpButton.hidden = YES;
     self.headerLabel.hidden = NO;
     self.headerLabel.text = @"Snoozing for";
-//    self.timeRemainingLabel.text = @"05:00";
     self.timeRemainingLabel.hidden = YES;
     second = 0;
     NSTimer *isSnoozing = [NSTimer scheduledTimerWithTimeInterval:300
@@ -113,6 +113,7 @@ int energyGained = 0;
     
     [[NSRunLoop mainRunLoop] addTimer:isSnoozing forMode:NSRunLoopCommonModes];
     snoozeCount ++;
+    [[UIApplication sharedApplication] cancelAllLocalNotifications];
 }
 
 - (void)viewDidLoad
@@ -126,14 +127,13 @@ int energyGained = 0;
     NSArray *settings = [self.defaults objectForKey:@"alarmSettings"];
     if(settings)
     {
-        soundLocation = settings[1];
+        soundLocation = settings[0];
         self.audioPlayer = nil;
-        self.audioPlayer.volume = [settings[0] floatValue];
-        NSString *urlEnding = [NSString stringWithString:settings[1]];
+        NSString *urlEnding = [NSString stringWithString:settings[0]];
         NSURL *url = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@%@", [[NSBundle mainBundle] resourcePath],urlEnding]];
         NSError *error;
         self.audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
-        self.audioPlayer.volume = [settings[0] floatValue];
+        self.audioPlayer.volume = 1;
         self.audioPlayer.numberOfLoops = 5;
 
         

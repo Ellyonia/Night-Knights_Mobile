@@ -12,7 +12,6 @@
 
 @interface AlarmSettingsViewController () <UIPickerViewDataSource, UIPickerViewDelegate, AVAudioPlayerDelegate, AVAudioSessionDelegate>
 @property (strong, nonatomic) NSUserDefaults* defaults;
-@property (strong, nonatomic) IBOutlet UISlider *volumeSlider;
 @property (strong, nonatomic) IBOutlet UIPickerView *pickerView;
 
 
@@ -43,7 +42,7 @@ NSString *pickedAlarm;
     self.pickerView.dataSource = self;
     
     alarmTones = @[@"/alarmChimes.mp3",@"/birdsChirping.mp3",@"/danceRave.mp3",@"/videogame.mp3",@"/progressiveAnnoyance.mp3",@"/basicAlarm.mp3"];
-    alarmNames = @[@"Chimes", @"Chirping Birds", @"Techo", @"VideoGame Theme", @"Random Sounds", @"Standard Alarm"];
+    alarmNames = @[@"Chimes", @"Chirping Birds", @"Techno", @"VideoGame Theme", @"Random Sounds", @"Standard Alarm"];
     
     NSString *defaultsName;
     NSString *findToneName;
@@ -51,7 +50,6 @@ NSString *pickedAlarm;
     if(settings)
     {
         defaultsName  = settings[1];
-        self.volumeSlider.value = [settings[0] floatValue];
         for (int i = 0; i < alarmTones.count ; i++)
         {
             findToneName = alarmTones[i];
@@ -71,9 +69,8 @@ NSString *pickedAlarm;
 
 -(void) viewWillDisappear:(BOOL)animated
 {
-    NSNumber *volume = @(self.volumeSlider.value);
     
-    NSArray *loginInfo = [NSArray arrayWithObjects:volume, pickedAlarm, nil];
+    NSArray *loginInfo = [NSArray arrayWithObjects:pickedAlarm, nil];
     
     [self.defaults setObject:loginInfo forKey:@"alarmSettings"];
     [audioPlayer stop];
@@ -120,7 +117,7 @@ NSString *pickedAlarm;
     NSError *error;
 	audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
 	audioPlayer.numberOfLoops = 0;
-    audioPlayer.volume = self.volumeSlider.value;
+    audioPlayer.volume = 1;
     [audioPlayer setDelegate:self];
     [audioPlayer prepareToPlay];
     [audioPlayer play];
