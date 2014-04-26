@@ -14,12 +14,10 @@
 
 @interface AlarmRunningViewController () <NSURLSessionTaskDelegate , AVAudioSessionDelegate, AVAudioPlayerDelegate>
 @property (strong, nonatomic) IBOutlet UIButton *cancelAlarm;
-@property (strong, nonatomic) IBOutlet UILabel *finalAlarmLabel;
 @property (strong, nonatomic) IBOutlet UILabel *timeRemainingLabel;
 @property (strong, nonatomic) IBOutlet UIButton *wakeUpButton;
 @property (strong, nonatomic) IBOutlet UIButton *snooozeButton;
 @property (strong, nonatomic) IBOutlet UILabel *headerLabel;
-@property (nonatomic) NSTimer * minuteHourRemover;
 @property (nonatomic) NSTimer *alarm;
 @property (strong, nonatomic) NSNumber *value;
 @property (strong, nonatomic) NSUserDefaults *defaults;
@@ -87,7 +85,6 @@ NSString *soundLocation;
     [[UIApplication sharedApplication] cancelAllLocalNotifications];
 }
 
-AVAudioPlayer *audioPlayer;
 int snoozeCount = -1;
 int timeRemaining = 0;
 int iHour = 0;
@@ -99,11 +96,11 @@ int energyGained = 0;
 - (IBAction)snoozedPressed:(UIButton *)sender {
     [self.audioPlayer stop];
     self.snooozeButton.hidden = YES;
-    self.cancelAlarm.hidden = NO;
-    self.wakeUpButton.hidden = YES;
+    self.cancelAlarm.hidden = YES;
+    self.wakeUpButton.hidden = NO;
     self.headerLabel.hidden = NO;
     self.headerLabel.text = @"Snoozing for";
-    self.timeRemainingLabel.hidden = YES;
+    self.timeRemainingLabel.text = @"5 Minutes";
     second = 0;
     NSTimer *isSnoozing = [NSTimer scheduledTimerWithTimeInterval:300
                                                       target:self
@@ -114,6 +111,35 @@ int energyGained = 0;
     [[NSRunLoop mainRunLoop] addTimer:isSnoozing forMode:NSRunLoopCommonModes];
     snoozeCount ++;
     [[UIApplication sharedApplication] cancelAllLocalNotifications];
+    
+    UILocalNotification *localNotif = [[UILocalNotification alloc] init];
+    if (localNotif == nil)
+        return;
+    
+    NSDate *snoozeNotif = [NSDate dateWithTimeInterval:300 sinceDate:[NSDate date]];
+    localNotif.fireDate = snoozeNotif;
+    localNotif.timeZone = [NSTimeZone defaultTimeZone];
+    
+    localNotif.alertAction = @"View";
+    localNotif.alertBody = @"things";
+    localNotif.applicationIconBadgeNumber = 1;
+    localNotif.soundName = soundLocation;
+    
+    [[UIApplication sharedApplication] scheduleLocalNotification:localNotif];
+    
+    snoozeNotif = [NSDate dateWithTimeInterval:30 sinceDate:snoozeNotif];
+    UILocalNotification *localNotif2 = [[UILocalNotification alloc] init];
+    if (localNotif2 == nil)
+        return;
+    localNotif2.fireDate = snoozeNotif;
+    localNotif2.timeZone = [NSTimeZone defaultTimeZone];
+    
+    localNotif2.alertAction = @"View";
+    localNotif2.alertBody = @"things";
+    localNotif2.applicationIconBadgeNumber = 1;
+    localNotif2.soundName = soundLocation;
+    
+    [[UIApplication sharedApplication] scheduleLocalNotification:localNotif2];
 }
 
 - (void)viewDidLoad
@@ -213,48 +239,20 @@ int energyGained = 0;
     if (timeRemaining < 0)
         timeRemaining = timeRemaining + 60*60*24;
     
-//    iHour = (int)timeRemaining/(60*60);
-//    iMinute = timeRemaining%3600 / 60 + 1;
-//
-//    NSString *remainingTimeLabel;
-//    if(iHour < 10)
-//    {
-//        remainingTimeLabel = [NSString stringWithFormat:@"0%d:", iHour];
-//    }
-//    else
-//    {
-//        remainingTimeLabel = [NSString stringWithFormat:@"%d:",iHour];
-//    }
-//    if (iMinute < 10)
-//    {
-//        remainingTimeLabel = [remainingTimeLabel stringByAppendingString:[NSString stringWithFormat:@"0%d",iMinute]];
-//        
-//    }
-//    else
-//    {
-//        remainingTimeLabel = [remainingTimeLabel stringByAppendingString:[NSString stringWithFormat:@"%d",iMinute]];
-//    }
-//    self.timeRemainingLabel.text = remainingTimeLabel;
-//    
-//    self.alarm = [NSTimer scheduledTimerWithTimeInterval:timeRemaining
-//                                                          target:self
-//                                                        selector:@selector(alarmComplete)
-//                                                        userInfo:nil
-//                                                        repeats:NO];
-//    
-//    [[NSRunLoop mainRunLoop] addTimer:self.alarm forMode:NSRunLoopCommonModes];
-//
-//    sSeconds = [NSString stringWithFormat:@"%@",convertedNow];
-//    sSeconds = [self getSubstring:sSeconds betweenString:@" "];
-//    sSeconds = [sSeconds substringFromIndex:6];
-//    second = (int)[sSeconds integerValue] + 1;
-//    self.minuteHourRemover = [NSTimer scheduledTimerWithTimeInterval:1 target:self
-//                                                            selector:@selector(removeMinuteOrHour)
-//                                                            userInfo:nil
-//                                                            repeats:YES];
-//                              
-//    
-//    [[NSRunLoop mainRunLoop] addTimer:self.minuteHourRemover forMode:NSRunLoopCommonModes];
+    
+    
+    
+    self.alarm = [NSTimer scheduledTimerWithTimeInterval:timeRemaining
+                   target:self
+                   selector:@selector(alarmComplete)
+                   userInfo:nil
+                   repeats:NO];
+    
+    [[NSRunLoop mainRunLoop] addTimer:self.alarm forMode:NSRunLoopCommonModes];
+    
+    
+    
+    
     
     UILocalNotification *localNotif = [[UILocalNotification alloc] init];
     if (localNotif == nil)
@@ -284,59 +282,17 @@ int energyGained = 0;
     
     [[UIApplication sharedApplication] scheduleLocalNotification:localNotif2];
 }
-//
-//-(void) removeMinuteOrHour
-//{
-//    if (second == 60)
-//    {
-//        if (iMinute != 0)
-//        {
-//            iMinute --;
-//        }
-//        else
-//        {
-//            iMinute = 59;
-//            iHour --;
-//        }
-//        second = 1;
-//    }
-//    else
-//    {
-//        second ++;
-//    }
-//    NSString *remainingTimeLabel;
-//    if(iHour < 10)
-//    {
-//        remainingTimeLabel = [NSString stringWithFormat:@"0%d:", iHour];
-//    }
-//    else
-//    {
-//        remainingTimeLabel = [NSString stringWithFormat:@"%d:",iHour];
-//    }
-//    if (iMinute < 10)
-//    {
-//        remainingTimeLabel = [remainingTimeLabel stringByAppendingString:[NSString stringWithFormat:@"0%d",iMinute]];
-//
-//    }
-//    else
-//    {
-//        remainingTimeLabel = [remainingTimeLabel stringByAppendingString:[NSString stringWithFormat:@"%d",iMinute]];
-//    }
-//    self.timeRemainingLabel.text = remainingTimeLabel;
-//}
 
 - (void) alarmComplete
 {
-    [self.minuteHourRemover invalidate];
     dispatch_async(dispatch_get_main_queue(), ^{
         self.snooozeButton.hidden = NO;
         self.wakeUpButton.hidden = NO;
         self.timeRemainingLabel.text = @"Wake-Up!";
-        self.finalAlarmLabel.hidden = YES;
         self.headerLabel.hidden = YES;
         self.cancelAlarm.hidden = YES;
-        [audioPlayer setDelegate:self];
-        [audioPlayer prepareToPlay];
+        [self.audioPlayer setDelegate:self];
+        [self.audioPlayer prepareToPlay];
         [self.audioPlayer play];
         
     });
@@ -359,7 +315,6 @@ int energyGained = 0;
     //Cancel the current alarms running.
     if([segue.identifier isEqualToString:@"cancel"])
     {
-        [self.minuteHourRemover invalidate];
         [self.alarm invalidate];
         [self.audioPlayer stop];
         [[UIApplication sharedApplication] cancelAllLocalNotifications];
