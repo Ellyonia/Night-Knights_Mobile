@@ -20,12 +20,16 @@
 @property (strong, nonatomic) NSUserDefaults* defaults;
 @property (strong,nonatomic) NSURLSession *session;
 @property (strong, nonatomic) IBOutlet UILabel *warningLabel;
+@property (strong, nonatomic) IBOutlet UIView *createAccountButton;
 
 
 @end
 
 @implementation CreateAccountViewController
 
+NSString *invalidEmailMessage = @"Username or email already exists";
+bool passwordsMatch = NO;
+bool emailIsValid = NO;
 
 -(NSUserDefaults *) defaults{
     if(!_defaults){
@@ -77,14 +81,17 @@
     if (textField == self.emailTextField) {
         [textField resignFirstResponder];
         [self.passwordTextField becomeFirstResponder];
+        [self validateEmail:self.emailTextField.text];
     }
     else if (textField == self.passwordTextField) {
         [textField resignFirstResponder];
         [self.passwordCheckTextField becomeFirstResponder];
+        [self validatePassword:self.passwordTextField.text];
     }
     else if (textField == self.passwordCheckTextField){
         [textField resignFirstResponder];
         [self.knightNameTextField becomeFirstResponder];
+        [self checkPasswords:self.passwordTextField.text retypedPassword:self.passwordCheckTextField.text];
     }
     else if (textField == self.knightNameTextField) {
         [textField resignFirstResponder];
@@ -92,25 +99,18 @@
     return YES;
 }
 
-// Hide the error message when the User begins typing
-- (void) textFieldDidBeginEditing:(UITextField *)textField{
-    self.warningLabel.hidden = YES;
-}
+//// Hide the error message when the User begins typing
+//- (void) textFieldDidBeginEditing:(UITextField *)textField{
+//    self.warningLabel.hidden = YES;
+//}
 
 - (IBAction)createAccountButton:(UIButton *)sender {
-    // an example for sending some data as JSON in the HTTP body
-    // setup the url
-    NSString *originalPass = self.passwordTextField.text;
-    NSString *retypedPass = self.passwordCheckTextField.text;
-    NSString *email = self.emailTextField.text;
-    
-    if ([self validateEmail:email])
+    if (emailIsValid)
     {
-        if ([originalPass isEqualToString:retypedPass])
+        if (passwordsMatch)
         {
             NSString *baseURL = [NSString stringWithFormat:@"%s/api/users",SERVER_URL];
             NSURL *postUrl = [NSURL URLWithString:baseURL];
-            
             NSError *error = nil;
             NSDictionary *jsonUpload = @{@"email":self.emailTextField.text,@"password":self.passwordTextField.text,@"username":self.knightNameTextField.text};
             NSData *requestBody=[NSJSONSerialization dataWithJSONObject:jsonUpload options:NSJSONWritingPrettyPrinted error:&error];
@@ -124,27 +124,43 @@
                                                                  //NSLog(@"11%@",response);
                                                                  NSDictionary *jsonDictionary = [NSJSONSerialization JSONObjectWithData:data options: NSJSONReadingMutableContainers error: &error];
                                                                  NSLog(@"%@",jsonDictionary);
-                                                                 if ([jsonDictionary[@"success"] isEqual:@1]){
-                                                                     NSLog(@"hi");
-                                                                 dispatch_sync(dispatch_get_main_queue(), ^{
-                                                                     NSLog(@"hi");
-                                                                     [self performSegueWithIdentifier:@"createAccount" sender:self];                                                         });
+                                                                 
+                                                                 
+                                                                 if ([jsonDictionary[@"success"] isEqual:@1])
+                                                                 {
+                                                                     dispatch_sync(dispatch_get_main_queue(), ^{
+                                                                         [self performSegueWithIdentifier:@"createAccount" sender:self];                                                         });
+                                                                 }
+                                                                 else
+                                                                 {
+                                                                     if (response == nil)
+                                                                     {
+                                                                         dispatch_sync(dispatch_get_main_queue(), ^{
+                                                                             [self.warningLabel setHidden:NO];
+                                                                             [self.warningLabel setText:@"Please connect to the Internet"];
+                                                                         });
+                                                                     }
+                                                                     if ([jsonDictionary[@"message"] isEqualToString: invalidEmailMessage])
+                                                                     {
+                                                                         dispatch_sync(dispatch_get_main_queue(), ^{
+                                                                         [self.warningLabel setHidden:NO];
+                                                                         [self.warningLabel setText:@"Email or Knight name is already in use"];
+                                                                         });
+                                                                     }
                                                                  }
                                                              }];
             [postTask resume];
         }
-        else // If Passwords are mismatched clear the Password UITextFields
+        else
         {
-            self.warningLabel.hidden = NO;
-            self.passwordCheckTextField.text = @"";
-            self.passwordTextField.text = @"";
+            [self.warningLabel setText:@"Please check your Password"];
+            [self.warningLabel setHidden:NO];
         }
     }
-    else // If Email regex failed.
+    else
     {
-        self.warningLabel.hidden = NO;
-        self.emailTextField.backgroundColor = [UIColor redColor];
-        self.warningLabel.text = @"Invalide Email";
+        [self.warningLabel setText:@"Please check your Email"];
+        [self.warningLabel setHidden:NO];
     }
 }
 
@@ -163,7 +179,8 @@
 }
 
 // Email regex.
-- (BOOL) validateEmail: (NSString *) candidate {
+- (void) validateEmail: (NSString *) candidate
+{
     NSString *emailRegex =
     @"(?:[a-z0-9!#$%\\&'*+/=?\\^_`{|}~-]+(?:\\.[a-z0-9!#$%\\&'*+/=?\\^_`{|}"
     @"~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\"
@@ -174,6 +191,57 @@
     @"-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])";
     NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES[c] %@", emailRegex];
     
-    return [emailTest evaluateWithObject:candidate];
+    if ([emailTest evaluateWithObject:candidate])
+    {
+        emailIsValid = YES;
+        [self.emailTextField setBackgroundColor: [UIColor whiteColor]];
+        [self.warningLabel setHidden:YES];
+    }
+    else
+    {
+        self.warningLabel.hidden = NO;
+        self.emailTextField.backgroundColor = [UIColor redColor];
+        self.warningLabel.text = @"Invalide Email";
+    }
 }
+
+
+- (void) checkPasswords: (NSString *)firstPassword retypedPassword:(NSString *)secondPassword
+{
+    if ([firstPassword isEqualToString:secondPassword] && ![firstPassword isEqualToString:@""])
+    {
+        passwordsMatch = YES;
+        [self.warningLabel setHidden:YES];
+    }
+    else
+    {
+        [self.warningLabel setText:@"Password fields must match"];
+        self.warningLabel.hidden = NO;
+        self.passwordCheckTextField.text = @"";
+        self.passwordTextField.text = @"";
+    }
+}
+
+- (void) validatePassword: (NSString *) candidate
+{
+    NSString *passwordRegex = @"^(?=.{8,}$)(?=.*[a-zA-Z0-9]).*$";
+    NSPredicate *passwordTest = [NSPredicate predicateWithFormat:@"SELF MATCHES[c] %@", passwordRegex];
+    
+    if ([passwordTest evaluateWithObject:candidate])
+    {
+        [self.warningLabel setHidden:YES];
+        [self.passwordTextField setBackgroundColor:[UIColor whiteColor]];
+    }
+    else
+    {
+        self.warningLabel.hidden = NO;
+        self.passwordTextField.backgroundColor = [UIColor redColor];
+        self.warningLabel.text = @"Password needs to be atleast 8 characters";
+    }
+}
+
+
+
+
+
 @end

@@ -117,7 +117,6 @@
                                                          
                                                          NSDictionary *jsonDictionary = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error: &error];
                                                          
-                                                         NSLog(@"%@",jsonDictionary);
                                                          
                                                          if ([jsonDictionary[@"success"] isEqual:@1])
                                                          {
