@@ -8,6 +8,7 @@
 
 #import "CreateAccountViewController.h"
 #import "SetAlarmViewController.h"
+#import <QuartzCore/QuartzCore.h>
 
 #define SERVER_URL "http://54.84.248.48"
 
@@ -20,7 +21,13 @@
 @property (strong, nonatomic) NSUserDefaults* defaults;
 @property (strong,nonatomic) NSURLSession *session;
 @property (strong, nonatomic) IBOutlet UILabel *warningLabel;
-@property (strong, nonatomic) IBOutlet UIView *createAccountButton;
+@property (strong, nonatomic) IBOutlet UILabel *viewTitleLabel;
+@property (strong, nonatomic) IBOutlet UILabel *emailLabel;
+@property (strong, nonatomic) IBOutlet UILabel *passwordLabel;
+@property (strong, nonatomic) IBOutlet UILabel *repassLabel;
+@property (strong, nonatomic) IBOutlet UILabel *userName;
+@property (strong, nonatomic) IBOutlet UIButton *cancelButton;
+@property (strong, nonatomic) IBOutlet UIButton *createAccountButton;
 
 
 @end
@@ -58,6 +65,24 @@ bool emailIsValid = NO;
     [NSURLSession sessionWithConfiguration:sessionConfig
                                   delegate:self
                              delegateQueue:nil];
+    
+    
+    UIColor* backgroundColor = [self createColorWithHexValue:@"#240672"];
+    UIColor* buttonColor = [self createColorWithHexValue:@"#7908aa"];
+
+    [self.createAccountButton.layer setCornerRadius:5];
+    [self.cancelButton.layer setCornerRadius:5];
+    [self.cancelButton setBackgroundColor: buttonColor];
+    [self.createAccountButton setBackgroundColor: buttonColor];
+    [self.cancelButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [self.createAccountButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [self.emailLabel setTextColor:[UIColor whiteColor]];
+    [self.viewTitleLabel setTextColor:[UIColor whiteColor]];
+    [self.passwordLabel setTextColor:[UIColor whiteColor]];
+    [self.repassLabel setTextColor:[UIColor whiteColor]];
+    [self.userName setTextColor:[UIColor whiteColor]];
+    [self.view setBackgroundColor:backgroundColor];
+    
 }
 
 
@@ -240,6 +265,13 @@ bool emailIsValid = NO;
 
 }
 
-
+-(UIColor *) createColorWithHexValue: (NSString *)hexValue
+{
+    unsigned rgbValue = 0;
+    NSScanner *scanner = [NSScanner scannerWithString:hexValue];
+    [scanner setScanLocation:1]; // bypass '#' character
+    [scanner scanHexInt:&rgbValue];
+    return [UIColor colorWithRed:((rgbValue & 0xFF0000) >> 16)/255.0 green:((rgbValue & 0xFF00) >> 8)/255.0 blue:(rgbValue & 0xFF)/255.0 alpha:1.0];
+}
 
 @end

@@ -306,7 +306,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="cancelHit:" destination="O6T-c8-CWt" eventType="touchUpInside" id="Phl-eo-vrB"/>
                                     <segue destination="0i6-xJ-jCp" kind="unwind" identifier="cancelAlarm" unwindAction="unwindToSetAlarm:" id="znc-7C-TQY"/>
                                 </connections>
                             </button>
@@ -415,7 +414,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                     <action selector="createAccountButton:" destination="b1R-rb-4YS" eventType="touchUpInside" id="f4S-yK-72u"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Knight Name:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J7O-Ja-f1N">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="User Name:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J7O-Ja-f1N">
                                 <rect key="frame" x="4" y="277" width="89" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
@@ -533,11 +532,17 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <barButtonItem key="backBarButtonItem" title="Cancel" id="D3I-RT-lpo"/>
                     </navigationItem>
                     <connections>
-                        <outlet property="createAccountButton" destination="d89-tp-0Fk" id="AcY-Kg-qlR"/>
+                        <outlet property="cancelButton" destination="FDe-KC-0ZK" id="AGg-ka-YcQ"/>
+                        <outlet property="createAccountButton" destination="4cK-sO-kxa" id="zrh-Ke-IFP"/>
+                        <outlet property="emailLabel" destination="6q7-bH-K1H" id="DcQ-ra-fkN"/>
                         <outlet property="emailTextField" destination="NhR-l8-hJa" id="e8J-6f-eIp"/>
                         <outlet property="knightNameTextField" destination="ktb-CJ-RDP" id="2sU-Xl-vMB"/>
                         <outlet property="passwordCheckTextField" destination="Rja-Of-YAc" id="aZW-5b-8dH"/>
+                        <outlet property="passwordLabel" destination="IXr-2r-QXj" id="hnm-eK-1Gm"/>
                         <outlet property="passwordTextField" destination="lHa-A0-zXI" id="09r-7W-LCc"/>
+                        <outlet property="repassLabel" destination="Upt-tD-wga" id="O9o-HY-hTE"/>
+                        <outlet property="userName" destination="J7O-Ja-f1N" id="eRs-UA-3Qy"/>
+                        <outlet property="viewTitleLabel" destination="2wd-H3-cU1" id="Nvf-v3-TaV"/>
                         <outlet property="warningLabel" destination="uu7-N0-70U" id="juy-qf-9hi"/>
                         <segue destination="qSt-2j-xi9" kind="push" identifier="createAccount" id="5Py-V9-Xuz"/>
                     </connections>
@@ -554,6 +559,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="Dap-aa-GLw"/>
+        <segue reference="BYG-zV-Yof"/>
     </inferredMetricsTieBreakers>
 </document>

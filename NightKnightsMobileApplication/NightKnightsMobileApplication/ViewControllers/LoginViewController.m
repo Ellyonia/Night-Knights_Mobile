@@ -39,22 +39,19 @@
 
 - (void)viewDidLoad
 {
-    UIColor *color = [UIColor colorWithRed:19.0/255 green:58.0/255 blue:172.0/255 alpha:1.0];
-    UIColor * textColour = [UIColor colorWithRed:109/255.0 green:135/255.0 blue:214/255.0 alpha:1.0];
-    UIColor* color2 = [self createColorWithHexValue:@"#ffffff"];
-    UIColor* color3 = [self createColorWithHexValue:@"#7908aa"];
-    UIColor* color4 = [self createColorWithHexValue:@"#240672"];
-    self.titleLabel.textColor = color2;
-    self.emailLabel.textColor = color2;
-    self.passwordLabel.textColor = color2;
-    self.loginButton.backgroundColor=color3;
-    self.createAccountButton.backgroundColor=color3;
+    UIColor* buttonColor = [self createColorWithHexValue:@"#7908aa"];
+    UIColor* backgroundColor = [self createColorWithHexValue:@"#240672"];
+    self.titleLabel.textColor = [UIColor whiteColor];
+    self.emailLabel.textColor = [UIColor whiteColor];
+    self.passwordLabel.textColor = [UIColor whiteColor];
+    self.loginButton.backgroundColor=buttonColor;
+    self.createAccountButton.backgroundColor=buttonColor;
     self.loginButton.layer.cornerRadius = 5;
     self.createAccountButton.layer.cornerRadius = 5;
-    [self.loginButton setTitleColor:color2 forState:UIControlStateNormal];
-    [self.createAccountButton setTitleColor:color2 forState:UIControlStateNormal];
+    [self.loginButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [self.createAccountButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [super viewDidLoad];
-    [self.view setBackgroundColor:color4];
+    [self.view setBackgroundColor:backgroundColor];
 
     NSURLSessionConfiguration *sessionConfig =
     [NSURLSessionConfiguration defaultSessionConfiguration];

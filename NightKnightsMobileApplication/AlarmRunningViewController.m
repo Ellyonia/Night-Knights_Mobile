@@ -32,12 +32,6 @@
 
 NSString *soundLocation;
 
-- (IBAction)cancelHit:(UIButton *)sender {
-    [self.audioPlayer stop];
-    [[UIApplication sharedApplication] cancelAllLocalNotifications];
-}
-
-
 -(AVAudioPlayer *)audioPlayer{
     if (!_audioPlayer)
     {
@@ -176,6 +170,11 @@ int energyGained = 0;
     [NSURLSession sessionWithConfiguration:sessionConfig
                                   delegate:self
                              delegateQueue:nil];
+    
+    UIColor* backgroundColor = [self createColorWithHexValue:@"#240672"];
+    UIColor* buttonColor = [self createColorWithHexValue:@"#7908aa"];
+
+    [self.view setBackgroundColor:backgroundColor];
     
 }
 
@@ -348,7 +347,7 @@ int energyGained = 0;
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     //Cancel the current alarms running.
-    if([segue.identifier isEqualToString:@"cancel"])
+    if([segue.identifier isEqualToString:@"cancelAlarm"])
     {
         [self.alarm invalidate];
         [self.audioPlayer stop];
@@ -357,7 +356,14 @@ int energyGained = 0;
     }
 }
 
-
+-(UIColor *) createColorWithHexValue: (NSString *)hexValue
+{
+    unsigned rgbValue = 0;
+    NSScanner *scanner = [NSScanner scannerWithString:hexValue];
+    [scanner setScanLocation:1]; // bypass '#' character
+    [scanner scanHexInt:&rgbValue];
+    return [UIColor colorWithRed:((rgbValue & 0xFF0000) >> 16)/255.0 green:((rgbValue & 0xFF00) >> 8)/255.0 blue:(rgbValue & 0xFF)/255.0 alpha:1.0];
+}
 
 
 @end
