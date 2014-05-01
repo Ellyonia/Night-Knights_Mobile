@@ -8,6 +8,7 @@
 
 #import "LoginViewController.h"
 #import "SetAlarmViewController.h"
+#import <QuartzCore/QuartzCore.h>
 
 #define SERVER_URL "http://54.84.248.48"
 
@@ -17,12 +18,16 @@
 @property (strong, nonatomic) NSUserDefaults* defaults;
 @property (strong,nonatomic) NSURLSession *session;
 @property (strong, nonatomic) IBOutlet UILabel *warningLabel;
+@property (strong, nonatomic) IBOutlet UILabel *titleLabel;
+@property (strong, nonatomic) IBOutlet UILabel *emailLabel;
+@property (strong, nonatomic) IBOutlet UILabel *passwordLabel;
+@property (strong, nonatomic) IBOutlet UIButton *loginButton;
+@property (strong, nonatomic) IBOutlet UIButton *createAccountButton;
 
 
 @end
 
 @implementation LoginViewController
-
 
 -(NSUserDefaults *) defaults{
     if(!_defaults){
@@ -34,7 +39,22 @@
 
 - (void)viewDidLoad
 {
+    UIColor *color = [UIColor colorWithRed:19.0/255 green:58.0/255 blue:172.0/255 alpha:1.0];
+    UIColor * textColour = [UIColor colorWithRed:109/255.0 green:135/255.0 blue:214/255.0 alpha:1.0];
+    UIColor* color2 = [self createColorWithHexValue:@"#ffffff"];
+    UIColor* color3 = [self createColorWithHexValue:@"#7908aa"];
+    UIColor* color4 = [self createColorWithHexValue:@"#240672"];
+    self.titleLabel.textColor = color2;
+    self.emailLabel.textColor = color2;
+    self.passwordLabel.textColor = color2;
+    self.loginButton.backgroundColor=color3;
+    self.createAccountButton.backgroundColor=color3;
+    self.loginButton.layer.cornerRadius = 5;
+    self.createAccountButton.layer.cornerRadius = 5;
+    [self.loginButton setTitleColor:color2 forState:UIControlStateNormal];
+    [self.createAccountButton setTitleColor:color2 forState:UIControlStateNormal];
     [super viewDidLoad];
+    [self.view setBackgroundColor:color4];
 
     NSURLSessionConfiguration *sessionConfig =
     [NSURLSessionConfiguration defaultSessionConfiguration];
@@ -165,6 +185,12 @@
 {
 }
 
-
-
+-(UIColor *) createColorWithHexValue: (NSString *)hexValue
+{
+    unsigned rgbValue = 0;
+    NSScanner *scanner = [NSScanner scannerWithString:hexValue];
+    [scanner setScanLocation:1]; // bypass '#' character
+    [scanner scanHexInt:&rgbValue];
+    return [UIColor colorWithRed:((rgbValue & 0xFF0000) >> 16)/255.0 green:((rgbValue & 0xFF00) >> 8)/255.0 blue:(rgbValue & 0xFF)/255.0 alpha:1.0];
+}
 @end

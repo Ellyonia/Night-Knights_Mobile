@@ -42,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "NightKnightsMobileApplication/ViewControllers/LoginViewController.m"
-            timestampString = "420235746.552631"
+            timestampString = "420668641.160723"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "142"
-            endingLineNumber = "142"
+            startingLineNumber = "162"
+            endingLineNumber = "162"
             landmarkName = "-loginButtonPushed:"
             landmarkType = "5">
          </BreakpointContent>
