@@ -23,6 +23,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *passwordLabel;
 @property (strong, nonatomic) IBOutlet UIButton *loginButton;
 @property (strong, nonatomic) IBOutlet UIButton *createAccountButton;
+@property (strong, nonatomic) IBOutlet UIButton *guestLogin;
 
 
 @end
@@ -52,6 +53,9 @@
     [self.createAccountButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [super viewDidLoad];
     [self.view setBackgroundColor:backgroundColor];
+    [self.guestLogin setBackgroundColor:buttonColor];
+    [self.guestLogin setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [self.guestLogin.layer setCornerRadius:5];
 
     NSURLSessionConfiguration *sessionConfig =
     [NSURLSessionConfiguration defaultSessionConfiguration];

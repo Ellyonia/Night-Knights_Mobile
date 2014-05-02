@@ -13,6 +13,8 @@
 @interface AlarmSettingsViewController () <UIPickerViewDataSource, UIPickerViewDelegate, AVAudioPlayerDelegate, AVAudioSessionDelegate>
 @property (strong, nonatomic) NSUserDefaults* defaults;
 @property (strong, nonatomic) IBOutlet UIPickerView *pickerView;
+@property (strong, nonatomic) IBOutlet UIButton *returnToSetAlarm;
+@property (strong, nonatomic) IBOutlet UILabel *viewTitleLabel;
 
 
 @end
@@ -40,6 +42,11 @@ NSString *pickedAlarm = @"/alarmChimes.mp3";
     [super viewDidLoad];
     UIColor* backgroundColor = [self createColorWithHexValue:@"#240672"];
     UIColor* buttonColor = [self createColorWithHexValue:@"#7908aa"];
+    
+    [self.returnToSetAlarm setBackgroundColor:buttonColor];
+    [self.returnToSetAlarm.layer setCornerRadius:5];
+    [self.returnToSetAlarm setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [self.viewTitleLabel setTextColor:[UIColor whiteColor]];
 
     [self.view setBackgroundColor:backgroundColor];
     
@@ -82,13 +89,6 @@ NSString *pickedAlarm = @"/alarmChimes.mp3";
 }
 
 
-
-- (IBAction)changeVolume:(UISlider *)sender {
-    audioPlayer.volume = sender.value;
-    
-}
-
-
 // returns the number of 'columns' to display.
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
 {
@@ -102,13 +102,14 @@ NSString *pickedAlarm = @"/alarmChimes.mp3";
     return 6;
     
 }
-
--(NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row   forComponent:(NSInteger)component
-
-{
-    return [alarmNames objectAtIndex: row];
-    
-}
+    - (NSAttributedString *)pickerView:(UIPickerView *)pickerView attributedTitleForRow:(NSInteger)row forComponent:(NSInteger)component
+    {
+        NSString *title = [alarmNames objectAtIndex:row];
+        NSAttributedString *attString = [[NSAttributedString alloc] initWithString:title attributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
+        
+        return attString;
+        
+    }
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row   inComponent:(NSInteger)component{
     pickedAlarm = [alarmTones objectAtIndex:row];

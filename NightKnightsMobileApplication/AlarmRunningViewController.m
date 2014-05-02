@@ -173,6 +173,19 @@ int energyGained = 0;
     
     UIColor* backgroundColor = [self createColorWithHexValue:@"#240672"];
     UIColor* buttonColor = [self createColorWithHexValue:@"#7908aa"];
+    
+    [self.cancelAlarm setBackgroundColor:buttonColor];
+    [self.cancelAlarm setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [self.wakeUpButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [self.snooozeButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [self.snooozeButton setBackgroundColor:buttonColor];
+    [self.wakeUpButton setBackgroundColor:buttonColor];
+    [self.headerLabel setTextColor:[UIColor whiteColor]];
+    [self.timeRemainingLabel setTextColor:[UIColor whiteColor]];
+    [self.cancelAlarm.layer setCornerRadius:5];
+    [self.snooozeButton.layer setCornerRadius:5];
+    [self.wakeUpButton.layer setCornerRadius:5];
+    
 
     [self.view setBackgroundColor:backgroundColor];
     
