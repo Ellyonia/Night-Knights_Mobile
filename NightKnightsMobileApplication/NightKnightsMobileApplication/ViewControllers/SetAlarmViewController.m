@@ -10,18 +10,24 @@
 #import "AlarmRunningViewController.h"
 #import <QuartzCore/QuartzCore.h>
 
-@interface SetAlarmViewController ()
-@property (strong, nonatomic) IBOutlet UIDatePicker *alarmPickerDisplay;
+@interface SetAlarmViewController () <UITextFieldDelegate>
 @property (strong, nonatomic) NSUserDefaults* defaults;
 @property (strong, nonatomic) IBOutlet UIButton *startButton;
 @property (strong, nonatomic) IBOutlet UIButton *goToSettingsButton;
 @property (strong, nonatomic) IBOutlet UIButton *logOutButton;
 @property (strong, nonatomic) IBOutlet UILabel *viewTitleLabel;
+@property (strong, nonatomic) IBOutlet UITextField *alarmDateTextField;
+@property (strong, nonatomic) IBOutlet UIButton *setAlarmButton;
 
 
 @end
 
 @implementation SetAlarmViewController
+
+NSDate * dateOfAlarm;
+- (IBAction)setAlarmPressed:(UIButton *)sender {
+    [self.alarmDateTextField becomeFirstResponder];
+}
 
 
 
@@ -38,6 +44,7 @@
 {
     [super viewDidLoad];
     
+    [self.alarmDateTextField setDelegate:self];
     UIColor* backgroundColor = [self createColorWithHexValue:@"#240672"];
     UIColor* buttonColor = [self createColorWithHexValue:@"#7908aa"];
 
@@ -49,12 +56,15 @@
     [self.goToSettingsButton setBackgroundColor:buttonColor];
     [self.startButton setBackgroundColor:buttonColor];
     [self.startButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [self.setAlarmButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     
+    [self.setAlarmButton setBackgroundColor:buttonColor];
+    
+    [self.setAlarmButton.layer setCornerRadius:5];
     [self.logOutButton.layer setCornerRadius:5];
     [self.goToSettingsButton.layer setCornerRadius:5];
     [self.startButton.layer setCornerRadius:5];
     
-    [self.alarmPickerDisplay setBackgroundColor:[UIColor whiteColor]];
     
 }
 
@@ -69,21 +79,6 @@
     //A User has previously Saved an Alarm Time.
     if(alarmDate){
         dateFromPrevious = alarmDate[0];
-        NSDate *midnight = [self dateAtBeginningOfDayForDate:[NSDate date]];
-        while ([dateFromPrevious compare:midnight] == NSOrderedAscending)
-        {
-            dateFromPrevious = [NSDate dateWithTimeInterval:24*60*60 sinceDate:dateFromPrevious];
-        }
-        self.alarmPickerDisplay.date = dateFromPrevious;
-        self.alarmPickerDisplay.datePickerMode = UIDatePickerModeTime;
-        self.alarmPickerDisplay.timeZone = [NSTimeZone timeZoneWithAbbreviation:@"CDT"];
-    }
-    else //Set the Date to the current Time.
-    {
-        NSDate *convertedDate = [NSDate dateWithTimeInterval:300 sinceDate:[NSDate date]];
-        self.alarmPickerDisplay.date = convertedDate;
-        self.alarmPickerDisplay.datePickerMode = UIDatePickerModeTime;
-        self.alarmPickerDisplay.timeZone = [NSTimeZone timeZoneWithAbbreviation:@"CDT"];
     }
 }
 
@@ -93,10 +88,10 @@
     {
         // Send the Alarm time info to the AlarmRunningViewController
         AlarmRunningViewController *transferViewController = segue.destinationViewController;
-        transferViewController.alarmDate = self.alarmPickerDisplay.date;
+        transferViewController.alarmDate = dateOfAlarm;
         
         // Save the Alarm to NSUserDefaults
-        NSDate *alarmInfo = self.alarmPickerDisplay.date;
+        NSDate *alarmInfo = dateOfAlarm;
         NSArray *alarmTime = [NSArray arrayWithObjects:alarmInfo, nil];
         [self.defaults setObject:alarmTime forKey:@"alarmInformation"];
         [self.defaults synchronize];
@@ -122,6 +117,67 @@
     // Convert back
     NSDate *beginningOfDay = [calendar dateFromComponents:dateComps];
     return beginningOfDay;
+}
+
+
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    
+    
+    
+    // Create a date picker for the date field.
+    UIDatePicker *datePicker = [[UIDatePicker alloc]init];
+    datePicker.datePickerMode = UIDatePickerModeDateAndTime;
+    datePicker.maximumDate = [NSDate dateWithTimeInterval:24*60*60 sinceDate:[NSDate date]];
+    datePicker.minimumDate = [NSDate date];
+    [datePicker setDate:[NSDate date]];
+    [datePicker addTarget:self action:@selector(updateDateField:) forControlEvents:UIControlEventValueChanged];
+    
+    // If the date field has focus, display a date picker instead of keyboard.
+    // Set the text to the date currently displayed by the picker.
+    if (textField)
+    {
+        self.alarmDateTextField.inputView = datePicker;
+    }
+}
+
+
+// Dismiss the keyboard When the User touches outside of a UITextField.
+-(void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
+    UITouch *touch = [touches anyObject];
+    if(touch.phase==UITouchPhaseBegan){
+        //find first response view
+        for (UIView *view in [self.view subviews]) {
+            if ([view isFirstResponder]) {
+                [view resignFirstResponder];
+                break;
+            }
+        }
+    }
+}
+
+
+
+// Called when the date picker changes.
+- (void)updateDateField:(id)sender
+{
+    UIDatePicker *picker = (UIDatePicker*)self.alarmDateTextField.inputView;
+    self.alarmDateTextField.text = [self formatDate:picker.date];
+    dateOfAlarm = picker.date;
+    NSLog(@"%@",dateOfAlarm);
+}
+
+
+// Formats the date chosen with the date picker.
+- (NSString *)formatDate:(NSDate *)date
+{
+    NSDateFormatter *format = [[NSDateFormatter alloc] init];
+    [format setDateStyle:NSDateFormatterLongStyle];
+    [format setDateFormat:@"MMM dd, hh:mm a"];
+    
+    NSString *formattedDate = [format stringFromDate:date];
+    return formattedDate;
 }
 
 
