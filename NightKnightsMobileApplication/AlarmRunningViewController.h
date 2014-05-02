@@ -12,6 +12,6 @@
 
 @property (nonatomic) NSDate *alarmDate;
 @property (strong,nonatomic) NSURLSession *session;
-
+@property (nonatomic) NSNumber *mEnergy;
 
 @end

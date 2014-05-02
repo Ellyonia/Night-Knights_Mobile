@@ -15,6 +15,7 @@
 		7E0906011907160C003D6677 /* videogame.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 7E0905FB1907160B003D6677 /* videogame.mp3 */; };
 		7E60981A18FDEA33007D490E /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E60981918FDEA33007D490E /* AVFoundation.framework */; };
 		7E83785A18DE2DA400B94636 /* AlarmRunningViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E83785918DE2DA400B94636 /* AlarmRunningViewController.m */; };
+		7EA857641913D9FC00F31153 /* MyLilTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EA857631913D9FC00F31153 /* MyLilTimer.m */; };
 		7EC9CDD418DBB4E400AB3BFA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EC9CDD318DBB4E400AB3BFA /* Foundation.framework */; };
 		7EC9CDD618DBB4E400AB3BFA /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EC9CDD518DBB4E400AB3BFA /* CoreGraphics.framework */; };
 		7EC9CDD818DBB4E400AB3BFA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EC9CDD718DBB4E400AB3BFA /* UIKit.framework */; };
@@ -54,6 +55,8 @@
 		7E60981918FDEA33007D490E /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		7E83785818DE2DA400B94636 /* AlarmRunningViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlarmRunningViewController.h; sourceTree = "<group>"; };
 		7E83785918DE2DA400B94636 /* AlarmRunningViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlarmRunningViewController.m; sourceTree = "<group>"; };
+		7EA857621913D9FC00F31153 /* MyLilTimer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyLilTimer.h; sourceTree = "<group>"; };
+		7EA857631913D9FC00F31153 /* MyLilTimer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyLilTimer.m; sourceTree = "<group>"; };
 		7EC9CDD018DBB4E400AB3BFA /* NightKnightsMobileApplication.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NightKnightsMobileApplication.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7EC9CDD318DBB4E400AB3BFA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		7EC9CDD518DBB4E400AB3BFA /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -106,6 +109,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7EA857611913D9E700F31153 /* myLilTimer */ = {
+			isa = PBXGroup;
+			children = (
+				7EA857621913D9FC00F31153 /* MyLilTimer.h */,
+				7EA857631913D9FC00F31153 /* MyLilTimer.m */,
+			);
+			name = myLilTimer;
+			sourceTree = "<group>";
+		};
 		7EC9CDC718DBB4E400AB3BFA = {
 			isa = PBXGroup;
 			children = (
@@ -140,6 +152,7 @@
 		7EC9CDD918DBB4E400AB3BFA /* NightKnightsMobileApplication */ = {
 			isa = PBXGroup;
 			children = (
+				7EA857611913D9E700F31153 /* myLilTimer */,
 				7EC9CDE218DBB4E400AB3BFA /* AppDelegate.h */,
 				7EC9CDE318DBB4E400AB3BFA /* AppDelegate.m */,
 				7EC9CDE518DBB4E400AB3BFA /* Main.storyboard */,
@@ -321,6 +334,7 @@
 				7EEB71D818F0718A00E75514 /* AlarmSettingsViewController.m in Sources */,
 				7E83785A18DE2DA400B94636 /* AlarmRunningViewController.m in Sources */,
 				7EC9CE0A18DBB6BA00AB3BFA /* LoginViewController.m in Sources */,
+				7EA857641913D9FC00F31153 /* MyLilTimer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

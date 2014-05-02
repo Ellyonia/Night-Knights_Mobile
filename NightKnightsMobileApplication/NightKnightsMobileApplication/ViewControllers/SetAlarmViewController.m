@@ -10,7 +10,7 @@
 #import "AlarmRunningViewController.h"
 #import <QuartzCore/QuartzCore.h>
 
-@interface SetAlarmViewController () <UITextFieldDelegate>
+@interface SetAlarmViewController () <UITextFieldDelegate  >
 @property (strong, nonatomic) NSUserDefaults* defaults;
 @property (strong, nonatomic) IBOutlet UIButton *startButton;
 @property (strong, nonatomic) IBOutlet UIButton *goToSettingsButton;
@@ -183,6 +183,11 @@
 
 - (IBAction)unwindToSetAlarm:(UIStoryboardSegue *)unwindSegue
 {
+}
+
+- (IBAction)unwindFromCancel:(UIStoryboardSegue *)unwindSegue
+{
+    
 }
 
 -(UIColor *) createColorWithHexValue: (NSString *)hexValue

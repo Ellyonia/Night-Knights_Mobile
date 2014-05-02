@@ -9,6 +9,7 @@
 #import "AlarmRunningViewController.h"
 #import <AudioToolbox/AudioToolbox.h>
 #import <AVFoundation/AVFoundation.h>
+#import "MyLilTimer.h"
 
 #define SERVER_URL "http://54.84.248.48"
 
@@ -25,6 +26,7 @@
 @property (nonatomic) NSString *toneLocal;
 @property (nonatomic) UILocalNotification* localNotif;
 @property (nonatomic) UILocalNotification* localNotif2;
+@property (nonatomic) MyLilTimer *alarmTimer;
 
 
 
@@ -57,7 +59,6 @@ NSString *soundLocation;
 {
     [self.audioPlayer stop];
     energyGained = (int)((double)timeRemaining)/100.0*(1.0-((double)snoozeCount*0.05));
-
     NSString *baseURL = [NSString stringWithFormat:@"%s/api/character/energy",SERVER_URL];
     NSURL *postUrl = [NSURL URLWithString:baseURL];
     
@@ -68,12 +69,19 @@ NSString *soundLocation;
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:postUrl];
     [request setHTTPMethod:@"PUT"];
     [request setHTTPBody:requestBody];
+    
+    NSString *alertMessage = [NSString stringWithFormat:@"You have gained %i Energy!",energyGained];
+    UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Congrats!"
+                                                      message:alertMessage
+                                                     delegate:nil
+                                            cancelButtonTitle:@"OK"
+                                            otherButtonTitles:nil];
+    
+    [message show];
 
     NSURLSessionDataTask *postTask = [self.session dataTaskWithRequest:request
                                                         completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-                                                            
-                                                        dispatch_sync(dispatch_get_main_queue(), ^{
-                                                            [self performSegueWithIdentifier:@"wakeUpButtonPushed" sender:self];                                                         });
+                                                         
                                                         }];
     
     [postTask resume];
@@ -86,6 +94,7 @@ NSString *soundLocation;
     alertEnergy.applicationIconBadgeNumber = 1;
     alertEnergy.soundName = UILocalNotificationDefaultSoundName;
     [[UIApplication sharedApplication] scheduleLocalNotification:alertEnergy];
+    self.mEnergy = @(energyGained);
 }
 
 int snoozeCount = -1;
@@ -105,13 +114,11 @@ int energyGained = 0;
     self.headerLabel.text = @"Snoozing for";
     self.timeRemainingLabel.text = @"5 Minutes";
     second = 0;
-    NSTimer *isSnoozing = [NSTimer scheduledTimerWithTimeInterval:300
+    self.alarmTimer = [MyLilTimer scheduledTimerWithBehavior:MyLilTimerBehaviorHourglass
+                                                timeInterval:300
                                                       target:self
                                                     selector:@selector(alarmComplete)
-                                                    userInfo:nil
-                                                     repeats:NO];
-    
-    [[NSRunLoop mainRunLoop] addTimer:isSnoozing forMode:NSRunLoopCommonModes];
+                                                    userInfo:nil];
     snoozeCount ++;
     [[UIApplication sharedApplication] cancelAllLocalNotifications];
     
@@ -297,24 +304,29 @@ int energyGained = 0;
     
     
     
+    self.alarmTimer = [MyLilTimer scheduledTimerWithBehavior:MyLilTimerBehaviorHourglass
+                                                timeInterval:timeRemaining
+                                                      target:self
+                                                    selector:@selector(alarmComplete)
+                                                    userInfo:nil];
     
-    self.alarm = [NSTimer scheduledTimerWithTimeInterval:timeRemaining
-                   target:self
-                   selector:@selector(alarmComplete)
-                   userInfo:nil
-                   repeats:NO];
-    
-    [[NSRunLoop mainRunLoop] addTimer:self.alarm forMode:NSRunLoopCommonModes];
-    
-    
-    
+//    NSLog(@"Timer: %@",[NSDate dateWithTimeInterval:timeRemaining sinceDate:[NSDate date]]);
+//    self.alarm = [NSTimer scheduledTimerWithTimeInterval:timeRemaining
+//                   target:self
+//                   selector:@selector(alarmComplete)
+//                   userInfo:nil
+//                   repeats:NO];
+//    
+//    [[NSRunLoop mainRunLoop] addTimer:self.alarm forMode:NSRunLoopCommonModes];
     
     
+    
+    
+    NSLog(@"First Local Notif: %@",convertedAlarmDate);
     self.localNotif = [[UILocalNotification alloc] init];
     if (self.localNotif == nil)
         return;
     self.localNotif.fireDate = convertedAlarmDate;
-    NSLog(@"%@",convertedAlarmDate);
     self.localNotif.timeZone = [NSTimeZone defaultTimeZone];
 
     self.localNotif.alertAction = @"View";
@@ -388,6 +400,5 @@ int energyGained = 0;
     [scanner scanHexInt:&rgbValue];
     return [UIColor colorWithRed:((rgbValue & 0xFF0000) >> 16)/255.0 green:((rgbValue & 0xFF00) >> 8)/255.0 blue:(rgbValue & 0xFF)/255.0 alpha:1.0];
 }
-
 
 @end

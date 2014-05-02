@@ -267,6 +267,7 @@
                                 </state>
                                 <connections>
                                     <action selector="wakeUpButtonPushed:" destination="O6T-c8-CWt" eventType="touchUpInside" id="tpT-gu-fD0"/>
+                                    <segue destination="0i6-xJ-jCp" kind="unwind" unwindAction="unwindToSetAlarm:" id="vvs-fG-oOv"/>
                                 </connections>
                             </button>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mkT-9l-Nzp">
@@ -286,7 +287,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="0i6-xJ-jCp" kind="unwind" identifier="cancelAlarm" unwindAction="unwindToSetAlarm:" id="znc-7C-TQY"/>
+                                    <segue destination="0i6-xJ-jCp" kind="unwind" unwindAction="unwindFromCancel:" id="aw6-eu-prJ"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -299,7 +300,6 @@
                         <outlet property="snooozeButton" destination="mkT-9l-Nzp" id="SBd-cQ-qoE"/>
                         <outlet property="timeRemainingLabel" destination="G6m-Ca-cpK" id="JmT-U2-6Kj"/>
                         <outlet property="wakeUpButton" destination="WYK-dl-NAB" id="ZTK-rU-NV0"/>
-                        <segue destination="qSt-2j-xi9" kind="push" identifier="wakeUpButtonPushed" id="BYG-zV-Yof"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bxH-pK-BSg" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -560,6 +560,6 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="jyW-x2-vmY"/>
+        <segue reference="tVm-OK-P3Q"/>
     </inferredMetricsTieBreakers>
 </document>
