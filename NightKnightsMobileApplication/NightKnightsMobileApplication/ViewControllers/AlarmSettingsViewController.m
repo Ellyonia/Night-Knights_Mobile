@@ -15,6 +15,7 @@
 @property (strong, nonatomic) IBOutlet UIPickerView *pickerView;
 @property (strong, nonatomic) IBOutlet UIButton *returnToSetAlarm;
 @property (strong, nonatomic) IBOutlet UILabel *viewTitleLabel;
+@property (strong, nonatomic) IBOutlet UIButton *stopSound;
 
 
 @end
@@ -36,6 +37,9 @@ NSString *pickedAlarm = @"/alarmChimes.mp3";
     
 }
 
+- (IBAction)stopSoundPressed:(UIButton *)sender {
+    [audioPlayer stop];
+}
 
 - (void)viewDidLoad
 {
@@ -47,6 +51,9 @@ NSString *pickedAlarm = @"/alarmChimes.mp3";
     [self.returnToSetAlarm.layer setCornerRadius:5];
     [self.returnToSetAlarm setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [self.viewTitleLabel setTextColor:[UIColor whiteColor]];
+    [self.stopSound setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [self.stopSound setBackgroundColor:buttonColor];
+    [self.stopSound.layer setCornerRadius:5];
 
     [self.view setBackgroundColor:backgroundColor];
     

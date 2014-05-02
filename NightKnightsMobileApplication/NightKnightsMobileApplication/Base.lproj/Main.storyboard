@@ -166,18 +166,15 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Set Desired Wake-up Time" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="160" translatesAutoresizingMaskIntoConstraints="NO" id="LKq-9r-6ya">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Set Desired Wake-up Time" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="160" translatesAutoresizingMaskIntoConstraints="NO" id="LKq-9r-6ya">
                                 <rect key="frame" x="80" y="0.0" width="160" height="98"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4oZ-DK-fnk">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4oZ-DK-fnk">
                                 <rect key="frame" x="71" y="333" width="178" height="46"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="46" id="EX4-wI-ohJ"/>
-                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="35"/>
                                 <state key="normal" title="Start Alarm">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -186,12 +183,9 @@
                                     <segue destination="O6T-c8-CWt" kind="push" identifier="startAlarm" id="53y-Zr-AqM"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nCC-q7-iRI">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nCC-q7-iRI">
                                 <rect key="frame" x="0.0" y="20" width="73" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="73" id="keg-n0-PaJ"/>
-                                </constraints>
                                 <state key="normal" title="Log Out">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -199,7 +193,7 @@
                                     <segue destination="pwS-T3-ZZw" kind="unwind" identifier="logOut" unwindAction="unwindToLogin:" id="wBd-YL-mKy"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5mh-dx-Pcl">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5mh-dx-Pcl">
                                 <rect key="frame" x="248" y="20" width="66" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Settings">
@@ -209,60 +203,28 @@
                                     <segue destination="BGI-xd-8s1" kind="push" id="ZXQ-yO-Rqd"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rEK-mc-VLP">
-                                <rect key="frame" x="96" y="227" width="127" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="PBB-sA-TeB"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
-                                <state key="normal" title="Set Alarm">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="setAlarmPressed:" destination="qSt-2j-xi9" eventType="touchUpInside" id="IcJ-No-Qxn"/>
-                                </connections>
-                            </button>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="OMU-5Q-hRg">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="OMU-5Q-hRg">
                                 <rect key="frame" x="64" y="178" width="192" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="83x-eW-UIM"/>
-                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Set your Desired Alarm time:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qcb-Tu-SeA">
+                                <rect key="frame" x="20" y="143" width="280" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="wQY-NW-jxD" firstAttribute="top" secondItem="4oZ-DK-fnk" secondAttribute="bottom" constant="189" id="1o6-qr-hQ8"/>
-                            <constraint firstItem="rEK-mc-VLP" firstAttribute="centerX" secondItem="s2r-Mu-qT5" secondAttribute="centerX" id="4ra-oL-DbQ"/>
-                            <constraint firstItem="4oZ-DK-fnk" firstAttribute="top" secondItem="rEK-mc-VLP" secondAttribute="bottom" constant="76" id="6fy-w1-M0C"/>
-                            <constraint firstItem="4oZ-DK-fnk" firstAttribute="leading" secondItem="s2r-Mu-qT5" secondAttribute="leading" constant="71" id="DOz-Nj-fCI"/>
-                            <constraint firstItem="nCC-q7-iRI" firstAttribute="top" secondItem="s2r-Mu-qT5" secondAttribute="top" constant="20" symbolic="YES" id="KAn-SL-KAE"/>
-                            <constraint firstItem="5mh-dx-Pcl" firstAttribute="leading" secondItem="s2r-Mu-qT5" secondAttribute="leading" constant="248" id="Kdh-w4-QZ4"/>
-                            <constraint firstAttribute="trailing" secondItem="5mh-dx-Pcl" secondAttribute="trailing" constant="6" id="PSO-YJ-1DB"/>
-                            <constraint firstItem="LKq-9r-6ya" firstAttribute="leading" secondItem="nCC-q7-iRI" secondAttribute="trailing" constant="7" id="QLZ-mK-JR4"/>
-                            <constraint firstItem="rEK-mc-VLP" firstAttribute="leading" secondItem="s2r-Mu-qT5" secondAttribute="leading" constant="96" id="TF4-jk-f40"/>
-                            <constraint firstItem="4oZ-DK-fnk" firstAttribute="centerX" secondItem="rEK-mc-VLP" secondAttribute="centerX" id="XCC-0i-La0"/>
-                            <constraint firstItem="LKq-9r-6ya" firstAttribute="centerX" secondItem="OMU-5Q-hRg" secondAttribute="centerX" id="ct5-wX-xNI"/>
-                            <constraint firstItem="OMU-5Q-hRg" firstAttribute="leading" secondItem="s2r-Mu-qT5" secondAttribute="leading" constant="64" id="e0S-NR-JT6"/>
-                            <constraint firstItem="LKq-9r-6ya" firstAttribute="centerX" secondItem="s2r-Mu-qT5" secondAttribute="centerX" id="fwU-SU-QP6"/>
-                            <constraint firstItem="OMU-5Q-hRg" firstAttribute="centerX" secondItem="rEK-mc-VLP" secondAttribute="centerX" id="gpV-Kd-7MH"/>
-                            <constraint firstItem="5mh-dx-Pcl" firstAttribute="leading" secondItem="LKq-9r-6ya" secondAttribute="trailing" constant="8" symbolic="YES" id="kPu-62-cmj"/>
-                            <constraint firstItem="rEK-mc-VLP" firstAttribute="top" secondItem="OMU-5Q-hRg" secondAttribute="bottom" constant="19" id="lp4-YL-gmF"/>
-                            <constraint firstItem="OMU-5Q-hRg" firstAttribute="top" secondItem="LKq-9r-6ya" secondAttribute="bottom" constant="80" id="qYo-AE-5vb"/>
-                            <constraint firstItem="nCC-q7-iRI" firstAttribute="leading" secondItem="s2r-Mu-qT5" secondAttribute="leading" id="uVR-rX-m3U"/>
-                            <constraint firstItem="5mh-dx-Pcl" firstAttribute="baseline" secondItem="nCC-q7-iRI" secondAttribute="baseline" id="yIg-Bu-4yZ"/>
-                            <constraint firstItem="LKq-9r-6ya" firstAttribute="top" secondItem="s2r-Mu-qT5" secondAttribute="top" id="z5w-Vb-Da5"/>
-                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="urh-jB-blW"/>
                     <connections>
                         <outlet property="alarmDateTextField" destination="OMU-5Q-hRg" id="vmk-oJ-vNT"/>
                         <outlet property="goToSettingsButton" destination="5mh-dx-Pcl" id="eis-fD-WNZ"/>
                         <outlet property="logOutButton" destination="nCC-q7-iRI" id="imn-gu-Yy6"/>
-                        <outlet property="setAlarmButton" destination="rEK-mc-VLP" id="V0Q-hc-zpC"/>
+                        <outlet property="setAlarmLabel" destination="Qcb-Tu-SeA" id="VQy-q8-VDj"/>
                         <outlet property="startButton" destination="4oZ-DK-fnk" id="gCb-4i-e9c"/>
                         <outlet property="viewTitleLabel" destination="LKq-9r-6ya" id="8gr-9E-fMr"/>
                     </connections>
@@ -377,12 +339,30 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZXY-Zh-ehk">
+                                <rect key="frame" x="81" y="288" width="158" height="58"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="58" id="Cpk-HG-mBk"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="27"/>
+                                <state key="normal" title="Stop Sound">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="stopSoundPressed:" destination="BGI-xd-8s1" eventType="touchUpInside" id="0MC-Kr-5Sf"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="hG7-gB-bnY" firstAttribute="centerX" secondItem="bdn-10-Sz5" secondAttribute="centerX" id="5yi-lR-zv4"/>
+                            <constraint firstItem="ZXY-Zh-ehk" firstAttribute="top" secondItem="hG7-gB-bnY" secondAttribute="bottom" constant="8" id="6BQ-qg-qEt"/>
+                            <constraint firstItem="ZXY-Zh-ehk" firstAttribute="trailing" secondItem="bdn-10-Sz5" secondAttribute="trailing" id="93M-cZ-buF"/>
                             <constraint firstItem="bdn-10-Sz5" firstAttribute="top" secondItem="Wbn-iW-Keg" secondAttribute="bottom" constant="29" id="AG1-aa-PdU"/>
+                            <constraint firstItem="ZXY-Zh-ehk" firstAttribute="centerX" secondItem="f8A-f5-HQJ" secondAttribute="centerX" id="Bxd-Xe-q0o"/>
                             <constraint firstItem="7Xj-S1-KZV" firstAttribute="leading" secondItem="f8A-f5-HQJ" secondAttribute="leading" constant="6" id="CFz-GH-Wqa"/>
+                            <constraint firstItem="ZXY-Zh-ehk" firstAttribute="leading" secondItem="bdn-10-Sz5" secondAttribute="leading" constant="-1" id="FSh-Hf-Rfv"/>
                             <constraint firstItem="7Xj-S1-KZV" firstAttribute="top" secondItem="f8A-f5-HQJ" secondAttribute="top" constant="20" symbolic="YES" id="JaJ-K8-vLu"/>
                             <constraint firstItem="hG7-gB-bnY" firstAttribute="top" secondItem="7Xj-S1-KZV" secondAttribute="bottom" constant="68" id="KFW-jw-dRM"/>
                             <constraint firstAttribute="trailing" secondItem="hG7-gB-bnY" secondAttribute="trailing" id="Scc-Ax-ERZ"/>
@@ -395,6 +375,7 @@
                     <connections>
                         <outlet property="pickerView" destination="hG7-gB-bnY" id="xZt-4L-OHL"/>
                         <outlet property="returnToSetAlarm" destination="7Xj-S1-KZV" id="HKp-gt-4Dq"/>
+                        <outlet property="stopSound" destination="ZXY-Zh-ehk" id="KyF-QU-hP8"/>
                         <outlet property="viewTitleLabel" destination="bdn-10-Sz5" id="aqi-CJ-lAF"/>
                     </connections>
                 </viewController>
@@ -579,6 +560,6 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="BYG-zV-Yof"/>
+        <segue reference="jyW-x2-vmY"/>
     </inferredMetricsTieBreakers>
 </document>

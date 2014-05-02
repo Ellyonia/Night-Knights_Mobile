@@ -23,6 +23,8 @@
 @property (strong, nonatomic) NSUserDefaults *defaults;
 @property (nonatomic) AVAudioPlayer *audioPlayer;
 @property (nonatomic) NSString *toneLocal;
+@property (nonatomic) UILocalNotification* localNotif;
+@property (nonatomic) UILocalNotification* localNotif2;
 
 
 
@@ -54,7 +56,7 @@ NSString *soundLocation;
 - (IBAction)wakeUpButtonPushed:(id)sender
 {
     [self.audioPlayer stop];
-    energyGained = timeRemaining/100*(1-(snoozeCount*0.05));
+    energyGained = (int)((double)timeRemaining)/100.0*(1.0-((double)snoozeCount*0.05));
 
     NSString *baseURL = [NSString stringWithFormat:@"%s/api/character/energy",SERVER_URL];
     NSURL *postUrl = [NSURL URLWithString:baseURL];
@@ -77,6 +79,13 @@ NSString *soundLocation;
     [postTask resume];
 
     [[UIApplication sharedApplication] cancelAllLocalNotifications];
+    
+    UILocalNotification * alertEnergy = [[UILocalNotification alloc]init];
+    alertEnergy.alertAction = @"View";
+    alertEnergy.alertBody = [NSString stringWithFormat:@"You gained %i Energy! Go to 54.84.248.48 to play!",energyGained ];
+    alertEnergy.applicationIconBadgeNumber = 1;
+    alertEnergy.soundName = UILocalNotificationDefaultSoundName;
+    [[UIApplication sharedApplication] scheduleLocalNotification:alertEnergy];
 }
 
 int snoozeCount = -1;
@@ -115,7 +124,7 @@ int energyGained = 0;
     localNotif.timeZone = [NSTimeZone defaultTimeZone];
     
     localNotif.alertAction = @"View";
-    localNotif.alertBody = @"things";
+    localNotif.alertBody = @"Wake up!";
     localNotif.applicationIconBadgeNumber = 1;
     localNotif.soundName = soundLocation;
     
@@ -129,7 +138,7 @@ int energyGained = 0;
     localNotif2.timeZone = [NSTimeZone defaultTimeZone];
     
     localNotif2.alertAction = @"View";
-    localNotif2.alertBody = @"things";
+    localNotif2.alertBody = @"Wake up!";
     localNotif2.applicationIconBadgeNumber = 1;
     localNotif2.soundName = soundLocation;
     
@@ -301,33 +310,33 @@ int energyGained = 0;
     
     
     
-    UILocalNotification *localNotif = [[UILocalNotification alloc] init];
-    if (localNotif == nil)
+    self.localNotif = [[UILocalNotification alloc] init];
+    if (self.localNotif == nil)
         return;
-    localNotif.fireDate = convertedAlarmDate;
+    self.localNotif.fireDate = convertedAlarmDate;
     NSLog(@"%@",convertedAlarmDate);
-    localNotif.timeZone = [NSTimeZone defaultTimeZone];
+    self.localNotif.timeZone = [NSTimeZone defaultTimeZone];
 
-    localNotif.alertAction = @"View";
-    localNotif.alertBody = @"things";
-    localNotif.applicationIconBadgeNumber = 1;
-    localNotif.soundName = soundLocation;
+    self.localNotif.alertAction = @"View";
+    self.localNotif.alertBody = @"Wake Up!";
+    self.localNotif.applicationIconBadgeNumber = 1;
+    self.localNotif.soundName = soundLocation;
     
-    [[UIApplication sharedApplication] scheduleLocalNotification:localNotif];
+    [[UIApplication sharedApplication] scheduleLocalNotification:self.localNotif];
     
     convertedAlarmDate = [NSDate dateWithTimeInterval:30 sinceDate:convertedAlarmDate];
-    UILocalNotification *localNotif2 = [[UILocalNotification alloc] init];
-    if (localNotif2 == nil)
+    self.localNotif2 = [[UILocalNotification alloc] init];
+    if (self.localNotif2 == nil)
         return;
-    localNotif2.fireDate = convertedAlarmDate;
-    localNotif2.timeZone = [NSTimeZone defaultTimeZone];
+    self.localNotif2.fireDate = convertedAlarmDate;
+    self.localNotif2.timeZone = [NSTimeZone defaultTimeZone];
 
-    localNotif2.alertAction = @"View";
-    localNotif2.alertBody = @"things";
-    localNotif2.applicationIconBadgeNumber = 1;
-    localNotif2.soundName = soundLocation;
+    self.localNotif2.alertAction = @"View";
+    self.localNotif2.alertBody = @"Wake Up!";
+    self.localNotif2.applicationIconBadgeNumber = 1;
+    self.localNotif2.soundName = soundLocation;
     
-    [[UIApplication sharedApplication] scheduleLocalNotification:localNotif2];
+    [[UIApplication sharedApplication] scheduleLocalNotification:self.localNotif2];
 }
 
 - (void) alarmComplete
@@ -365,6 +374,8 @@ int energyGained = 0;
         [self.alarm invalidate];
         [self.audioPlayer stop];
         [[UIApplication sharedApplication] cancelAllLocalNotifications];
+        [[UIApplication sharedApplication] cancelLocalNotification:self.localNotif];
+        [[UIApplication sharedApplication] cancelLocalNotification:self.localNotif2];
         
     }
 }

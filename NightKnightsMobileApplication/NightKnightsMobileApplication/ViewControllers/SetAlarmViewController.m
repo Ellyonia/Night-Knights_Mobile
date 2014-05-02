@@ -17,19 +17,13 @@
 @property (strong, nonatomic) IBOutlet UIButton *logOutButton;
 @property (strong, nonatomic) IBOutlet UILabel *viewTitleLabel;
 @property (strong, nonatomic) IBOutlet UITextField *alarmDateTextField;
-@property (strong, nonatomic) IBOutlet UIButton *setAlarmButton;
+@property (strong, nonatomic) IBOutlet UILabel *setAlarmLabel;
+@property (nonatomic) NSDate *dateForAlarm;
 
 
 @end
 
 @implementation SetAlarmViewController
-
-NSDate * dateOfAlarm;
-- (IBAction)setAlarmPressed:(UIButton *)sender {
-    [self.alarmDateTextField becomeFirstResponder];
-}
-
-
 
 -(NSUserDefaults *) defaults{
     if(!_defaults){
@@ -56,11 +50,7 @@ NSDate * dateOfAlarm;
     [self.goToSettingsButton setBackgroundColor:buttonColor];
     [self.startButton setBackgroundColor:buttonColor];
     [self.startButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [self.setAlarmButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    
-    [self.setAlarmButton setBackgroundColor:buttonColor];
-    
-    [self.setAlarmButton.layer setCornerRadius:5];
+    [self.setAlarmLabel setTextColor:[UIColor whiteColor]];
     [self.logOutButton.layer setCornerRadius:5];
     [self.goToSettingsButton.layer setCornerRadius:5];
     [self.startButton.layer setCornerRadius:5];
@@ -70,7 +60,6 @@ NSDate * dateOfAlarm;
 
 - (void) viewWillAppear:(BOOL)animated
 {
-    NSDate *dateFromPrevious;
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
@@ -78,7 +67,16 @@ NSDate * dateOfAlarm;
     
     //A User has previously Saved an Alarm Time.
     if(alarmDate){
-        dateFromPrevious = alarmDate[0];
+        if (alarmDate[0])
+        {
+            self.dateForAlarm = alarmDate[0];
+            while ([self.dateForAlarm compare:[NSDate date]] == NSOrderedAscending)
+            {
+                self.dateForAlarm = [NSDate dateWithTimeInterval:24*60*60 sinceDate:alarmDate[0]];
+
+            }
+            [self.alarmDateTextField setText:[self formatDate:alarmDate[0]]];
+        }
     }
 }
 
@@ -88,13 +86,12 @@ NSDate * dateOfAlarm;
     {
         // Send the Alarm time info to the AlarmRunningViewController
         AlarmRunningViewController *transferViewController = segue.destinationViewController;
-        transferViewController.alarmDate = dateOfAlarm;
+        transferViewController.alarmDate = self.dateForAlarm;
         
         // Save the Alarm to NSUserDefaults
-        NSDate *alarmInfo = dateOfAlarm;
+        NSDate *alarmInfo = self.dateForAlarm;
         NSArray *alarmTime = [NSArray arrayWithObjects:alarmInfo, nil];
         [self.defaults setObject:alarmTime forKey:@"alarmInformation"];
-        [self.defaults synchronize];
     }
     
 }
@@ -130,8 +127,9 @@ NSDate * dateOfAlarm;
     UIDatePicker *datePicker = [[UIDatePicker alloc]init];
     datePicker.datePickerMode = UIDatePickerModeDateAndTime;
     datePicker.maximumDate = [NSDate dateWithTimeInterval:24*60*60 sinceDate:[NSDate date]];
-    datePicker.minimumDate = [NSDate date];
-    [datePicker setDate:[NSDate date]];
+    datePicker.minimumDate = [NSDate dateWithTimeInterval:60 sinceDate:[NSDate date]];
+    [datePicker setDate:self.dateForAlarm];
+    
     [datePicker addTarget:self action:@selector(updateDateField:) forControlEvents:UIControlEventValueChanged];
     
     // If the date field has focus, display a date picker instead of keyboard.
@@ -139,6 +137,7 @@ NSDate * dateOfAlarm;
     if (textField)
     {
         self.alarmDateTextField.inputView = datePicker;
+        self.alarmDateTextField.text = [self formatDate:datePicker.date];
     }
 }
 
@@ -164,8 +163,7 @@ NSDate * dateOfAlarm;
 {
     UIDatePicker *picker = (UIDatePicker*)self.alarmDateTextField.inputView;
     self.alarmDateTextField.text = [self formatDate:picker.date];
-    dateOfAlarm = picker.date;
-    NSLog(@"%@",dateOfAlarm);
+    self.dateForAlarm = picker.date;
 }
 
 
