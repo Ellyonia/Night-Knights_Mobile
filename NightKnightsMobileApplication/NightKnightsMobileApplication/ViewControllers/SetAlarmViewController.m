@@ -8,11 +8,15 @@
 
 #import "SetAlarmViewController.h"
 #import "AlarmRunningViewController.h"
-
+#import <QuartzCore/QuartzCore.h>
 
 @interface SetAlarmViewController ()
 @property (strong, nonatomic) IBOutlet UIDatePicker *alarmPickerDisplay;
 @property (strong, nonatomic) NSUserDefaults* defaults;
+@property (strong, nonatomic) IBOutlet UIButton *startButton;
+@property (strong, nonatomic) IBOutlet UIButton *goToSettingsButton;
+@property (strong, nonatomic) IBOutlet UIButton *logOutButton;
+@property (strong, nonatomic) IBOutlet UILabel *viewTitleLabel;
 
 
 @end
@@ -38,6 +42,20 @@
     UIColor* buttonColor = [self createColorWithHexValue:@"#7908aa"];
 
     [self.view setBackgroundColor:backgroundColor];
+    [self.logOutButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [self.goToSettingsButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [self.logOutButton setBackgroundColor:buttonColor];
+    [self.viewTitleLabel setTextColor:[UIColor whiteColor]];
+    [self.goToSettingsButton setBackgroundColor:buttonColor];
+    [self.startButton setBackgroundColor:buttonColor];
+    [self.startButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    
+    [self.logOutButton.layer setCornerRadius:5];
+    [self.goToSettingsButton.layer setCornerRadius:5];
+    [self.startButton.layer setCornerRadius:5];
+    
+    [self.alarmPickerDisplay setBackgroundColor:[UIColor whiteColor]];
+    
 }
 
 - (void) viewWillAppear:(BOOL)animated
@@ -121,5 +139,14 @@
     [scanner scanHexInt:&rgbValue];
     return [UIColor colorWithRed:((rgbValue & 0xFF0000) >> 16)/255.0 green:((rgbValue & 0xFF00) >> 8)/255.0 blue:(rgbValue & 0xFF)/255.0 alpha:1.0];
 }
+
+
+
+
+
+
+
+
+
 
 @end

@@ -23,7 +23,7 @@ AVAudioPlayer *audioPlayer;
 int nameRow = 0 ;
 NSArray *alarmTones;
 NSArray *alarmNames;
-NSString *pickedAlarm;
+NSString *pickedAlarm = @"/alarmChimes.mp3";
 
 -(NSUserDefaults *) defaults{
     if(!_defaults){

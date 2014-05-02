@@ -165,7 +165,7 @@
 {
     if([segue.identifier isEqualToString:@"login"])
     {
-        
+        [self.warningLabel setHidden:YES];
         NSString *email = self.emailTextField.text;
         NSString *password = self.passwordTextField.text;
         
