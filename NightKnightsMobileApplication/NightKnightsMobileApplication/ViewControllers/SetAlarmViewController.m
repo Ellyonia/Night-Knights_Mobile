@@ -67,8 +67,7 @@
     [self.logOutButton.layer setCornerRadius:5];
     [self.goToSettingsButton.layer setCornerRadius:5];
     [self.startButton.layer setCornerRadius:5];
-    
-    
+        
 }
 
 - (void) viewWillAppear:(BOOL)animated
@@ -89,6 +88,10 @@
             }
             [self.alarmDateTextField setText:[self formatDate:self.dateForAlarm]];
         }
+    }
+    else
+    {
+        [self.alarmDateTextField becomeFirstResponder];
     }
 }
 
@@ -151,7 +154,7 @@
     }
     else
     {
-        [datePicker setDate:datePicker.minimumDate];
+        [datePicker setDate:[NSDate dateWithTimeInterval:60 sinceDate:datePicker.minimumDate]];
     }
     
     [datePicker addTarget:self action:@selector(updateDateField:) forControlEvents:UIControlEventValueChanged];

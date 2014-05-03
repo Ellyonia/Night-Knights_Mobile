@@ -93,11 +93,14 @@ UIFont *pickerFont;
         [self.pickerView selectRow:nameRow inComponent:0 animated:NO];
         self.pickedAlarm = settings[0];
     }
+    else
+    {
+        self.pickedAlarm = @"/alarmChimes.mp3";
+    }
     
     AVAudioSession *session = [AVAudioSession sharedInstance];
     [session setCategory:AVAudioSessionCategoryPlayback error:nil];
     
-
 }
 
 //-(void) viewWillDisappear:(BOOL)animated

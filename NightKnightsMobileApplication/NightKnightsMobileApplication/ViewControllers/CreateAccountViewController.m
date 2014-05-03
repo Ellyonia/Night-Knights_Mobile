@@ -53,6 +53,7 @@ bool emailIsValid = NO;
     self.emailTextField.delegate = self;
     self.passwordTextField.delegate = self;
     self.passwordCheckTextField.delegate = self;
+    [self.emailTextField becomeFirstResponder];
     
     NSURLSessionConfiguration *sessionConfig =
     [NSURLSessionConfiguration defaultSessionConfiguration];
@@ -217,7 +218,7 @@ bool emailIsValid = NO;
     {
         self.warningLabel.hidden = NO;
         self.emailTextField.backgroundColor = [UIColor redColor];
-        self.warningLabel.text = @"Invalide Email";
+        self.warningLabel.text = @"Invalid Email";
     }
 }
 

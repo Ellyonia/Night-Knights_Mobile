@@ -70,32 +70,38 @@ NSString *soundLocation = @"/basicAlarm.mp3";
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:postUrl];
     [request setHTTPMethod:@"PUT"];
     [request setHTTPBody:requestBody];
-    
-    NSString *alertMessage = [NSString stringWithFormat:@"You have gained %i Energy! Go to 54.24.248.48 to play Night Knights!",energyGained];
-    UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Congrats!"
-                                                      message:alertMessage
-                                                     delegate:nil
-                                            cancelButtonTitle:@"OK"
-                                            otherButtonTitles:nil];
-    
-    [message show];
-
-    NSURLSessionDataTask *postTask = [self.session dataTaskWithRequest:request
-                                                        completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-                                                         
-                                                        }];
-    
-    [postTask resume];
-
     [[UIApplication sharedApplication] cancelAllLocalNotifications];
     
-    UILocalNotification * alertEnergy = [[UILocalNotification alloc]init];
-    alertEnergy.alertAction = @"View";
-    alertEnergy.alertBody = [NSString stringWithFormat:@"You gained %i Energy! Go to 54.84.248.48 to play!",energyGained ];
-    alertEnergy.applicationIconBadgeNumber = 1;
-    alertEnergy.soundName = UILocalNotificationDefaultSoundName;
-    [[UIApplication sharedApplication] scheduleLocalNotification:alertEnergy];
-    self.mEnergy = @(energyGained);
+    NSArray *isGuest = [self.defaults objectForKey:@"guestLogin"];
+    NSLog(@"3%@3",isGuest);
+    if(!isGuest)
+    {
+        NSString *alertMessage = [NSString stringWithFormat:@"You have gained %i Energy! Go to 54.24.248.48 to play Night Knights!",energyGained];
+        UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Congrats!"
+                                                          message:alertMessage
+                                                         delegate:nil
+                                                cancelButtonTitle:@"OK"
+                                                otherButtonTitles:nil];
+        
+        [message show];
+
+        NSURLSessionDataTask *postTask = [self.session dataTaskWithRequest:request
+                                                            completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                                             
+                                                            }];
+        
+        [postTask resume];
+            
+
+        
+        
+        UILocalNotification * alertEnergy = [[UILocalNotification alloc]init];
+        alertEnergy.alertAction = @"View";
+        alertEnergy.alertBody = [NSString stringWithFormat:@"You gained %i Energy! Go to 54.84.248.48 to play!",energyGained ];
+        alertEnergy.applicationIconBadgeNumber = 1;
+        alertEnergy.soundName = UILocalNotificationDefaultSoundName;
+        [[UIApplication sharedApplication] scheduleLocalNotification:alertEnergy];
+    }
 }
 
 int snoozeCount = -1;
@@ -112,9 +118,8 @@ int energyGained = 0;
     self.cancelAlarm.hidden = YES;
     self.wakeUpButton.hidden = NO;
     self.headerLabel.hidden = NO;
-    self.headerLabel.text = @"Snoozing for";
-    self.timeRemainingLabel.text = @"5 Minutes";
-    second = 0;
+    self.headerLabel.text = @"Snoozing until";
+    self.timeRemainingLabel.text = [self formatDate:[NSDate dateWithTimeInterval:300 sinceDate:[NSDate date]]];
     self.alarmTimer = [MyLilTimer scheduledTimerWithBehavior:MyLilTimerBehaviorHourglass
                                                 timeInterval:300
                                                       target:self
@@ -190,7 +195,6 @@ int energyGained = 0;
     
     UIColor* buttonColor = [self createColorWithHexValue:@"#7908aa"];
     
-//    UIFont *titleFont = [UIFont fontWithName:@"VT323-Regular" size:30];
     UIFont *navButtonFont = [UIFont fontWithName:@"VT323-Regular" size:20];
     UIFont *titleLabelFont = [UIFont fontWithName:@"VT323-Regular" size:29];
     UIFont *timeRemaingFont = [UIFont fontWithName:@"VT323-Regular" size:75];
@@ -401,6 +405,18 @@ int energyGained = 0;
     [scanner setScanLocation:1]; // bypass '#' character
     [scanner scanHexInt:&rgbValue];
     return [UIColor colorWithRed:((rgbValue & 0xFF0000) >> 16)/255.0 green:((rgbValue & 0xFF00) >> 8)/255.0 blue:(rgbValue & 0xFF)/255.0 alpha:1.0];
+}
+
+
+// Formats the date chosen with the date picker.
+- (NSString *)formatDate:(NSDate *)date
+{
+    NSDateFormatter *format = [[NSDateFormatter alloc] init];
+    [format setDateStyle:NSDateFormatterLongStyle];
+    [format setDateFormat:@"hh:mm"];
+    
+    NSString *formattedDate = [format stringFromDate:date];
+    return formattedDate;
 }
 
 @end

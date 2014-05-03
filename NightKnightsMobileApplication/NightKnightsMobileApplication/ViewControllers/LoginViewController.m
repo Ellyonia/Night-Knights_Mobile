@@ -12,7 +12,7 @@
 
 #define SERVER_URL "http://54.84.248.48"
 
-@interface LoginViewController () <NSURLSessionTaskDelegate>
+@interface LoginViewController () <NSURLSessionTaskDelegate, UIAlertViewDelegate>
 @property (strong, nonatomic) IBOutlet UITextField *emailTextField;
 @property (strong, nonatomic) IBOutlet UITextField *passwordTextField;
 @property (strong, nonatomic) NSUserDefaults* defaults;
@@ -179,6 +179,38 @@
                                                      }];
     [postTask resume];
 }
+- (IBAction)guestLoginPushed:(id)sender {
+    NSString *alertMessage = [NSString stringWithFormat:@"Continuing will not gain you energy, recommended only for if you do not have Internet."];
+    UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Guest Login"
+                                                      message:alertMessage
+                                                     delegate:self
+                                            cancelButtonTitle:@"OK"
+                                            otherButtonTitles:@"Cancel", nil];
+    [message show];
+}
+
+-(void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    
+    //u need to change 0 to other value(,1,2,3) if u have more buttons.then u can check which button was pressed.
+    
+    if (buttonIndex == 0)
+    {
+        
+        [self performSegueWithIdentifier:@"guestLogin" sender:self];
+        
+        NSArray *isGuest = [NSArray arrayWithObjects:@1,nil];
+        
+        [self.defaults setObject:isGuest forKey:@"guestLogin"];
+    }
+    else
+    {
+        
+    }
+        
+        
+    }
+    
+
 
 #pragma mark - Methods for Segues
 
@@ -194,6 +226,10 @@
         NSArray *loginInfo = [NSArray arrayWithObjects:email,password, nil];
         
         [self.defaults setObject:loginInfo forKey:@"loginInformation"];
+        
+        
+        [self.defaults removeObjectForKey:@"guestLogin"];
+
     }
 }
 
