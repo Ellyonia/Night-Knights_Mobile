@@ -40,7 +40,21 @@
     [super viewDidLoad];
     
     [self.alarmDateTextField setDelegate:self];
+    
     UIColor* buttonColor = [self createColorWithHexValue:@"#7908aa"];
+    
+    UIFont *titleFont = [UIFont fontWithName:@"VT323-Regular" size:30];
+    UIFont *dateLabelFont = [UIFont fontWithName:@"VT323-Regular" size:23];
+    UIFont *navButtonFont = [UIFont fontWithName:@"VT323-Regular" size:20];
+    UIFont *alarmButtonFont = [UIFont fontWithName:@"VT323-Regular" size:40];
+    
+    self.viewTitleLabel.font = titleFont;
+    self.setAlarmLabel.font = dateLabelFont;
+    self.alarmDateTextField.font = dateLabelFont;
+    self.logOutButton.titleLabel.font = navButtonFont;
+    self.goToSettingsButton.titleLabel.font = navButtonFont;
+    self.startButton.titleLabel.font = alarmButtonFont;
+    
 
     [self.logOutButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [self.goToSettingsButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];

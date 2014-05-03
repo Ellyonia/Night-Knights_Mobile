@@ -190,6 +190,18 @@ int energyGained = 0;
     
     UIColor* buttonColor = [self createColorWithHexValue:@"#7908aa"];
     
+//    UIFont *titleFont = [UIFont fontWithName:@"VT323-Regular" size:30];
+    UIFont *navButtonFont = [UIFont fontWithName:@"VT323-Regular" size:20];
+    UIFont *titleLabelFont = [UIFont fontWithName:@"VT323-Regular" size:29];
+    UIFont *timeRemaingFont = [UIFont fontWithName:@"VT323-Regular" size:75];
+    UIFont *wakeSnoozeFont = [UIFont fontWithName:@"VT323-Regular" size:25];
+
+    self.wakeUpButton.titleLabel.font = wakeSnoozeFont;
+    self.snooozeButton.titleLabel.font = wakeSnoozeFont;
+    self.cancelAlarm.titleLabel.font = navButtonFont;
+    self.timeRemainingLabel.font = timeRemaingFont;
+    self.headerLabel.font = titleLabelFont;
+    
     [self.cancelAlarm setBackgroundColor:buttonColor];
     [self.cancelAlarm setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [self.wakeUpButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];

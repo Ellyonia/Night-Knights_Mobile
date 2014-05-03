@@ -43,12 +43,21 @@
 
     [super viewDidLoad];
     
-//    UIColor* buttonColor = [self createColorWithHexValue:@"#0F7F03"];
-//    UIColor* buttonColor = [self createColorWithHexValue:@"#8C19A5"];
-//    UIColor* buttonColor = [self createColorWithHexValue:@"#C362D8"]; // Maybe
-//    UIColor* buttonColor = [self createColorWithHexValue:@"#68007F"]; // If dark is better
+    UIFont *textLabelFont = [UIFont fontWithName:@"VT323-Regular" size:18];
+    UIFont *buttonFont = [UIFont fontWithName:@"VT323-Regular" size:25];
+    UIFont *titleFont = [UIFont fontWithName:@"VT323-Regular" size:30];
+    UIFont *warningFont = [UIFont fontWithName:@"VT323-Regular" size:23];
+    
     UIColor* buttonColor = [self createColorWithHexValue:@"#7908aa"];
-    UIColor* warningColor = [self createColorWithHexValue:@"#FF684E"];
+    
+    self.titleLabel.font = titleFont;
+    self.emailLabel.font = textLabelFont;
+    self.passwordLabel.font = textLabelFont;
+    self.createAccountButton.titleLabel.font = buttonFont;
+    self.guestLogin.titleLabel.font = buttonFont;
+    self.loginButton.titleLabel.font = buttonFont;
+    self.warningLabel.font = warningFont;
+    self.emailTextField.font = textLabelFont;
     
     self.titleLabel.textColor = [UIColor whiteColor];
     self.emailLabel.textColor = [UIColor whiteColor];
@@ -62,7 +71,7 @@
     [self.guestLogin setBackgroundColor:buttonColor];
     [self.guestLogin setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [self.guestLogin.layer setCornerRadius:5];
-    [self.warningLabel setTextColor:warningColor];
+    [self.warningLabel setTextColor:[UIColor redColor]];
 
     NSURLSessionConfiguration *sessionConfig =
     [NSURLSessionConfiguration defaultSessionConfiguration];

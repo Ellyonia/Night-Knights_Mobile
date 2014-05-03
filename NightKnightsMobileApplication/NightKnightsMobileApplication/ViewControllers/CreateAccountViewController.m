@@ -67,8 +67,27 @@ bool emailIsValid = NO;
                              delegateQueue:nil];
     
     
+    UIFont *titleFont = [UIFont fontWithName:@"VT323-Regular" size:30];
+    UIFont *warningFont = [UIFont fontWithName:@"VT323-Regular" size:23];
+    UIFont *textLabelFont = [UIFont fontWithName:@"VT323-Regular" size:18];
+    UIFont *navButtonFont = [UIFont fontWithName:@"VT323-Regular" size:20];
+    UIFont *createAccountFont = [UIFont fontWithName:@"VT323-Regular" size:25];
+    
     UIColor* buttonColor = [self createColorWithHexValue:@"#7908aa"];
-    UIColor* warningColor = [self createColorWithHexValue:@"#FF684E"];
+
+    self.viewTitleLabel.font = titleFont;
+    self.warningLabel.font = warningFont;
+    self.emailLabel.font = textLabelFont;
+    self.passwordLabel.font = textLabelFont;
+    self.repassLabel.font = textLabelFont;
+    self.userName.font = textLabelFont;
+    self.emailTextField.font = textLabelFont;
+    self.passwordTextField.font = textLabelFont;
+    self.passwordCheckTextField.font = textLabelFont;
+    self.knightNameTextField.font = textLabelFont;
+    self.cancelButton.titleLabel.font = navButtonFont;
+    self.createAccountButton.titleLabel.font = createAccountFont;
+    
 
     [self.createAccountButton.layer setCornerRadius:5];
     [self.cancelButton.layer setCornerRadius:5];
@@ -81,7 +100,7 @@ bool emailIsValid = NO;
     [self.passwordLabel setTextColor:[UIColor whiteColor]];
     [self.repassLabel setTextColor:[UIColor whiteColor]];
     [self.userName setTextColor:[UIColor whiteColor]];
-    [self.warningLabel setTextColor:warningColor];
+    [self.warningLabel setTextColor:[UIColor redColor]];
     
 }
 
@@ -135,6 +154,10 @@ bool emailIsValid = NO;
     else if (textField == self.knightNameTextField) {
         [self validateUserName:self.knightNameTextField.text];
     }
+}
+-(void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    textField.backgroundColor = [UIColor whiteColor];
 }
 
 - (IBAction)createAccountButton:(UIButton *)sender {
@@ -205,12 +228,14 @@ bool emailIsValid = NO;
     {
         passwordsMatch = YES;
         [self.warningLabel setHidden:YES];
+        self.passwordCheckTextField.backgroundColor = [UIColor whiteColor];
     }
     else
     {
         [self.warningLabel setText:@"Password fields must match"];
         self.warningLabel.hidden = NO;
         self.passwordCheckTextField.text = @"";
+        self.passwordCheckTextField.backgroundColor = [UIColor redColor];
     }
 }
 
@@ -290,11 +315,22 @@ bool emailIsValid = NO;
 
 -(void) validateUserName:(NSString *)userName
 {
-    if ([userName componentsSeparatedByString:@" "].count > 1 || userName.length == 0)
+    if ([userName componentsSeparatedByString:@" "].count > 1)
     {
         self.warningLabel.hidden = NO;
         [self.knightNameTextField setBackgroundColor:[UIColor redColor]];
         [self.warningLabel setText:@"Please do not use Spaces in your Username"];
+    }
+    else if (userName.length == 0)
+    {
+        self.warningLabel.hidden = NO;
+        [self.knightNameTextField setBackgroundColor:[UIColor redColor]];
+        [self.warningLabel setText:@"Please enter a Username"];
+    }
+    else
+    {
+        [self.warningLabel setHidden:YES];
+        [self.knightNameTextField setBackgroundColor:[UIColor whiteColor]];
     }
 }
 

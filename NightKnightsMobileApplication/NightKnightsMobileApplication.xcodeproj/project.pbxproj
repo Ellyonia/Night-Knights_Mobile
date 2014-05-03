@@ -16,6 +16,7 @@
 		7E60981A18FDEA33007D490E /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E60981918FDEA33007D490E /* AVFoundation.framework */; };
 		7E83785A18DE2DA400B94636 /* AlarmRunningViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E83785918DE2DA400B94636 /* AlarmRunningViewController.m */; };
 		7EA857641913D9FC00F31153 /* MyLilTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EA857631913D9FC00F31153 /* MyLilTimer.m */; };
+		7EAB9C6D19157929007D65A4 /* VT323-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7EAB9C6C1915777C007D65A4 /* VT323-Regular.ttf */; };
 		7EC9CDD418DBB4E400AB3BFA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EC9CDD318DBB4E400AB3BFA /* Foundation.framework */; };
 		7EC9CDD618DBB4E400AB3BFA /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EC9CDD518DBB4E400AB3BFA /* CoreGraphics.framework */; };
 		7EC9CDD818DBB4E400AB3BFA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EC9CDD718DBB4E400AB3BFA /* UIKit.framework */; };
@@ -57,6 +58,7 @@
 		7E83785918DE2DA400B94636 /* AlarmRunningViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlarmRunningViewController.m; sourceTree = "<group>"; };
 		7EA857621913D9FC00F31153 /* MyLilTimer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyLilTimer.h; sourceTree = "<group>"; };
 		7EA857631913D9FC00F31153 /* MyLilTimer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyLilTimer.m; sourceTree = "<group>"; };
+		7EAB9C6C1915777C007D65A4 /* VT323-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "VT323-Regular.ttf"; sourceTree = "<group>"; };
 		7EC9CDD018DBB4E400AB3BFA /* NightKnightsMobileApplication.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NightKnightsMobileApplication.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7EC9CDD318DBB4E400AB3BFA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		7EC9CDD518DBB4E400AB3BFA /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -166,6 +168,7 @@
 		7EC9CDDA18DBB4E400AB3BFA /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				7EAB9C6C1915777C007D65A4 /* VT323-Regular.ttf */,
 				7E0905F61907160B003D6677 /* alarmChimes.mp3 */,
 				7E0905F71907160B003D6677 /* basicAlarm.mp3 */,
 				7E0905F81907160B003D6677 /* birdsChirping.mp3 */,
@@ -300,6 +303,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7EAB9C6D19157929007D65A4 /* VT323-Regular.ttf in Resources */,
 				7E0905FD1907160B003D6677 /* basicAlarm.mp3 in Resources */,
 				7E0905FF1907160B003D6677 /* danceRave.mp3 in Resources */,
 				7EC9CDEC18DBB4E400AB3BFA /* Images.xcassets in Resources */,

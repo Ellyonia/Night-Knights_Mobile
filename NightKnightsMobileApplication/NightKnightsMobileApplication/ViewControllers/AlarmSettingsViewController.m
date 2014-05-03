@@ -26,6 +26,7 @@
 int nameRow = 0 ;
 NSArray *alarmTones;
 NSArray *alarmNames;
+UIFont *pickerFont;
 //NSString *pickedAlarm = @"/alarmChimes.mp3";
 
 -(NSUserDefaults *) defaults{
@@ -44,7 +45,18 @@ NSArray *alarmNames;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
     UIColor* buttonColor = [self createColorWithHexValue:@"#7908aa"];
+    
+    UIFont *titleFont = [UIFont fontWithName:@"VT323-Regular" size:30];
+    UIFont *navButtonFont = [UIFont fontWithName:@"VT323-Regular" size:20];
+    UIFont *stopButtonFont = [UIFont fontWithName:@"VT323-Regular" size:32];
+    pickerFont = [UIFont fontWithName:@"VT323-Regular" size:25];
+    
+    self.viewTitleLabel.font = titleFont;
+    self.saveButton.titleLabel.font = navButtonFont;
+    self.returnToSetAlarm.titleLabel.font = navButtonFont;
+    self.stopSound.titleLabel.font = stopButtonFont;
     
     [self.returnToSetAlarm setBackgroundColor:buttonColor];
     [self.returnToSetAlarm.layer setCornerRadius:5];
@@ -79,6 +91,7 @@ NSArray *alarmNames;
             }
         }
         [self.pickerView selectRow:nameRow inComponent:0 animated:NO];
+        self.pickedAlarm = settings[0];
     }
     
     AVAudioSession *session = [AVAudioSession sharedInstance];
@@ -110,14 +123,6 @@ NSArray *alarmNames;
     return 6;
     
 }
-    - (NSAttributedString *)pickerView:(UIPickerView *)pickerView attributedTitleForRow:(NSInteger)row forComponent:(NSInteger)component
-    {
-        NSString *title = [alarmNames objectAtIndex:row];
-        NSAttributedString *attString = [[NSAttributedString alloc] initWithString:title attributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
-        
-        return attString;
-        
-    }
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row   inComponent:(NSInteger)component{
     self.pickedAlarm = [alarmTones objectAtIndex:row];
@@ -136,6 +141,19 @@ NSArray *alarmNames;
     [self.audioPlayer prepareToPlay];
     [self.audioPlayer play];
     
+}
+- (UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view {
+    UILabel *pickerLabel = (UILabel *)view;
+    // Reuse the label if possible, otherwise create and configure a new one
+    if ((pickerLabel == nil) || ([pickerLabel class] != [UILabel class])) { //newlabel
+        CGRect frame = CGRectMake(0.0, 0.0, 320, 32.0);
+        pickerLabel = [[UILabel alloc] initWithFrame:frame];
+        pickerLabel.font = pickerFont;
+        pickerLabel.text = [alarmNames objectAtIndex:row];
+        pickerLabel.textAlignment = NSTextAlignmentCenter;
+    }
+    pickerLabel.textColor = [UIColor whiteColor];
+    return pickerLabel; 
 }
 
 -(UIColor *) createColorWithHexValue: (NSString *)hexValue
