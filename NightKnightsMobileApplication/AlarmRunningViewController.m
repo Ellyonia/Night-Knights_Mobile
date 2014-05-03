@@ -35,7 +35,7 @@
 
 @implementation AlarmRunningViewController
 
-NSString *soundLocation;
+NSString *soundLocation = @"/basicAlarm.mp3";
 
 -(AVAudioPlayer *)audioPlayer{
     if (!_audioPlayer)
@@ -311,18 +311,7 @@ int energyGained = 0;
                                                     selector:@selector(alarmComplete)
                                                     userInfo:nil];
     
-//    NSLog(@"Timer: %@",[NSDate dateWithTimeInterval:timeRemaining sinceDate:[NSDate date]]);
-//    self.alarm = [NSTimer scheduledTimerWithTimeInterval:timeRemaining
-//                   target:self
-//                   selector:@selector(alarmComplete)
-//                   userInfo:nil
-//                   repeats:NO];
-//    
-//    [[NSRunLoop mainRunLoop] addTimer:self.alarm forMode:NSRunLoopCommonModes];
-    
-    
-    
-    
+
     NSLog(@"First Local Notif: %@",convertedAlarmDate);
     self.localNotif = [[UILocalNotification alloc] init];
     if (self.localNotif == nil)

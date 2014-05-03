@@ -131,10 +131,18 @@
     
     // Create a date picker for the date field.
     UIDatePicker *datePicker = [[UIDatePicker alloc]init];
+    [datePicker setBackgroundColor:[UIColor whiteColor]];
     datePicker.datePickerMode = UIDatePickerModeDateAndTime;
     datePicker.maximumDate = [NSDate dateWithTimeInterval:24*60*60 sinceDate:[NSDate date]];
     datePicker.minimumDate = [NSDate dateWithTimeInterval:60 sinceDate:[NSDate date]];
-    [datePicker setDate:self.dateForAlarm];
+    if (self.dateForAlarm)
+    {
+       [datePicker setDate:self.dateForAlarm];
+    }
+    else
+    {
+        [datePicker setDate:datePicker.minimumDate];
+    }
     
     [datePicker addTarget:self action:@selector(updateDateField:) forControlEvents:UIControlEventValueChanged];
     
@@ -144,6 +152,7 @@
     {
         self.alarmDateTextField.inputView = datePicker;
         self.alarmDateTextField.text = [self formatDate:datePicker.date];
+        self.dateForAlarm = datePicker.date;
     }
 }
 
