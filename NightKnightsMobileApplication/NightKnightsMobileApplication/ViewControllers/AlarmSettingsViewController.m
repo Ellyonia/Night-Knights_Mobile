@@ -7,7 +7,7 @@
 //
 
 #import "AlarmSettingsViewController.h"
-#import <AVFoundation/AVFoundation.h>
+
 
 
 @interface AlarmSettingsViewController () <UIPickerViewDataSource, UIPickerViewDelegate, AVAudioPlayerDelegate, AVAudioSessionDelegate>
@@ -16,17 +16,17 @@
 @property (strong, nonatomic) IBOutlet UIButton *returnToSetAlarm;
 @property (strong, nonatomic) IBOutlet UILabel *viewTitleLabel;
 @property (strong, nonatomic) IBOutlet UIButton *stopSound;
+@property (strong, nonatomic) IBOutlet UIButton *saveButton;
 
 
 @end
 
 @implementation AlarmSettingsViewController
 
-AVAudioPlayer *audioPlayer;
 int nameRow = 0 ;
 NSArray *alarmTones;
 NSArray *alarmNames;
-NSString *pickedAlarm = @"/alarmChimes.mp3";
+//NSString *pickedAlarm = @"/alarmChimes.mp3";
 
 -(NSUserDefaults *) defaults{
     if(!_defaults){
@@ -38,7 +38,7 @@ NSString *pickedAlarm = @"/alarmChimes.mp3";
 }
 
 - (IBAction)stopSoundPressed:(UIButton *)sender {
-    [audioPlayer stop];
+    [self.audioPlayer stop];
 }
 
 - (void)viewDidLoad
@@ -54,6 +54,9 @@ NSString *pickedAlarm = @"/alarmChimes.mp3";
     [self.stopSound setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [self.stopSound setBackgroundColor:buttonColor];
     [self.stopSound.layer setCornerRadius:5];
+    [self.saveButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [self.saveButton.layer setCornerRadius:5];
+    [self.saveButton setBackgroundColor:buttonColor];
 
     [self.view setBackgroundColor:backgroundColor];
     
@@ -86,14 +89,14 @@ NSString *pickedAlarm = @"/alarmChimes.mp3";
 
 }
 
--(void) viewWillDisappear:(BOOL)animated
-{
-    
-    NSArray *loginInfo = [NSArray arrayWithObjects:pickedAlarm, nil];
-    
-    [self.defaults setObject:loginInfo forKey:@"alarmSettings"];
-    [audioPlayer stop];
-}
+//-(void) viewWillDisappear:(BOOL)animated
+//{
+//    
+//    NSArray *loginInfo = [NSArray arrayWithObjects:pickedAlarm, nil];
+//    
+//    [self.defaults setObject:loginInfo forKey:@"alarmSettings"];
+//    [audioPlayer stop];
+//}
 
 
 // returns the number of 'columns' to display.
@@ -119,21 +122,21 @@ NSString *pickedAlarm = @"/alarmChimes.mp3";
     }
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row   inComponent:(NSInteger)component{
-    pickedAlarm = [alarmTones objectAtIndex:row];
-    if (audioPlayer == nil)
+    self.pickedAlarm = [alarmTones objectAtIndex:row];
+    if (self.audioPlayer == nil)
     {
     }
     else{
-        audioPlayer = nil;
+        self.audioPlayer = nil;
     }
-    NSURL *url = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@%@", [[NSBundle mainBundle] resourcePath],pickedAlarm]];
+    NSURL *url = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@%@", [[NSBundle mainBundle] resourcePath],self.pickedAlarm]];
     NSError *error;
-	audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
-	audioPlayer.numberOfLoops = 0;
-    audioPlayer.volume = 1;
-    [audioPlayer setDelegate:self];
-    [audioPlayer prepareToPlay];
-    [audioPlayer play];
+	self.audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
+	self.audioPlayer.numberOfLoops = 0;
+    self.audioPlayer.volume = 1;
+    [self.audioPlayer setDelegate:self];
+    [self.audioPlayer prepareToPlay];
+    [self.audioPlayer play];
     
 }
 
@@ -146,15 +149,13 @@ NSString *pickedAlarm = @"/alarmChimes.mp3";
     return [UIColor colorWithRed:((rgbValue & 0xFF0000) >> 16)/255.0 green:((rgbValue & 0xFF00) >> 8)/255.0 blue:(rgbValue & 0xFF)/255.0 alpha:1.0];
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+- (IBAction)cancel:(id)sender
 {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    [self.delegate AlarmSettingsViewControllerDidCancel:self];
 }
-*/
+- (IBAction)done:(id)sender
+{
+    [self.delegate AlarmSettingsViewControllerDidSave:self];
+}
 
 @end

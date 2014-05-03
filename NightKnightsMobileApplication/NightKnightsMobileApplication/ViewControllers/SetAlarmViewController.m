@@ -8,9 +8,10 @@
 
 #import "SetAlarmViewController.h"
 #import "AlarmRunningViewController.h"
+#import "AlarmSettingsViewController.h"
 #import <QuartzCore/QuartzCore.h>
 
-@interface SetAlarmViewController () <UITextFieldDelegate  >
+@interface SetAlarmViewController () <UITextFieldDelegate,AlarmSettingsViewControllerDelegate>
 @property (strong, nonatomic) NSUserDefaults* defaults;
 @property (strong, nonatomic) IBOutlet UIButton *startButton;
 @property (strong, nonatomic) IBOutlet UIButton *goToSettingsButton;
@@ -92,6 +93,11 @@
         NSDate *alarmInfo = self.dateForAlarm;
         NSArray *alarmTime = [NSArray arrayWithObjects:alarmInfo, nil];
         [self.defaults setObject:alarmTime forKey:@"alarmInformation"];
+    }
+    if ([segue.identifier isEqualToString:@"editSettings"]) {
+        
+        AlarmSettingsViewController *settingsView = segue.destinationViewController;
+        settingsView.delegate = self;
     }
     
 }
@@ -202,7 +208,19 @@
 
 
 
+-(void) AlarmSettingsViewControllerDidSave:(AlarmSettingsViewController *)controller
+{
+        NSArray *loginInfo = [NSArray arrayWithObjects:controller.pickedAlarm, nil];
+    
+        [self.defaults setObject:loginInfo forKey:@"alarmSettings"];
+        [controller.audioPlayer stop];
+    [self dismissViewControllerAnimated:YES completion:nil];
 
+}
+-(void) AlarmSettingsViewControllerDidCancel:(AlarmSettingsViewController *)controller
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
 
 
 

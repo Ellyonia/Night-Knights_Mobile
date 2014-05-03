@@ -42,6 +42,7 @@
 {
     UIColor* buttonColor = [self createColorWithHexValue:@"#7908aa"];
     UIColor* backgroundColor = [self createColorWithHexValue:@"#240672"];
+    UIColor* warningColor = [self createColorWithHexValue:@"#FF684E"];
     self.titleLabel.textColor = [UIColor whiteColor];
     self.emailLabel.textColor = [UIColor whiteColor];
     self.passwordLabel.textColor = [UIColor whiteColor];
@@ -56,6 +57,7 @@
     [self.guestLogin setBackgroundColor:buttonColor];
     [self.guestLogin setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [self.guestLogin.layer setCornerRadius:5];
+    [self.warningLabel setTextColor:warningColor];
 
     NSURLSessionConfiguration *sessionConfig =
     [NSURLSessionConfiguration defaultSessionConfiguration];
@@ -167,9 +169,10 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
+    [self.warningLabel setHidden:YES];
+    
     if([segue.identifier isEqualToString:@"login"])
     {
-        [self.warningLabel setHidden:YES];
         NSString *email = self.emailTextField.text;
         NSString *password = self.passwordTextField.text;
         

@@ -69,6 +69,7 @@ bool emailIsValid = NO;
     
     UIColor* backgroundColor = [self createColorWithHexValue:@"#240672"];
     UIColor* buttonColor = [self createColorWithHexValue:@"#7908aa"];
+    UIColor* warningColor = [self createColorWithHexValue:@"#FF684E"];
 
     [self.createAccountButton.layer setCornerRadius:5];
     [self.cancelButton.layer setCornerRadius:5];
@@ -82,6 +83,7 @@ bool emailIsValid = NO;
     [self.repassLabel setTextColor:[UIColor whiteColor]];
     [self.userName setTextColor:[UIColor whiteColor]];
     [self.view setBackgroundColor:backgroundColor];
+    [self.warningLabel setTextColor:warningColor];
     
 }
 
