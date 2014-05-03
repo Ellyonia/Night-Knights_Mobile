@@ -44,7 +44,6 @@ NSArray *alarmNames;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    UIColor* backgroundColor = [self createColorWithHexValue:@"#240672"];
     UIColor* buttonColor = [self createColorWithHexValue:@"#7908aa"];
     
     [self.returnToSetAlarm setBackgroundColor:buttonColor];
@@ -58,7 +57,6 @@ NSArray *alarmNames;
     [self.saveButton.layer setCornerRadius:5];
     [self.saveButton setBackgroundColor:buttonColor];
 
-    [self.view setBackgroundColor:backgroundColor];
     
     self.pickerView.delegate = self;
     self.pickerView.dataSource = self;

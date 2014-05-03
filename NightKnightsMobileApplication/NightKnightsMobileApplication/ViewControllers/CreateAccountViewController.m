@@ -67,7 +67,6 @@ bool emailIsValid = NO;
                              delegateQueue:nil];
     
     
-    UIColor* backgroundColor = [self createColorWithHexValue:@"#240672"];
     UIColor* buttonColor = [self createColorWithHexValue:@"#7908aa"];
     UIColor* warningColor = [self createColorWithHexValue:@"#FF684E"];
 
@@ -82,7 +81,6 @@ bool emailIsValid = NO;
     [self.passwordLabel setTextColor:[UIColor whiteColor]];
     [self.repassLabel setTextColor:[UIColor whiteColor]];
     [self.userName setTextColor:[UIColor whiteColor]];
-    [self.view setBackgroundColor:backgroundColor];
     [self.warningLabel setTextColor:warningColor];
     
 }

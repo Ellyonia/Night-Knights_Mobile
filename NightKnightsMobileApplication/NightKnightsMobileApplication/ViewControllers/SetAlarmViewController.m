@@ -40,10 +40,8 @@
     [super viewDidLoad];
     
     [self.alarmDateTextField setDelegate:self];
-    UIColor* backgroundColor = [self createColorWithHexValue:@"#240672"];
     UIColor* buttonColor = [self createColorWithHexValue:@"#7908aa"];
 
-    [self.view setBackgroundColor:backgroundColor];
     [self.logOutButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [self.goToSettingsButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [self.logOutButton setBackgroundColor:buttonColor];
