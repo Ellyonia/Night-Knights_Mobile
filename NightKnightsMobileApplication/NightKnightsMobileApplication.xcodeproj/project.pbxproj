@@ -19,6 +19,7 @@
 		7EB63C801914BD8A00DC4A35 /* AlarmRuning.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7EB63C7D1914BD8A00DC4A35 /* AlarmRuning.jpg */; };
 		7EB63C811914BD8A00DC4A35 /* setAlarm_alarmSettings.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7EB63C7E1914BD8A00DC4A35 /* setAlarm_alarmSettings.jpg */; };
 		7EB63C821914BD8A00DC4A35 /* login_CreateAccount.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7EB63C7F1914BD8A00DC4A35 /* login_CreateAccount.jpg */; };
+		7EB63C841914C49300DC4A35 /* wakeUp.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7EB63C831914C49300DC4A35 /* wakeUp.jpg */; };
 		7EC9CDD418DBB4E400AB3BFA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EC9CDD318DBB4E400AB3BFA /* Foundation.framework */; };
 		7EC9CDD618DBB4E400AB3BFA /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EC9CDD518DBB4E400AB3BFA /* CoreGraphics.framework */; };
 		7EC9CDD818DBB4E400AB3BFA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EC9CDD718DBB4E400AB3BFA /* UIKit.framework */; };
@@ -63,6 +64,7 @@
 		7EB63C7D1914BD8A00DC4A35 /* AlarmRuning.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = AlarmRuning.jpg; sourceTree = "<group>"; };
 		7EB63C7E1914BD8A00DC4A35 /* setAlarm_alarmSettings.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = setAlarm_alarmSettings.jpg; sourceTree = "<group>"; };
 		7EB63C7F1914BD8A00DC4A35 /* login_CreateAccount.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = login_CreateAccount.jpg; sourceTree = "<group>"; };
+		7EB63C831914C49300DC4A35 /* wakeUp.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = wakeUp.jpg; sourceTree = "<group>"; };
 		7EC9CDD018DBB4E400AB3BFA /* NightKnightsMobileApplication.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NightKnightsMobileApplication.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7EC9CDD318DBB4E400AB3BFA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		7EC9CDD518DBB4E400AB3BFA /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -164,6 +166,7 @@
 				7EC9CDE518DBB4E400AB3BFA /* Main.storyboard */,
 				7EC9CE0B18DBB6C600AB3BFA /* ViewControllers */,
 				7EC9CDEB18DBB4E400AB3BFA /* Images.xcassets */,
+				7EB63C831914C49300DC4A35 /* wakeUp.jpg */,
 				7EB63C7D1914BD8A00DC4A35 /* AlarmRuning.jpg */,
 				7EB63C7E1914BD8A00DC4A35 /* setAlarm_alarmSettings.jpg */,
 				7EB63C7F1914BD8A00DC4A35 /* login_CreateAccount.jpg */,
@@ -312,6 +315,7 @@
 				7E0905FD1907160B003D6677 /* basicAlarm.mp3 in Resources */,
 				7E0905FF1907160B003D6677 /* danceRave.mp3 in Resources */,
 				7EB63C801914BD8A00DC4A35 /* AlarmRuning.jpg in Resources */,
+				7EB63C841914C49300DC4A35 /* wakeUp.jpg in Resources */,
 				7EB63C821914BD8A00DC4A35 /* login_CreateAccount.jpg in Resources */,
 				7EB63C811914BD8A00DC4A35 /* setAlarm_alarmSettings.jpg in Resources */,
 				7EC9CDEC18DBB4E400AB3BFA /* Images.xcassets in Resources */,

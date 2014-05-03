@@ -27,6 +27,7 @@
 @property (nonatomic) UILocalNotification* localNotif;
 @property (nonatomic) UILocalNotification* localNotif2;
 @property (nonatomic) MyLilTimer *alarmTimer;
+@property (strong, nonatomic) IBOutlet UIImageView *backgroundImage;
 
 
 
@@ -349,6 +350,8 @@ int energyGained = 0;
         [self.audioPlayer setDelegate:self];
         [self.audioPlayer prepareToPlay];
         [self.audioPlayer play];
+        UIImage *background = [UIImage imageNamed:@"wakeUp.jpg"];
+        [self.backgroundImage setImage:background];
         
     });
 }

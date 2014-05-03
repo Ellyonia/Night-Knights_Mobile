@@ -43,13 +43,10 @@
 
     [super viewDidLoad];
     
-    //    UIColor* buttonColor = [self createColorWithHexValue:@"#7908aa"];
-    //    UIColor* buttonColor = [self createColorWithHexValue:@"#8C19A5"];
-    //    UIColor* buttonColor = [self createColorWithHexValue:@"#C362D8"];
-    //    UIColor* buttonColor = [self createColorWithHexValue:@"#68007F"];
-    //    UIColor* buttonColor = [self createColorWithHexValue:@"#54F1FE"];
-    //    UIColor* buttonColor = [self createColorWithHexValue:@"#2A787F"];
-    UIColor* buttonColor = [self createColorWithHexValue:@"#500DFE"];
+    UIColor* buttonColor = [self createColorWithHexValue:@"#7908aa"];
+//    UIColor* buttonColor = [self createColorWithHexValue:@"#8C19A5"];
+//    UIColor* buttonColor = [self createColorWithHexValue:@"#C362D8"]; // Maybe
+//    UIColor* buttonColor = [self createColorWithHexValue:@"#68007F"]; // If dark is better
     UIColor* warningColor = [self createColorWithHexValue:@"#FF684E"];
     
     self.titleLabel.textColor = [UIColor whiteColor];

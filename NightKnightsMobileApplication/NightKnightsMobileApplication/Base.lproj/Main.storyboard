@@ -379,6 +379,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="SDj-21-Udn"/>
                     <connections>
+                        <outlet property="backgroundImage" destination="D0G-MM-iKG" id="dFa-ka-k3U"/>
                         <outlet property="cancelAlarm" destination="S8w-l8-F67" id="shN-2a-rbP"/>
                         <outlet property="headerLabel" destination="Kfe-MR-fkc" id="uSz-nX-PCt"/>
                         <outlet property="snooozeButton" destination="mkT-9l-Nzp" id="SBd-cQ-qoE"/>
