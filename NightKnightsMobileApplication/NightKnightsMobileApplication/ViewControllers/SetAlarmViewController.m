@@ -129,7 +129,6 @@
     
     // Create a date picker for the date field.
     UIDatePicker *datePicker = [[UIDatePicker alloc]init];
-    [datePicker setBackgroundColor:[UIColor whiteColor]];
     datePicker.datePickerMode = UIDatePickerModeDateAndTime;
     datePicker.maximumDate = [NSDate dateWithTimeInterval:24*60*60 sinceDate:[NSDate date]];
     datePicker.minimumDate = [NSDate dateWithTimeInterval:60 sinceDate:[NSDate date]];

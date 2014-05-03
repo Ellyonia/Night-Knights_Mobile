@@ -350,7 +350,7 @@ int energyGained = 0;
         [self.audioPlayer setDelegate:self];
         [self.audioPlayer prepareToPlay];
         [self.audioPlayer play];
-        UIImage *background = [UIImage imageNamed:@"wakeUp.jpg"];
+        UIImage *background = [UIImage imageNamed:@"wakeUp"];
         [self.backgroundImage setImage:background];
         
     });

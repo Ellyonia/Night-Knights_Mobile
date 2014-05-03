@@ -106,22 +106,35 @@ bool emailIsValid = NO;
     if (textField == self.emailTextField) {
         [textField resignFirstResponder];
         [self.passwordTextField becomeFirstResponder];
-        [self validateEmail:self.emailTextField.text];
     }
     else if (textField == self.passwordTextField) {
         [textField resignFirstResponder];
         [self.passwordCheckTextField becomeFirstResponder];
-        [self validatePassword:self.passwordTextField.text];
     }
     else if (textField == self.passwordCheckTextField){
         [textField resignFirstResponder];
         [self.knightNameTextField becomeFirstResponder];
-        [self checkPasswords:self.passwordTextField.text retypedPassword:self.passwordCheckTextField.text];
     }
     else if (textField == self.knightNameTextField) {
         [textField resignFirstResponder];
     }
     return YES;
+}
+
+-(void)textFieldDidEndEditing:(UITextField *)textField
+{
+    if (textField == self.emailTextField) {
+        [self validateEmail:self.emailTextField.text];
+    }
+    else if (textField == self.passwordTextField) {
+        [self validatePassword:self.passwordTextField.text];
+    }
+    else if (textField == self.passwordCheckTextField){
+        [self checkPasswords:self.passwordTextField.text retypedPassword:self.passwordCheckTextField.text];
+    }
+    else if (textField == self.knightNameTextField) {
+        [self validateUserName:self.knightNameTextField.text];
+    }
 }
 
 - (IBAction)createAccountButton:(UIButton *)sender {
@@ -272,6 +285,17 @@ bool emailIsValid = NO;
     [scanner setScanLocation:1]; // bypass '#' character
     [scanner scanHexInt:&rgbValue];
     return [UIColor colorWithRed:((rgbValue & 0xFF0000) >> 16)/255.0 green:((rgbValue & 0xFF00) >> 8)/255.0 blue:(rgbValue & 0xFF)/255.0 alpha:1.0];
+}
+
+
+-(void) validateUserName:(NSString *)userName
+{
+    if ([userName componentsSeparatedByString:@" "].count > 1 || userName.length == 0)
+    {
+        self.warningLabel.hidden = NO;
+        [self.knightNameTextField setBackgroundColor:[UIColor redColor]];
+        [self.warningLabel setText:@"Please do not use Spaces in your Username"];
+    }
 }
 
 @end
