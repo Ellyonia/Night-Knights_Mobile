@@ -43,7 +43,7 @@
 
     [super viewDidLoad];
     
-    UIColor* buttonColor = [self createColorWithHexValue:@"#7908aa"];
+    UIColor* buttonColor = [self createColorWithHexValue:@"#0F7F03"];
 //    UIColor* buttonColor = [self createColorWithHexValue:@"#8C19A5"];
 //    UIColor* buttonColor = [self createColorWithHexValue:@"#C362D8"]; // Maybe
 //    UIColor* buttonColor = [self createColorWithHexValue:@"#68007F"]; // If dark is better
