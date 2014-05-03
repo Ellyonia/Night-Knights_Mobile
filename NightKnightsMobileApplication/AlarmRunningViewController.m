@@ -71,7 +71,7 @@ NSString *soundLocation;
     [request setHTTPMethod:@"PUT"];
     [request setHTTPBody:requestBody];
     
-    NSString *alertMessage = [NSString stringWithFormat:@"You have gained %i Energy!",energyGained];
+    NSString *alertMessage = [NSString stringWithFormat:@"You have gained %i Energy! Go to 54.24.248.48 to play Night Knights!",energyGained];
     UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Congrats!"
                                                       message:alertMessage
                                                      delegate:nil
