@@ -86,9 +86,8 @@
             while ([self.dateForAlarm compare:[NSDate date]] == NSOrderedAscending)
             {
                 self.dateForAlarm = [NSDate dateWithTimeInterval:24*60*60 sinceDate:alarmDate[0]];
-
             }
-            [self.alarmDateTextField setText:[self formatDate:alarmDate[0]]];
+            [self.alarmDateTextField setText:[self formatDate:self.dateForAlarm]];
         }
     }
 }

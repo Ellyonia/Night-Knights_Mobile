@@ -58,6 +58,7 @@
     self.loginButton.titleLabel.font = buttonFont;
     self.warningLabel.font = warningFont;
     self.emailTextField.font = textLabelFont;
+    self.passwordTextField.font = textLabelFont;
     
     self.titleLabel.textColor = [UIColor whiteColor];
     self.emailLabel.textColor = [UIColor whiteColor];
