@@ -27,6 +27,7 @@
 @property (nonatomic) UILocalNotification* localNotif;
 @property (nonatomic) UILocalNotification* localNotif2;
 @property (nonatomic) MyLilTimer *alarmTimer;
+@property (nonatomic) UIColor* backgroundColor;
 
 
 
@@ -187,7 +188,7 @@ int energyGained = 0;
                                   delegate:self
                              delegateQueue:nil];
     
-    UIColor* backgroundColor = [self createColorWithHexValue:@"#240672"];
+    self.backgroundColor = [self createColorWithHexValue:@"#240672"];
     UIColor* buttonColor = [self createColorWithHexValue:@"#7908aa"];
     
     [self.cancelAlarm setBackgroundColor:buttonColor];
@@ -203,7 +204,7 @@ int energyGained = 0;
     [self.wakeUpButton.layer setCornerRadius:5];
     
 
-    [self.view setBackgroundColor:backgroundColor];
+    [self.view setBackgroundColor:self.backgroundColor];
     
 }
 
