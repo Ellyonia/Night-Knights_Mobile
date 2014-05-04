@@ -117,6 +117,7 @@ bool emailIsValid = NO;
         NSArray *loginInfo = [NSArray arrayWithObjects:email,password, nil];
         
         [self.defaults setObject:loginInfo forKey:@"loginInformation"];
+        [self.defaults removeObjectForKey:@"guestLogin"];
     }
 }
 
