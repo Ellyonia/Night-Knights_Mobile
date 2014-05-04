@@ -37,6 +37,7 @@
 NSString *invalidEmailMessage = @"Username or email already exists";
 bool passwordsMatch = NO;
 bool emailIsValid = NO;
+bool usernameValid = NO;
 
 -(NSUserDefaults *) defaults{
     if(!_defaults){
@@ -167,7 +168,15 @@ bool emailIsValid = NO;
     {
         if (passwordsMatch)
         {
-            [self createAccount];
+            if (usernameValid)
+            {
+                [self createAccount];
+            }
+            else
+            {
+                [self.warningLabel setText:@"Please check your Username"];
+                [self.warningLabel setHidden:NO];
+            }
         }
         else
         {
@@ -322,17 +331,20 @@ bool emailIsValid = NO;
         self.warningLabel.hidden = NO;
         [self.knightNameTextField setBackgroundColor:[UIColor redColor]];
         [self.warningLabel setText:@"Please do not use Spaces in your Username"];
+        usernameValid = NO;
     }
     else if (userName.length == 0)
     {
         self.warningLabel.hidden = NO;
         [self.knightNameTextField setBackgroundColor:[UIColor redColor]];
         [self.warningLabel setText:@"Please enter a Username"];
+        usernameValid = NO;
     }
     else
     {
         [self.warningLabel setHidden:YES];
         [self.knightNameTextField setBackgroundColor:[UIColor whiteColor]];
+        usernameValid = YES;
     }
 }
 
