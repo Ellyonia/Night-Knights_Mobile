@@ -35,6 +35,8 @@
     
 }
 
+#pragma mark - View Controller Methods
+
 - (void) viewDidLoad
 {
     [super viewDidLoad];
@@ -95,26 +97,7 @@
     }
 }
 
--(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
-    
-    if([segue.identifier isEqualToString:@"startAlarm"])
-    {
-        // Send the Alarm time info to the AlarmRunningViewController
-        AlarmRunningViewController *transferViewController = segue.destinationViewController;
-        transferViewController.alarmDate = self.dateForAlarm;
-        
-        // Save the Alarm to NSUserDefaults
-        NSDate *alarmInfo = self.dateForAlarm;
-        NSArray *alarmTime = [NSArray arrayWithObjects:alarmInfo, nil];
-        [self.defaults setObject:alarmTime forKey:@"alarmInformation"];
-    }
-    if ([segue.identifier isEqualToString:@"editSettings"]) {
-        
-        AlarmSettingsViewController *settingsView = segue.destinationViewController;
-        settingsView.delegate = self;
-    }
-    
-}
+#pragma mark - UITextField Delegate Methods
 
 - (NSDate *)dateAtBeginningOfDayForDate:(NSDate *)inputDate
 {
@@ -184,7 +167,48 @@
     }
 }
 
+#pragma mark - Methods for Segues
 
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    
+    if([segue.identifier isEqualToString:@"startAlarm"])
+    {
+        // Send the Alarm time info to the AlarmRunningViewController
+        AlarmRunningViewController *transferViewController = segue.destinationViewController;
+        transferViewController.alarmDate = self.dateForAlarm;
+        
+        // Save the Alarm to NSUserDefaults
+        NSDate *alarmInfo = self.dateForAlarm;
+        NSArray *alarmTime = [NSArray arrayWithObjects:alarmInfo, nil];
+        [self.defaults setObject:alarmTime forKey:@"alarmInformation"];
+    }
+    if ([segue.identifier isEqualToString:@"editSettings"]) {
+        
+        AlarmSettingsViewController *settingsView = segue.destinationViewController;
+        settingsView.delegate = self;
+    }
+    
+}
+
+- (IBAction)unwindToSetAlarm:(UIStoryboardSegue *)unwindSegue
+{
+}
+
+- (IBAction)unwindFromCancel:(UIStoryboardSegue *)unwindSegue
+{
+    
+}
+
+#pragma mark - User Created Methods
+
+-(UIColor *) createColorWithHexValue: (NSString *)hexValue
+{
+    unsigned rgbValue = 0;
+    NSScanner *scanner = [NSScanner scannerWithString:hexValue];
+    [scanner setScanLocation:1]; // bypass '#' character
+    [scanner scanHexInt:&rgbValue];
+    return [UIColor colorWithRed:((rgbValue & 0xFF0000) >> 16)/255.0 green:((rgbValue & 0xFF00) >> 8)/255.0 blue:(rgbValue & 0xFF)/255.0 alpha:1.0];
+}
 
 // Called when the date picker changes.
 - (void)updateDateField:(id)sender
@@ -193,7 +217,6 @@
     self.alarmDateTextField.text = [self formatDate:picker.date];
     self.dateForAlarm = picker.date;
 }
-
 
 // Formats the date chosen with the date picker.
 - (NSString *)formatDate:(NSDate *)date
@@ -207,28 +230,7 @@
 }
 
 
-
-
-- (IBAction)unwindToSetAlarm:(UIStoryboardSegue *)unwindSegue
-{
-}
-
-- (IBAction)unwindFromCancel:(UIStoryboardSegue *)unwindSegue
-{
-    
-}
-
--(UIColor *) createColorWithHexValue: (NSString *)hexValue
-{
-    unsigned rgbValue = 0;
-    NSScanner *scanner = [NSScanner scannerWithString:hexValue];
-    [scanner setScanLocation:1]; // bypass '#' character
-    [scanner scanHexInt:&rgbValue];
-    return [UIColor colorWithRed:((rgbValue & 0xFF0000) >> 16)/255.0 green:((rgbValue & 0xFF00) >> 8)/255.0 blue:(rgbValue & 0xFF)/255.0 alpha:1.0];
-}
-
-
-
+#pragma mark - Modal View Controller Delegate Methods
 
 -(void) AlarmSettingsViewControllerDidSave:(AlarmSettingsViewController *)controller
 {

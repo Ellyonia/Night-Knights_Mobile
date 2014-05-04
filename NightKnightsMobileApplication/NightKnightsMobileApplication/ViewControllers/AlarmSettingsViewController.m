@@ -27,7 +27,6 @@ int nameRow = 0 ;
 NSArray *alarmTones;
 NSArray *alarmNames;
 UIFont *pickerFont;
-//NSString *pickedAlarm = @"/alarmChimes.mp3";
 
 -(NSUserDefaults *) defaults{
     if(!_defaults){
@@ -38,9 +37,7 @@ UIFont *pickerFont;
     
 }
 
-- (IBAction)stopSoundPressed:(UIButton *)sender {
-    [self.audioPlayer stop];
-}
+#pragma mark - View Controller Methods
 
 - (void)viewDidLoad
 {
@@ -68,7 +65,7 @@ UIFont *pickerFont;
     [self.saveButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [self.saveButton.layer setCornerRadius:5];
     [self.saveButton setBackgroundColor:buttonColor];
-
+    
     
     self.pickerView.delegate = self;
     self.pickerView.dataSource = self;
@@ -103,15 +100,13 @@ UIFont *pickerFont;
     
 }
 
-//-(void) viewWillDisappear:(BOOL)animated
-//{
-//    
-//    NSArray *loginInfo = [NSArray arrayWithObjects:pickedAlarm, nil];
-//    
-//    [self.defaults setObject:loginInfo forKey:@"alarmSettings"];
-//    [audioPlayer stop];
-//}
+#pragma mark - Button Events
 
+- (IBAction)stopSoundPressed:(UIButton *)sender {
+    [self.audioPlayer stop];
+}
+
+#pragma mark - Picker Delegate Methods
 
 // returns the number of 'columns' to display.
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
@@ -159,6 +154,8 @@ UIFont *pickerFont;
     return pickerLabel; 
 }
 
+#pragma mark - User Created Functions
+
 -(UIColor *) createColorWithHexValue: (NSString *)hexValue
 {
     unsigned rgbValue = 0;
@@ -167,6 +164,8 @@ UIFont *pickerFont;
     [scanner scanHexInt:&rgbValue];
     return [UIColor colorWithRed:((rgbValue & 0xFF0000) >> 16)/255.0 green:((rgbValue & 0xFF00) >> 8)/255.0 blue:(rgbValue & 0xFF)/255.0 alpha:1.0];
 }
+
+#pragma mark - Modal View Controller Functions
 
 - (IBAction)cancel:(id)sender
 {

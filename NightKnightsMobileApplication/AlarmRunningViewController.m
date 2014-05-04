@@ -36,6 +36,12 @@
 @implementation AlarmRunningViewController
 
 NSString *soundLocation = @"/basicAlarm.mp3";
+int snoozeCount = -1;
+int timeRemaining = 0;
+int iHour = 0;
+int iMinute = 0;
+int second = 0;
+int energyGained = 0;
 
 -(AVAudioPlayer *)audioPlayer{
     if (!_audioPlayer)
@@ -56,107 +62,8 @@ NSString *soundLocation = @"/basicAlarm.mp3";
     return _defaults;
     
 }
-- (IBAction)wakeUpButtonPushed:(id)sender
-{
-    [self.audioPlayer stop];
-    energyGained = (int)((double)timeRemaining)/100.0*(1.0-((double)snoozeCount*0.05));
-    NSString *baseURL = [NSString stringWithFormat:@"%s/api/character/energy",SERVER_URL];
-    NSURL *postUrl = [NSURL URLWithString:baseURL];
-    
-    NSError *error = nil;
-    NSDictionary *jsonUpload = @{@"energy":@(energyGained)};
-    NSData *requestBody=[NSJSONSerialization dataWithJSONObject:jsonUpload options:NSJSONWritingPrettyPrinted error:&error];
 
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:postUrl];
-    [request setHTTPMethod:@"PUT"];
-    [request setHTTPBody:requestBody];
-    [[UIApplication sharedApplication] cancelAllLocalNotifications];
-    
-    NSArray *isGuest = [self.defaults objectForKey:@"guestLogin"];
-    NSLog(@"3%@3",isGuest);
-    if(!isGuest)
-    {
-        NSString *alertMessage = [NSString stringWithFormat:@"You have gained %i Energy! Go to 54.24.248.48 to play Night Knights!",energyGained];
-        UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Congrats!"
-                                                          message:alertMessage
-                                                         delegate:nil
-                                                cancelButtonTitle:@"OK"
-                                                otherButtonTitles:nil];
-        
-        [message show];
-
-        NSURLSessionDataTask *postTask = [self.session dataTaskWithRequest:request
-                                                            completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-                                                             
-                                                            }];
-        
-        [postTask resume];
-            
-
-        
-        
-        UILocalNotification * alertEnergy = [[UILocalNotification alloc]init];
-        alertEnergy.alertAction = @"View";
-        alertEnergy.alertBody = [NSString stringWithFormat:@"You gained %i Energy! Go to 54.84.248.48 to play!",energyGained ];
-        alertEnergy.applicationIconBadgeNumber = 1;
-        alertEnergy.soundName = UILocalNotificationDefaultSoundName;
-        [[UIApplication sharedApplication] scheduleLocalNotification:alertEnergy];
-    }
-}
-
-int snoozeCount = -1;
-int timeRemaining = 0;
-int iHour = 0;
-int iMinute = 0;
-int second = 0;
-int energyGained = 0;
-
-
-- (IBAction)snoozedPressed:(UIButton *)sender {
-    [self.audioPlayer stop];
-    self.snooozeButton.hidden = YES;
-    self.cancelAlarm.hidden = YES;
-    self.wakeUpButton.hidden = NO;
-    self.headerLabel.hidden = NO;
-    self.headerLabel.text = @"Snoozing until";
-    self.timeRemainingLabel.text = [self formatDate:[NSDate dateWithTimeInterval:300 sinceDate:[NSDate date]]];
-    self.alarmTimer = [MyLilTimer scheduledTimerWithBehavior:MyLilTimerBehaviorHourglass
-                                                timeInterval:300
-                                                      target:self
-                                                    selector:@selector(alarmComplete)
-                                                    userInfo:nil];
-    snoozeCount ++;
-    [[UIApplication sharedApplication] cancelAllLocalNotifications];
-    
-    UILocalNotification *localNotif = [[UILocalNotification alloc] init];
-    if (localNotif == nil)
-        return;
-    
-    NSDate *snoozeNotif = [NSDate dateWithTimeInterval:300 sinceDate:[NSDate date]];
-    localNotif.fireDate = snoozeNotif;
-    localNotif.timeZone = [NSTimeZone defaultTimeZone];
-    
-    localNotif.alertAction = @"View";
-    localNotif.alertBody = @"Wake up!";
-    localNotif.applicationIconBadgeNumber = 1;
-    localNotif.soundName = soundLocation;
-    
-    [[UIApplication sharedApplication] scheduleLocalNotification:localNotif];
-    
-    snoozeNotif = [NSDate dateWithTimeInterval:30 sinceDate:snoozeNotif];
-    UILocalNotification *localNotif2 = [[UILocalNotification alloc] init];
-    if (localNotif2 == nil)
-        return;
-    localNotif2.fireDate = snoozeNotif;
-    localNotif2.timeZone = [NSTimeZone defaultTimeZone];
-    
-    localNotif2.alertAction = @"View";
-    localNotif2.alertBody = @"Wake up!";
-    localNotif2.applicationIconBadgeNumber = 1;
-    localNotif2.soundName = soundLocation;
-    
-    [[UIApplication sharedApplication] scheduleLocalNotification:localNotif2];
-}
+#pragma mark - View Controller Methods
 
 - (void)viewDidLoad
 {
@@ -177,7 +84,7 @@ int energyGained = 0;
         self.audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
         self.audioPlayer.volume = 1;
         self.audioPlayer.numberOfLoops = 5;
-
+        
         
     }
     
@@ -199,7 +106,7 @@ int energyGained = 0;
     UIFont *titleLabelFont = [UIFont fontWithName:@"VT323-Regular" size:29];
     UIFont *timeRemaingFont = [UIFont fontWithName:@"VT323-Regular" size:75];
     UIFont *wakeSnoozeFont = [UIFont fontWithName:@"VT323-Regular" size:25];
-
+    
     self.wakeUpButton.titleLabel.font = wakeSnoozeFont;
     self.snooozeButton.titleLabel.font = wakeSnoozeFont;
     self.cancelAlarm.titleLabel.font = navButtonFont;
@@ -218,7 +125,7 @@ int energyGained = 0;
     [self.snooozeButton.layer setCornerRadius:5];
     [self.wakeUpButton.layer setCornerRadius:5];
     
-
+    
     
 }
 
@@ -242,9 +149,9 @@ int energyGained = 0;
         if (alarmHour == 0)
         {
             if (alarmMinute > 9){
-            NSString *time = [NSString stringWithFormat:@"12:%d",alarmMinute];
-            labelText = [labelText stringByAppendingString:time];
-            labelText = [labelText stringByAppendingString:@" AM"];
+                NSString *time = [NSString stringWithFormat:@"12:%d",alarmMinute];
+                labelText = [labelText stringByAppendingString:time];
+                labelText = [labelText stringByAppendingString:@" AM"];
             }
             else
             {
@@ -255,17 +162,17 @@ int energyGained = 0;
         }
         else
         {
-                if (alarmMinute > 9){
-                    NSString *time = [NSString stringWithFormat:@"%d:%d",alarmHour,alarmMinute];
-                    labelText = [labelText stringByAppendingString:time];
-                    labelText = [labelText stringByAppendingString:@" AM"];
-                }
-                else
-                {
-                    NSString *time = [NSString stringWithFormat:@"%d:0%d",alarmHour,alarmMinute];
-                    labelText = [labelText stringByAppendingString:time];
-                    labelText = [labelText stringByAppendingString:@" AM"];
-                }
+            if (alarmMinute > 9){
+                NSString *time = [NSString stringWithFormat:@"%d:%d",alarmHour,alarmMinute];
+                labelText = [labelText stringByAppendingString:time];
+                labelText = [labelText stringByAppendingString:@" AM"];
+            }
+            else
+            {
+                NSString *time = [NSString stringWithFormat:@"%d:0%d",alarmHour,alarmMinute];
+                labelText = [labelText stringByAppendingString:time];
+                labelText = [labelText stringByAppendingString:@" AM"];
+            }
         }
     }
     else
@@ -311,7 +218,7 @@ int energyGained = 0;
     timeRemaining = (int)alarmRunTime - second;
     
     convertedAlarmDate = [NSDate dateWithTimeInterval:-second sinceDate:convertedAlarmDate];
-
+    
     
     // Checks to see if you want an alarm time for the morning.
     if (timeRemaining < 0)
@@ -325,14 +232,14 @@ int energyGained = 0;
                                                     selector:@selector(alarmComplete)
                                                     userInfo:nil];
     
-
+    
     NSLog(@"First Local Notif: %@",convertedAlarmDate);
     self.localNotif = [[UILocalNotification alloc] init];
     if (self.localNotif == nil)
         return;
     self.localNotif.fireDate = convertedAlarmDate;
     self.localNotif.timeZone = [NSTimeZone defaultTimeZone];
-
+    
     self.localNotif.alertAction = @"View";
     self.localNotif.alertBody = @"Wake Up!";
     self.localNotif.applicationIconBadgeNumber = 1;
@@ -346,7 +253,7 @@ int energyGained = 0;
         return;
     self.localNotif2.fireDate = convertedAlarmDate;
     self.localNotif2.timeZone = [NSTimeZone defaultTimeZone];
-
+    
     self.localNotif2.alertAction = @"View";
     self.localNotif2.alertBody = @"Wake Up!";
     self.localNotif2.applicationIconBadgeNumber = 1;
@@ -354,6 +261,106 @@ int energyGained = 0;
     
     [[UIApplication sharedApplication] scheduleLocalNotification:self.localNotif2];
 }
+
+#pragma mark - Button Events
+
+- (IBAction)wakeUpButtonPushed:(id)sender
+{
+    [self.audioPlayer stop];
+    self.audioPlayer = nil;
+    energyGained = (int)((double)timeRemaining)/100.0*(1.0-((double)snoozeCount*0.05));
+    NSString *baseURL = [NSString stringWithFormat:@"%s/api/character/energy",SERVER_URL];
+    NSURL *postUrl = [NSURL URLWithString:baseURL];
+    
+    NSError *error = nil;
+    NSDictionary *jsonUpload = @{@"energy":@(energyGained)};
+    NSData *requestBody=[NSJSONSerialization dataWithJSONObject:jsonUpload options:NSJSONWritingPrettyPrinted error:&error];
+
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:postUrl];
+    [request setHTTPMethod:@"PUT"];
+    [request setHTTPBody:requestBody];
+    [[UIApplication sharedApplication] cancelAllLocalNotifications];
+    
+    NSArray *isGuest = [self.defaults objectForKey:@"guestLogin"];
+    NSLog(@"3%@3",isGuest);
+    if(!isGuest)
+    {
+        NSString *alertMessage = [NSString stringWithFormat:@"You have gained %i Energy! Go to 54.24.248.48 to play Night Knights!",energyGained];
+        UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Congrats!"
+                                                          message:alertMessage
+                                                         delegate:nil
+                                                cancelButtonTitle:@"OK"
+                                                otherButtonTitles:nil];
+        
+        [message show];
+
+        NSURLSessionDataTask *postTask = [self.session dataTaskWithRequest:request
+                                                            completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                                             
+                                                            }];
+        
+        [postTask resume];
+            
+
+        
+        
+        UILocalNotification * alertEnergy = [[UILocalNotification alloc]init];
+        alertEnergy.alertAction = @"View";
+        alertEnergy.alertBody = [NSString stringWithFormat:@"You gained %i Energy! Go to 54.84.248.48 to play!",energyGained ];
+        alertEnergy.applicationIconBadgeNumber = 1;
+        alertEnergy.soundName = UILocalNotificationDefaultSoundName;
+        [[UIApplication sharedApplication] scheduleLocalNotification:alertEnergy];
+    }
+}
+
+- (IBAction)snoozedPressed:(UIButton *)sender {
+    [self.alarm invalidate];
+    [self.audioPlayer stop];
+    self.snooozeButton.hidden = YES;
+    self.cancelAlarm.hidden = YES;
+    self.wakeUpButton.hidden = NO;
+    self.headerLabel.hidden = NO;
+    self.headerLabel.text = @"Snoozing until";
+    self.timeRemainingLabel.text = [self formatDate:[NSDate dateWithTimeInterval:300 sinceDate:[NSDate date]]];
+    self.alarmTimer = [MyLilTimer scheduledTimerWithBehavior:MyLilTimerBehaviorHourglass
+                                                timeInterval:300
+                                                      target:self
+                                                    selector:@selector(alarmComplete)
+                                                    userInfo:nil];
+    snoozeCount ++;
+    [[UIApplication sharedApplication] cancelAllLocalNotifications];
+    
+    UILocalNotification *localNotif = [[UILocalNotification alloc] init];
+    if (localNotif == nil)
+        return;
+    
+    NSDate *snoozeNotif = [NSDate dateWithTimeInterval:300 sinceDate:[NSDate date]];
+    localNotif.fireDate = snoozeNotif;
+    localNotif.timeZone = [NSTimeZone defaultTimeZone];
+    
+    localNotif.alertAction = @"View";
+    localNotif.alertBody = @"Wake up!";
+    localNotif.applicationIconBadgeNumber = 1;
+    localNotif.soundName = soundLocation;
+    
+    [[UIApplication sharedApplication] scheduleLocalNotification:localNotif];
+    
+    snoozeNotif = [NSDate dateWithTimeInterval:30 sinceDate:snoozeNotif];
+    UILocalNotification *localNotif2 = [[UILocalNotification alloc] init];
+    if (localNotif2 == nil)
+        return;
+    localNotif2.fireDate = snoozeNotif;
+    localNotif2.timeZone = [NSTimeZone defaultTimeZone];
+    
+    localNotif2.alertAction = @"View";
+    localNotif2.alertBody = @"Wake up!";
+    localNotif2.applicationIconBadgeNumber = 1;
+    localNotif2.soundName = soundLocation;
+    
+    [[UIApplication sharedApplication] scheduleLocalNotification:localNotif2];
+}
+
+#pragma mark - User Created Functions
 
 - (void) alarmComplete
 {
@@ -382,22 +389,6 @@ int energyGained = 0;
     return [value substringWithRange:finalRange];
 }
 
-
-
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    //Cancel the current alarms running.
-    if([segue.identifier isEqualToString:@"cancelAlarm"])
-    {
-        [self.alarm invalidate];
-        [self.audioPlayer stop];
-        [[UIApplication sharedApplication] cancelAllLocalNotifications];
-        [[UIApplication sharedApplication] cancelLocalNotification:self.localNotif];
-        [[UIApplication sharedApplication] cancelLocalNotification:self.localNotif2];
-        
-    }
-}
-
 -(UIColor *) createColorWithHexValue: (NSString *)hexValue
 {
     unsigned rgbValue = 0;
@@ -419,4 +410,20 @@ int energyGained = 0;
     return formattedDate;
 }
 
+
+#pragma mark - Methods for Segues
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    //Cancel the current alarms running.
+    if([segue.identifier isEqualToString:@"cancelAlarm"])
+    {
+        [self.alarm invalidate];
+        [self.audioPlayer stop];
+        [[UIApplication sharedApplication] cancelAllLocalNotifications];
+        [[UIApplication sharedApplication] cancelLocalNotification:self.localNotif];
+        [[UIApplication sharedApplication] cancelLocalNotification:self.localNotif2];
+        
+    }
+}
 @end

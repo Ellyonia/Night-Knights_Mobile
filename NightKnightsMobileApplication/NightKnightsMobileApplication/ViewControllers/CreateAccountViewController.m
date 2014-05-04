@@ -47,6 +47,8 @@ bool usernameValid = NO;
     
 }
 
+#pragma mark - View Controller Methods
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -106,6 +108,7 @@ bool usernameValid = NO;
     
 }
 
+#pragma mark - Methods for Segues
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
@@ -121,6 +124,8 @@ bool usernameValid = NO;
         [self.defaults removeObjectForKey:@"guestLogin"];
     }
 }
+
+#pragma mark - UITextField Delegate Methods
 
 // Function to pass the Keyboard Delegate to the Next UITextField
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
@@ -158,10 +163,27 @@ bool usernameValid = NO;
         [self validateUserName:self.knightNameTextField.text];
     }
 }
+
 -(void)textFieldDidBeginEditing:(UITextField *)textField
 {
     textField.backgroundColor = [UIColor whiteColor];
 }
+
+// Dismiss the Keyboard when the User touches outside of a UITextField.
+-(void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
+    UITouch *touch = [touches anyObject];
+    if(touch.phase==UITouchPhaseBegan){
+        //find first response view
+        for (UIView *view in [self.view subviews]) {
+            if ([view isFirstResponder]) {
+                [view resignFirstResponder];
+                break;
+            }
+        }
+    }
+}
+
+#pragma mark - Button Events
 
 - (IBAction)createAccountButton:(UIButton *)sender {
     if (emailIsValid)
@@ -191,82 +213,7 @@ bool usernameValid = NO;
     }
 }
 
-// Dismiss the Keyboard when the User touches outside of a UITextField.
--(void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
-    UITouch *touch = [touches anyObject];
-    if(touch.phase==UITouchPhaseBegan){
-        //find first response view
-        for (UIView *view in [self.view subviews]) {
-            if ([view isFirstResponder]) {
-                [view resignFirstResponder];
-                break;
-            }
-        }
-    }
-}
-
-// Email regex.
-- (void) validateEmail: (NSString *) candidate
-{
-    NSString *emailRegex =
-    @"(?:[a-z0-9!#$%\\&'*+/=?\\^_`{|}~-]+(?:\\.[a-z0-9!#$%\\&'*+/=?\\^_`{|}"
-    @"~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\"
-    @"x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-z0-9](?:[a-"
-    @"z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:25[0-5"
-    @"]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-"
-    @"9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21"
-    @"-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])";
-    NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES[c] %@", emailRegex];
-    
-    if ([emailTest evaluateWithObject:candidate])
-    {
-        emailIsValid = YES;
-        [self.emailTextField setBackgroundColor: [UIColor whiteColor]];
-        [self.warningLabel setHidden:YES];
-    }
-    else
-    {
-        self.warningLabel.hidden = NO;
-        self.emailTextField.backgroundColor = [UIColor redColor];
-        self.warningLabel.text = @"Invalid Email";
-    }
-}
-
-
-- (void) checkPasswords: (NSString *)firstPassword retypedPassword:(NSString *)secondPassword
-{
-    if ([firstPassword isEqualToString:secondPassword] && ![firstPassword isEqualToString:@""])
-    {
-        passwordsMatch = YES;
-        [self.warningLabel setHidden:YES];
-        self.passwordCheckTextField.backgroundColor = [UIColor whiteColor];
-    }
-    else
-    {
-        [self.warningLabel setText:@"Password fields must match"];
-        self.warningLabel.hidden = NO;
-        self.passwordCheckTextField.text = @"";
-        self.passwordCheckTextField.backgroundColor = [UIColor redColor];
-    }
-}
-
-- (void) validatePassword: (NSString *) candidate
-{
-    NSString *passwordRegex = @"^(?=.{8,}$)(?=.*[a-zA-Z0-9]).*$";
-    NSPredicate *passwordTest = [NSPredicate predicateWithFormat:@"SELF MATCHES[c] %@", passwordRegex];
-    
-    if ([passwordTest evaluateWithObject:candidate])
-    {
-        [self.warningLabel setHidden:YES];
-        [self.passwordTextField setBackgroundColor:[UIColor whiteColor]];
-    }
-    else
-    {
-        self.warningLabel.hidden = NO;
-        self.passwordTextField.backgroundColor = [UIColor redColor];
-        self.warningLabel.text = @"Password needs to be atleast 8 characters";
-    }
-}
+#pragma mark - User Created Methods
 
 - (void) createAccount
 {
@@ -311,7 +258,6 @@ bool usernameValid = NO;
                                                          }
                                                      }];
     [postTask resume];
-
 }
 
 -(UIColor *) createColorWithHexValue: (NSString *)hexValue
@@ -323,6 +269,7 @@ bool usernameValid = NO;
     return [UIColor colorWithRed:((rgbValue & 0xFF0000) >> 16)/255.0 green:((rgbValue & 0xFF00) >> 8)/255.0 blue:(rgbValue & 0xFF)/255.0 alpha:1.0];
 }
 
+#pragma mark - Validation Methods
 
 -(void) validateUserName:(NSString *)userName
 {
@@ -345,6 +292,68 @@ bool usernameValid = NO;
         [self.warningLabel setHidden:YES];
         [self.knightNameTextField setBackgroundColor:[UIColor whiteColor]];
         usernameValid = YES;
+    }
+}
+
+// Email regex.
+- (void) validateEmail: (NSString *) candidate
+{
+    NSString *emailRegex =
+    @"(?:[a-z0-9!#$%\\&'*+/=?\\^_`{|}~-]+(?:\\.[a-z0-9!#$%\\&'*+/=?\\^_`{|}"
+    @"~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\"
+    @"x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-z0-9](?:[a-"
+    @"z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:25[0-5"
+    @"]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-"
+    @"9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21"
+    @"-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])";
+    NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES[c] %@", emailRegex];
+    
+    if ([emailTest evaluateWithObject:candidate])
+    {
+        emailIsValid = YES;
+        [self.emailTextField setBackgroundColor: [UIColor whiteColor]];
+        [self.warningLabel setHidden:YES];
+    }
+    else
+    {
+        self.warningLabel.hidden = NO;
+        self.emailTextField.backgroundColor = [UIColor redColor];
+        self.warningLabel.text = @"Invalid Email";
+    }
+}
+
+- (void) checkPasswords: (NSString *)firstPassword retypedPassword:(NSString *)secondPassword
+{
+    if ([firstPassword isEqualToString:secondPassword] && ![firstPassword isEqualToString:@""])
+    {
+        passwordsMatch = YES;
+        [self.warningLabel setHidden:YES];
+        self.passwordCheckTextField.backgroundColor = [UIColor whiteColor];
+    }
+    else
+    {
+        [self.warningLabel setText:@"Password fields must match"];
+        self.warningLabel.hidden = NO;
+        self.passwordCheckTextField.text = @"";
+        self.passwordCheckTextField.backgroundColor = [UIColor redColor];
+    }
+}
+
+- (void) validatePassword: (NSString *) candidate
+{
+    NSString *passwordRegex = @"^(?=.{8,}$)(?=.*[a-zA-Z0-9]).*$";
+    NSPredicate *passwordTest = [NSPredicate predicateWithFormat:@"SELF MATCHES[c] %@", passwordRegex];
+    
+    if ([passwordTest evaluateWithObject:candidate])
+    {
+        [self.warningLabel setHidden:YES];
+        [self.passwordTextField setBackgroundColor:[UIColor whiteColor]];
+    }
+    else
+    {
+        self.warningLabel.hidden = NO;
+        self.passwordTextField.backgroundColor = [UIColor redColor];
+        self.warningLabel.text = @"Password needs to be atleast 8 characters";
     }
 }
 

@@ -38,6 +38,8 @@
     
 }
 
+#pragma mark - View Controller Methods
+
 - (void)viewDidLoad
 {
 
@@ -102,6 +104,7 @@
 
 }
 
+#pragma mark - UITextField Delegate Methods
 
 // Hide the error message when the User begins typing
 - (void) textFieldDidBeginEditing:(UITextField *)textField
@@ -136,6 +139,8 @@
         }
     }
 }
+
+#pragma mark - Button Events
 
 - (IBAction)loginButtonPushed:(UIButton*)sender {
     
@@ -179,6 +184,7 @@
                                                      }];
     [postTask resume];
 }
+
 - (IBAction)guestLoginPushed:(id)sender {
     NSString *alertMessage = [NSString stringWithFormat:@"Continuing will not gain you energy, recommended only for if you do not have Internet."];
     UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Guest Login"
@@ -188,6 +194,8 @@
                                             otherButtonTitles:@"Cancel", nil];
     [message show];
 }
+
+#pragma mark - UIAlertView Delegate Methods
 
 -(void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     
@@ -207,7 +215,25 @@
         
     }
 }
-    
+
+#pragma mark - User Created Methods
+
+-(UIColor *) createColorWithHexValue: (NSString *)hexValue
+{
+    unsigned rgbValue = 0;
+    NSScanner *scanner = [NSScanner scannerWithString:hexValue];
+    [scanner setScanLocation:1]; // bypass '#' character
+    [scanner scanHexInt:&rgbValue];
+    return [UIColor colorWithRed:((rgbValue & 0xFF0000) >> 16)/255.0 green:((rgbValue & 0xFF00) >> 8)/255.0 blue:(rgbValue & 0xFF)/255.0 alpha:1.0];
+}
+-(UIColor *) createColorWithHexValue: (NSString *)hexValue withAlpha:(float)alpha
+{
+    unsigned rgbValue = 0;
+    NSScanner *scanner = [NSScanner scannerWithString:hexValue];
+    [scanner setScanLocation:1]; // bypass '#' character
+    [scanner scanHexInt:&rgbValue];
+    return [UIColor colorWithRed:((rgbValue & 0xFF0000) >> 16)/255.0 green:((rgbValue & 0xFF00) >> 8)/255.0 blue:(rgbValue & 0xFF)/255.0 alpha:alpha];
+}
 
 
 #pragma mark - Methods for Segues
@@ -238,20 +264,5 @@
 {
 }
 
--(UIColor *) createColorWithHexValue: (NSString *)hexValue
-{
-    unsigned rgbValue = 0;
-    NSScanner *scanner = [NSScanner scannerWithString:hexValue];
-    [scanner setScanLocation:1]; // bypass '#' character
-    [scanner scanHexInt:&rgbValue];
-    return [UIColor colorWithRed:((rgbValue & 0xFF0000) >> 16)/255.0 green:((rgbValue & 0xFF00) >> 8)/255.0 blue:(rgbValue & 0xFF)/255.0 alpha:1.0];
-}
--(UIColor *) createColorWithHexValue: (NSString *)hexValue withAlpha:(float)alpha
-{
-    unsigned rgbValue = 0;
-    NSScanner *scanner = [NSScanner scannerWithString:hexValue];
-    [scanner setScanLocation:1]; // bypass '#' character
-    [scanner scanHexInt:&rgbValue];
-    return [UIColor colorWithRed:((rgbValue & 0xFF0000) >> 16)/255.0 green:((rgbValue & 0xFF00) >> 8)/255.0 blue:(rgbValue & 0xFF)/255.0 alpha:alpha];
-}
+
 @end
