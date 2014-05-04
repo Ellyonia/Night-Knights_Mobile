@@ -413,7 +413,7 @@ int energyGained = 0;
 {
     NSDateFormatter *format = [[NSDateFormatter alloc] init];
     [format setDateStyle:NSDateFormatterLongStyle];
-    [format setDateFormat:@"hh:mm"];
+    [format setDateFormat:@"hh:mm a"];
     
     NSString *formattedDate = [format stringFromDate:date];
     return formattedDate;
